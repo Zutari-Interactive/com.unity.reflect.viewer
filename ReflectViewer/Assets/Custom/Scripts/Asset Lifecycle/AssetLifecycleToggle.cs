@@ -9,7 +9,7 @@ public class AssetLifecycleToggle : MonoBehaviour, IPointerDownHandler, IPointer
     public GameObject slider;
     private bool toolActive;
 
-    public MinMaxPropertyControl MinMaxPropertyControl;
+    public AssetLifeCycleSliderControl MinMaxPropertyControl;
 
     public void OnPointerDown(PointerEventData eventData)
     {

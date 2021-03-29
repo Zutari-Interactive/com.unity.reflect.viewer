@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7437955894642000544}
   - component: {fileID: 254738654550803537}
   - component: {fileID: 6276374966895108843}
+  - component: {fileID: 7264490548124277777}
   m_Layer: 0
   m_Name: AssetLifecycleFilter
   m_TagString: Untagged
@@ -58,6 +59,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84bca2c315356c84085e57d327b4bbe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ids: []
+  interactor: {fileID: 0}
 --- !u!114 &6276374966895108843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,3 +77,17 @@ MonoBehaviour:
   group: 1
   groups: []
   manager: {fileID: 0}
+--- !u!114 &7264490548124277777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8865670824754753009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5f8f8318e857e242ac8688e06fe6a6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AssetStateMaterialDatabase: {fileID: 11400000, guid: 5e14ae384be2d234a8a231ed9d337d15,
+    type: 2}
