@@ -61,14 +61,14 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
   m_text: Connected To
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 39caf30cce56c40be82c6eb558b4dd69, type: 2}
-  m_sharedMaterial: {fileID: 21012494582400112, guid: 39caf30cce56c40be82c6eb558b4dd69,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ea3ba021e79594b48839f516b6a04867, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: ea3ba021e79594b48839f516b6a04867, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

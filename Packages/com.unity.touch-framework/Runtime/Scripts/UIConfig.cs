@@ -25,7 +25,7 @@ namespace Unity.TouchFramework
         /// <summary>
         /// The color of a property, like a button or slider, when it is selected or toggled on
         /// </summary>
-        public static Color propertySelectedColor { get; } = new Color32(0, 153, 255, 255);
+        public static Color propertySelectedColor { get; } = new Color32(123, 204, 196, 255);
 
         /// <summary>
         /// The color of a property, like a button or slider, in it's normal state
@@ -40,7 +40,7 @@ namespace Unity.TouchFramework
         /// <summary>
         /// The color of a property, like a button or slider, when it is being pressed down
         /// </summary>
-        public static Color propertyPressedColor { get; } = new Color32(30, 30, 30, 255);
+        public static Color propertyPressedColor { get; } = new Color32(101, 124, 24, 255);
 
         /// <summary>
         /// The color of the dropdown arrow, when not selected
@@ -79,7 +79,7 @@ namespace Unity.TouchFramework
 
         public static Color projectTabTextBaseColor { get; } = new Color32(228, 228, 228, 127);
 
-        public static Color projectTabTextSelectedColor { get; } = new Color32(32, 150, 243, 255);
+        public static Color projectTabTextSelectedColor { get; } = new Color32(101, 124, 24, 255);
 
     }
 }
