@@ -433,7 +433,7 @@ namespace Unity.TouchFramework
     }
 
     // Color tween class, receives the TweenValue callback and then sets the value on the target.
-    internal struct ColorTween : ITweenValue
+    public struct ColorTween : ITweenValue
     {
         public enum ColorTweenMode
         {
@@ -555,7 +555,7 @@ namespace Unity.TouchFramework
     /// Tween runner, executes the given tween. The coroutine will live within the given behaviour container.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    internal class TweenRunner<T> where T : struct, ITweenValue // changed from internal to public
+    public class TweenRunner<T> where T : struct, ITweenValue // changed from internal to public
     {
         protected MonoBehaviour m_CoroutineContainer;
         protected IEnumerator m_Tween;
