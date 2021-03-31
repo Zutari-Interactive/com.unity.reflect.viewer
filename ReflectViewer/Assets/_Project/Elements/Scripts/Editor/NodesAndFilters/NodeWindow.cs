@@ -1,5 +1,4 @@
 ﻿#if UNITY_EDITOR
-using System;
 using System.IO;
 using UnityEngine;
 using UnityEditor;
@@ -23,6 +22,7 @@ namespace Zutari.Elements.Editors
         {
             Window = GetWindow<NodeWindow>("Node Creator");
             Window.Show();
+            Debug.Log("Show Window");
         }
 
         #endregion
@@ -44,8 +44,10 @@ namespace Zutari.Elements.Editors
 
         public void OnEnable()
         {
-            _nodeTemplate = Resources.Load<TextAsset>("template-unique-node");
+            NodeToTemplate();
             if (EditorPrefs.HasKey("$NAMESPACE")) _namespace = EditorPrefs.GetString("$NAMESPACE");
+
+            Debug.Log("On Enable");
         }
 
         public void OnGUI()
@@ -56,15 +58,7 @@ namespace Zutari.Elements.Editors
 
             if (EditorGUI.EndChangeCheck())
             {
-                switch (_nodeType)
-                {
-                    case NodeType.UniqueNode:
-                        _nodeTemplate = Resources.Load<TextAsset>("template-unique-node");
-                        break;
-                    case NodeType.UniversalNode:
-                        _nodeTemplate = Resources.Load<TextAsset>("template-universal-node");
-                        break;
-                }
+                NodeToTemplate();
             }
 
             _nodeTemplate =
@@ -95,7 +89,8 @@ namespace Zutari.Elements.Editors
             EditorGUILayout.Space();
             if (GUILayout.Button("Create Custom Node"))
             {
-                if (string.IsNullOrEmpty(_nodeClassName) || string.IsNullOrEmpty(_filterClassName))
+                if (string.IsNullOrEmpty(_nodeClassName) || string.IsNullOrEmpty(_filterClassName) ||
+                    string.IsNullOrEmpty(_categoryName)  || string.IsNullOrEmpty(_subcategoryName))
                 {
                     Debug.LogError("Cannot have Empty Class Name!");
                     return;
@@ -115,6 +110,19 @@ namespace Zutari.Elements.Editors
                 string path = EditorUtility.SaveFilePanel("Save", Application.dataPath, _nodeClassName, "cs");
                 File.WriteAllText(path, data);
                 AssetDatabase.Refresh();
+            }
+        }
+
+        private void NodeToTemplate()
+        {
+            switch (_nodeType)
+            {
+                case NodeType.UniqueNode:
+                    _nodeTemplate = Resources.Load<TextAsset>("template-unique-node");
+                    break;
+                case NodeType.UniversalNode:
+                    _nodeTemplate = Resources.Load<TextAsset>("template-universal-node");
+                    break;
             }
         }
 

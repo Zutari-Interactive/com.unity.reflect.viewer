@@ -11,21 +11,21 @@ namespace Zutari.Elements.Nodes
     #region REFLECT NODE
 
     [Serializable]
-    public class MyCustomNode : ReflectNode<MyCusomFilter>
+    public class MyCustomNode : ReflectNode<MyCustomFilter>
     {
         public StreamInstanceInput InstanceInput   = new StreamInstanceInput();
         public GameObjectInput     GameObjectInput = new GameObjectInput();
 
-        protected override MyCusomFilter Create(ReflectBootstrapper hook, ISyncModelProvider provider,
+        protected override MyCustomFilter Create(ReflectBootstrapper hook, ISyncModelProvider provider,
                                                       IExposedPropertyTable resolver)
         {
-            Debug.Log("Created new MyCusomFilter.");
-            MyCusomFilter MyCusomFilter = new MyCusomFilter();
+            Debug.Log("Created new MyCustomFilter.");
+            MyCustomFilter MyCustomFilter = new MyCustomFilter();
 
-            InstanceInput.streamEvent = MyCusomFilter.OnStreamInstanceEvent;
-            GameObjectInput.streamEvent = MyCusomFilter.OnGameObjectEvent;
+            InstanceInput.streamEvent = MyCustomFilter.OnStreamInstanceEvent;
+            GameObjectInput.streamEvent = MyCustomFilter.OnGameObjectEvent;
 
-            return MyCusomFilter;
+            return MyCustomFilter;
         }
 
         #region VARIABLES
@@ -45,7 +45,7 @@ namespace Zutari.Elements.Nodes
 
     #region IREFLECT NODE PROCESSOR FILTER
 
-    public class MyCusomFilter : IReflectNodeProcessor
+    public class MyCustomFilter : IReflectNodeProcessor
     {
         class FilterData
         {
@@ -109,7 +109,7 @@ namespace Zutari.Elements.Nodes
                 filter.Instances.Add(gameObject);
 
                 // YOUR CUSTOM CODE GOES HERE, THIS IS A UNIQUE CASE
-                if (category.value.Equals("Bricks"))
+                if (category.value.Equals("SubCategory"))
                 {
                     // YOU CUSTOM CODE GOES HERE,
                     // ONCE A SUB CATEGORY HAS BEEN FOUND,
