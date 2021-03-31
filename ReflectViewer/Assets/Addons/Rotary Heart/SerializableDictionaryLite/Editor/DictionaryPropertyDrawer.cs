@@ -20,9 +20,9 @@ namespace RotaryHeart.Lib.SerializableDictionary
         SerializedProperty KeysProp;
         SerializedProperty ValuesProp;
 
-        readonly GUIContent idContent = new GUIContent("Id");
+        readonly GUIContent idContent    = new GUIContent("Id");
         readonly GUIContent valueContent = new GUIContent("Value");
-        readonly GUIStyle tooTipStyle = new GUIStyle("Tooltip");
+        readonly GUIStyle   tooTipStyle  = new GUIStyle("Tooltip");
 
         ReorderableList list;
 
@@ -69,6 +69,9 @@ namespace RotaryHeart.Lib.SerializableDictionary
         {
             GetReferences(property);
 
+            if (list == null)
+                return 0;
+            
             //Default header height
             float height = EditorGUIUtility.singleLineHeight;
             //Default space between entires

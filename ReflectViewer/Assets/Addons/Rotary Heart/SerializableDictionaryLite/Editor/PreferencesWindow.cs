@@ -19,7 +19,7 @@ namespace RotaryHeart.Lib.SerializableDictionary
         //Default values
         private static bool showPages;
         private static bool showSize;
-        private static int pageCount;
+        private static int  pageCount;
 
 #if UNITY_2018_3_OR_NEWER
         private class MyPrefSettingsProvider : SettingsProvider
