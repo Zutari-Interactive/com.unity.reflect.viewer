@@ -1,48 +1,20 @@
-﻿#if UNITY_EDITOR
+#if UNITY_EDITOR
 using System.Collections.Generic;
 using UnityEditor;
 
-namespace RotaryHeart.Lib
+namespace RotaryHeart.Lib.SerializableDictionary
 {
-    public static class Definer
+    [InitializeOnLoad]
+    public class Definer
     {
-        public static void ApplyDefines(List<string> defines)
+        static Definer()
         {
-            if (defines == null || defines.Count == 0)
-                return;
-
-            string availableDefines =
-                PlayerSettings.GetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup);
-            List<string> definesSplit = new List<string>(availableDefines.Split(';'));
-
-            foreach (string define in defines)
-                if (!definesSplit.Contains(define))
-                    definesSplit.Add(define);
-
-            _ApplyDefine(string.Join(";", definesSplit.ToArray()));
-        }
-
-        public static void RemoveDefines(List<string> defines)
-        {
-            if (defines == null || defines.Count == 0)
-                return;
-
-            string availableDefines =
-                PlayerSettings.GetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup);
-            List<string> definesSplit = new List<string>(availableDefines.Split(';'));
-
-            foreach (string define in defines)
-                definesSplit.Remove(define);
-
-            _ApplyDefine(string.Join(";", definesSplit.ToArray()));
-        }
-
-        static void _ApplyDefine(string define)
-        {
-            if (string.IsNullOrEmpty(define))
-                return;
-
-            PlayerSettings.SetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup, define);
+            List<string> defines = new List<string>(1)
+            {
+                "RH_SerializedDictionary"
+            };
+            
+            Lib.Definer.ApplyDefines(defines);
         }
     }
 }

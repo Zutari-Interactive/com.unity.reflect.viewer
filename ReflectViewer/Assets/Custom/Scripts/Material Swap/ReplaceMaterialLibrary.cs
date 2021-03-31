@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using SerializableDictionary;
 using UnityEngine;
 
 namespace Zutari.Database
 {
     [CreateAssetMenu(fileName = "ReplaceMaterialLibrary", menuName = "Zutari/Databases/ReplaceMaterialLibrary")]
-    public class ReplaceMaterialLibrary : SODatabase<string, Material>
+    public class ReplaceMaterialLibrary : SODictionary<string, Material>
     {
 
         #region VARIABLES
@@ -14,7 +15,7 @@ namespace Zutari.Database
         public MatDict Database = new MatDict();
 
         #endregion
-        
+
         #region METHODS
 
         public override void Add(string key, Material value)
@@ -65,7 +66,7 @@ namespace Zutari.Database
             return kw;
         }
     }
-    
+
     [Serializable]
     public class MatDict : SDictionary<string, Material>
     {
