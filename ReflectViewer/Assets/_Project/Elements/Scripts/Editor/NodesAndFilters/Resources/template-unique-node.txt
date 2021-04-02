@@ -47,20 +47,56 @@ namespace $NAMESPACE
 
     public class $NODEPROCESSORFILTERNAME : IReflectNodeProcessor
     {
+        #region INTERNAL CLASS
+
         class FilterData
         {
             public bool                Visible   = true;
             public HashSet<GameObject> Instances = new HashSet<GameObject>();
         }
 
-        private Dictionary<string, FilterData> _instances = new Dictionary<string, FilterData>();
+        #endregion
 
+        #region VARIABLES
+
+        private Dictionary<string, FilterData> _instances = new Dictionary<string, FilterData>();
         private ReflectClient _client;
+
+        // ADD YOUR CUSTOM VARIABLES HERE
+        // YOUR VARIABLES - START
+
+        // YOUR VARIABLES - END
+
+        #endregion
+
+        #region PROPERTIES
 
         public IEnumerable<string> Categories
         {
             get { return _instances.Keys; }
         }
+
+        #endregion
+
+        #region CUSTOM METHODS
+
+        // ADD YOUR CUSTOM METHODS HERE
+        // YOUR METHODS - START
+
+        public void Setup()
+        {
+            // CALL THIS METHOD IN A CUSTOM FILTER
+        }
+
+        public void SetupNode(CustomNode node)
+        {
+        }
+
+        // YOUR METHODS - END
+
+        #endregion
+
+        #region NODE PROCESSOR METHODS
 
         public void OnStreamEvent(SyncedData<GameObject> gameObject, StreamEvent streamEvent)
         {
@@ -95,7 +131,7 @@ namespace $NAMESPACE
             }
         }
 
-        void OnGameObjectAdded(GameObject gameObject)
+        private void OnGameObjectAdded(GameObject gameObject)
         {
             if (!gameObject.TryGetComponent(out Metadata metadata))
                 return;
@@ -127,7 +163,7 @@ namespace $NAMESPACE
             }
         }
 
-        void OnGameObjectRemoved(GameObject gameObject)
+        private void OnGameObjectRemoved(GameObject gameObject)
         {
             if (!gameObject.TryGetComponent(out Metadata metadata))
                 return;
@@ -174,19 +210,8 @@ namespace $NAMESPACE
         {
             // OnPipelineShutdown is called before the pipeline graph is destroyed.
         }
+
+        #endregion
     }
-
-    #region VARIABLES
-
-    // THIS IS FOR YOUR VARIABLES
-
-    #endregion
-
-    #region CUSTOM METHODS
-
-    // THIS IS WHERE YOU ADD YOUR CUSTOM FILTER METHODS
-
-    #endregion
-
     #endregion
 }

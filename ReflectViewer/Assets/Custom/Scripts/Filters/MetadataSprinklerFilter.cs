@@ -9,37 +9,37 @@ public class MetadataSprinklerFilter : CustomFilter
     SprinklerFilter m_SprinklerFilterProcessor;
     SprinklerGrouper grouper;
 
-    public override void AssignPipeline(PipelineAsset p)
+    public override void AssignPipeline(PipelineAsset pipelineAsset)
     {
-        base.AssignPipeline(p);
+        base.AssignPipeline(pipelineAsset);
     }
 
     public override void SetupNode(Transform r)
     {
         // Create the node required for this but first check if it exists
-        if (pipelineAsset.TryGetNode<SprinklerNode>(out SprinklerNode sprinklerNode))
+        if (PipelineAsset.TryGetNode<SprinklerNode>(out SprinklerNode sprinklerNode))
         {
             StartCoroutine(SetupFilter(grouper, sprinklerNode));
             return;
         }
 
 
-        var filterNode = pipelineAsset.CreateNode<SprinklerNode>();
+        var filterNode = PipelineAsset.CreateNode<SprinklerNode>();
 
-        pipelineAsset.TryGetNode<SyncObjectInstanceProviderNode>(out SyncObjectInstanceProviderNode syncNode);
-        pipelineAsset.TryGetNode<InstanceConverterNode>(out InstanceConverterNode instanceNode);
+        PipelineAsset.TryGetNode<SyncObjectInstanceProviderNode>(out SyncObjectInstanceProviderNode syncNode);
+        PipelineAsset.TryGetNode<InstanceConverterNode>(out InstanceConverterNode instanceNode);
 
-        pipelineAsset.CreateConnection(syncNode.output, filterNode.instanceInput);
-        pipelineAsset.CreateConnection(instanceNode.output, filterNode.gameObjectInput);
+        PipelineAsset.CreateConnection(syncNode.output, filterNode.instanceInput);
+        PipelineAsset.CreateConnection(instanceNode.output, filterNode.gameObjectInput);
 
         // Once the pipeline is started, keep a link to the processor node so we can control filtering from it
 
         m_SprinklerFilterProcessor = filterNode.processor;
     }
 
-    public override void SetupGrouper(Grouper g)
+    public override void SetupGrouper(Grouper grouper)
     {
-        grouper = g as SprinklerGrouper;
+        this.grouper = grouper as SprinklerGrouper;
     }
 
     public override void SetupNode(CustomNode node)

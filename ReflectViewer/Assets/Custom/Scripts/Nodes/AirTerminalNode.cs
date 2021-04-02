@@ -6,11 +6,13 @@ using UnityEngine.Reflect;
 using UnityEngine.Reflect.Pipeline;
 
 [SerializeField]
-class AirTerminalNode : ReflectNode<AirTerminalFilter>
+public class AirTerminalNode : ReflectNode<AirTerminalFilter>
 {
-    public StreamInstanceInput instanceInput = new StreamInstanceInput();
-    public GameObjectInput gameObjectInput = new GameObjectInput();
-    protected override AirTerminalFilter Create(ReflectBootstrapper hook, ISyncModelProvider provider, IExposedPropertyTable resolver)
+    public StreamInstanceInput instanceInput   = new StreamInstanceInput();
+    public GameObjectInput     gameObjectInput = new GameObjectInput();
+
+    protected override AirTerminalFilter Create(ReflectBootstrapper hook, ISyncModelProvider provider,
+                                                IExposedPropertyTable resolver)
     {
         Debug.Log("created air terminal filter");
         var filter = new AirTerminalFilter();
@@ -22,11 +24,11 @@ class AirTerminalNode : ReflectNode<AirTerminalFilter>
     }
 }
 
-class AirTerminalFilter : IReflectNodeProcessor
+public class AirTerminalFilter : IReflectNodeProcessor
 {
     class FilterData
     {
-        public bool visible = true;
+        public bool                visible   = true;
         public HashSet<GameObject> instances = new HashSet<GameObject>();
     }
 
@@ -155,6 +157,5 @@ class AirTerminalFilter : IReflectNodeProcessor
     public void OnPipelineShutdown()
     {
         // OnPipelineShutdown is called before the pipeline graph is destroyed.
-
     }
 }

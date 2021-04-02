@@ -17,7 +17,7 @@ namespace Zutari.Elements.Editors
 
         public static NodeWindow Window;
 
-        [MenuItem("Elements/Create/Node")]
+        [MenuItem("Elements/Create/Custom Node")]
         public static void OpenWindow()
         {
             Window = GetWindow<NodeWindow>("Node Creator");
@@ -46,11 +46,22 @@ namespace Zutari.Elements.Editors
         {
             NodeToTemplate();
             if (EditorPrefs.HasKey("$NAMESPACE")) _namespace = EditorPrefs.GetString("$NAMESPACE");
-
-            Debug.Log("On Enable");
         }
 
         public void OnGUI()
+        {
+            NodeTemplateField();
+            NamespaceField();
+            ClassNameFields();
+            CategoryFields();
+            ButtonField();
+        }
+
+        #endregion
+
+        #region METHODS
+
+        private void NodeTemplateField()
         {
             EditorGUI.BeginChangeCheck();
             _nodeType = (NodeType) EditorGUILayout.EnumPopup("Node Type", _nodeType);
@@ -64,35 +75,44 @@ namespace Zutari.Elements.Editors
             _nodeTemplate =
                 (TextAsset) EditorGUILayout.ObjectField("Template:", _nodeTemplate, typeof(TextAsset), false);
             EditorGUILayout.Space();
+        }
 
+        private void NamespaceField()
+        {
             EditorGUI.BeginChangeCheck();
-
             _namespace = EditorGUILayout.TextField("Namespace:", _namespace);
-
             if (EditorGUI.EndChangeCheck())
             {
                 EditorPrefs.SetString("$NAMESPACE", _namespace);
             }
+        }
 
+        private void ClassNameFields()
+        {
             _nodeClassName = EditorGUILayout.TextField("Node Class Name:", _nodeClassName);
-
             _filterClassName = EditorGUILayout.TextField("Filter Class Name:", _filterClassName);
             EditorGUILayout.Space();
+        }
 
+        private void CategoryFields()
+        {
             _categoryName = EditorGUILayout.TextField("Category Name:", _categoryName);
 
             if (_nodeType == NodeType.UniqueNode)
             {
                 _subcategoryName = EditorGUILayout.TextField("SubCategory Name:", _subcategoryName);
             }
+        }
 
+        private void ButtonField()
+        {
             EditorGUILayout.Space();
-            if (GUILayout.Button("Create Custom Node"))
+            if (GUILayout.Button("Compile Node"))
             {
                 if (string.IsNullOrEmpty(_nodeClassName) || string.IsNullOrEmpty(_filterClassName) ||
                     string.IsNullOrEmpty(_categoryName)  || string.IsNullOrEmpty(_subcategoryName))
                 {
-                    Debug.LogError("Cannot have Empty Class Name!");
+                    Debug.LogError("You have Missing Information!");
                     return;
                 }
 
@@ -126,9 +146,6 @@ namespace Zutari.Elements.Editors
             }
         }
 
-        #endregion
-
-        #region METHODS
 
         private void UpdateTextForUniqueNode(out string data)
         {

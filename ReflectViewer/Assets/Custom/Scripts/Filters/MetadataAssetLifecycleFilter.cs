@@ -8,28 +8,28 @@ public class MetadataAssetLifecycleFilter : CustomFilter
     AssetLifecycleFilter m_AssetLifeCycleFilterProcessor;
     AssetLifecycleGrouper grouper;
 
-    public override void AssignPipeline(PipelineAsset p)
+    public override void AssignPipeline(PipelineAsset pipelineAsset)
     {
-        base.AssignPipeline(p);
+        base.AssignPipeline(pipelineAsset);
     }
 
     public override void SetupNode(Transform r)
     {
         // Create the node required
-        if (pipelineAsset.TryGetNode<AssetLifecycleNode>(out AssetLifecycleNode assetLifecycleNode))
+        if (PipelineAsset.TryGetNode<AssetLifecycleNode>(out AssetLifecycleNode assetLifecycleNode))
         {
             StartCoroutine(SetupFilter(grouper, assetLifecycleNode));
             return;
         }
 
 
-        var filterNode = pipelineAsset.CreateNode<AssetLifecycleNode>();
+        var filterNode = PipelineAsset.CreateNode<AssetLifecycleNode>();
 
-        pipelineAsset.TryGetNode<SyncObjectInstanceProviderNode>(out SyncObjectInstanceProviderNode syncNode);
-        pipelineAsset.TryGetNode<InstanceConverterNode>(out InstanceConverterNode instanceNode);
+        PipelineAsset.TryGetNode<SyncObjectInstanceProviderNode>(out SyncObjectInstanceProviderNode syncNode);
+        PipelineAsset.TryGetNode<InstanceConverterNode>(out InstanceConverterNode instanceNode);
 
-        pipelineAsset.CreateConnection(syncNode.output, filterNode.instanceInput);
-        pipelineAsset.CreateConnection(instanceNode.output, filterNode.gameObjectInput);
+        PipelineAsset.CreateConnection(syncNode.output, filterNode.instanceInput);
+        PipelineAsset.CreateConnection(instanceNode.output, filterNode.gameObjectInput);
 
         // Once the pipeline is started, keep a link to the processor node so we can control filtering from it
 
@@ -37,9 +37,9 @@ public class MetadataAssetLifecycleFilter : CustomFilter
         SetupFilter(grouper, filterNode);
     }
 
-    public override void SetupGrouper(Grouper g)
+    public override void SetupGrouper(Grouper grouper)
     {
-        grouper = g as AssetLifecycleGrouper;
+        this.grouper = grouper as AssetLifecycleGrouper;
     }
 
     public override void SetupNode(CustomNode node)
