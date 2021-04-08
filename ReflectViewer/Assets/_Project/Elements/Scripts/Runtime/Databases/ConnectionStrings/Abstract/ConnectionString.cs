@@ -9,17 +9,19 @@ namespace Databases.ConnectionStrings
         /// <summary>
         /// Connection String.
         /// </summary>
-        [Header("Default")]
+        [Header("Default String")]
         public string StaticConnectionString = string.Empty;
 
         /// <summary>
         /// Create a Custom Connection String Flag.
         /// </summary>
+        [Header("Options")]
         public bool UseCustomConnectionString = false;
 
         /// <summary>
         /// Custom Connection String.
         /// </summary>
+        [Header("Custom String")]
         public string CustomConnectionString = string.Empty;
 
         #endregion
@@ -32,19 +34,17 @@ namespace Databases.ConnectionStrings
         /// <returns></returns>
         public string GetValidString()
         {
-            if (StaticConnectionString != string.Empty && !string.IsNullOrEmpty(StaticConnectionString) &&
-                !string.IsNullOrWhiteSpace(StaticConnectionString))
+            if (!string.IsNullOrEmpty(StaticConnectionString) && !string.IsNullOrWhiteSpace(StaticConnectionString))
             {
                 return StaticConnectionString;
             }
 
-            if (CustomConnectionString != string.Empty && !string.IsNullOrEmpty(CustomConnectionString) &&
-                !string.IsNullOrWhiteSpace(CustomConnectionString))
+            if (!string.IsNullOrEmpty(CustomConnectionString) && !string.IsNullOrWhiteSpace(CustomConnectionString))
             {
                 return CustomConnectionString;
             }
 
-            return "";
+            return string.Empty;
         }
 
         #endregion

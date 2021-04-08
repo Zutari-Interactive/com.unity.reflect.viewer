@@ -1,4 +1,5 @@
 ﻿#if UNITY_EDITOR
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -60,7 +61,6 @@ namespace Databases.ConnectionStrings
 
         #endregion
 
-
         #region UNITY METHODS
 
         private void OnEnable()
@@ -70,7 +70,6 @@ namespace Databases.ConnectionStrings
 
         public override void OnInspectorGUI()
         {
-            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             Default(15);
 
             if (!UseCustomString)
@@ -81,9 +80,6 @@ namespace Databases.ConnectionStrings
 
             EditStaticString();
             SaveString();
-            EditorGUILayout.EndVertical();
-
-            base.OnInspectorGUI();
         }
 
         #endregion
@@ -93,8 +89,7 @@ namespace Databases.ConnectionStrings
         private void Default(float space = 0f)
         {
             UseCustomString = EditorGUILayout.ToggleLeft("Use Custom String", UseCustomString);
-
-            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            EditorGUILayout.Space();
 
             if (UseCustomString)
             {
@@ -108,15 +103,11 @@ namespace Databases.ConnectionStrings
                 EditorGUILayout.TextArea(StaticConnectionString, EditorStyles.helpBox, GUILayout.Height(96f));
             }
 
-            EditorGUILayout.EndVertical();
-
             GUILayout.Space(space);
         }
 
         private void ConnectionStringParameters(float space = 0f)
         {
-            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
-
             EditorGUILayout.LabelField("Connection String Parameters");
 
             EditorGUILayout.BeginHorizontal(EditorStyles.helpBox);
@@ -125,37 +116,22 @@ namespace Databases.ConnectionStrings
                                                        GUILayout.ExpandWidth(true));
 
             UseInitialCatalog = EditorGUILayout.ToggleLeft("Use Initial Catalog", UseInitialCatalog,
-                                                           GUILayout.Width(96f),
-                                                           GUILayout.ExpandWidth(true));
+                                                           GUILayout.Width(96f), GUILayout.ExpandWidth(true));
 
             EditorGUILayout.EndHorizontal();
-            EditorGUILayout.EndVertical();
             GUILayout.Space(space);
         }
 
         private void ConnectionStringFields(float space = 0f)
         {
-            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             EditorGUILayout.LabelField("Connection String Fields");
 
-            if (UseDataSource)
-            {
-                _target.Server = EditorGUILayout.TextField("DataSource:", _target.Server, EditorStyles.helpBox);
-            }
-            else
-            {
-                _target.Server = EditorGUILayout.TextField("Server:", _target.Server, EditorStyles.helpBox);
-            }
+            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            _target.Server = EditorGUILayout.TextField(UseDataSource ? "DataSource:" : "Server:", _target.Server,
+                                                       EditorStyles.helpBox);
 
-            if (UseInitialCatalog)
-            {
-                _target.Database =
-                    EditorGUILayout.TextField("Initial Catalog:", _target.Database, EditorStyles.helpBox);
-            }
-            else
-            {
-                _target.Database = EditorGUILayout.TextField("Database:", _target.Database, EditorStyles.helpBox);
-            }
+            _target.Database = EditorGUILayout.TextField(UseInitialCatalog ? "Initial Catalog:" : "Database:",
+                                                         _target.Database, EditorStyles.helpBox);
 
             _target.UserID = EditorGUILayout.TextField("Username:", _target.UserID, EditorStyles.helpBox);
             _target.Password = EditorGUILayout.TextField("Password:", _target.Password, EditorStyles.helpBox);
@@ -166,7 +142,7 @@ namespace Databases.ConnectionStrings
 
         private void EditStaticString(float space = 0f)
         {
-            string connectionString = "";
+            string connectionString = String.Empty;
 
             if (UseDataSource)
             {
