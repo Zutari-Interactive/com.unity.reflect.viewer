@@ -1,21 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace Zutari.General
+﻿public enum CharacterMaterial
 {
-    public class Enums : MonoBehaviour
-    {
-        #region VARIABLES
-
-        #endregion
-
-        #region UNITY METHODS
-
-        #endregion
-
-        #region METHODS
-
-        #endregion
-    }
+    Clothes = 0,
+    Skin = 1,
+    Accessory = 0, // Possible Bug Cause
 }
+
+
