@@ -9,7 +9,7 @@ namespace Zutari.Character
         #region VARIABLES
 
         [Header("Username")]
-        public string Username = string.Empty;
+        public string Username = "Zutari.Guest-Player";
 
         [Header("Character Gender")]
         public int Gender = -1;
