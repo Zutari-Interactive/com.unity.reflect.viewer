@@ -1,34 +1,55 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Reflect;
 using UnityEngine.Reflect.Pipeline;
 
 public class CustomFilter : MonoBehaviour
 {
-    [HideInInspector]
-    public PipelineAsset pipelineAsset;
+    #region VARIABLES
 
-    public virtual void AssignPipeline(PipelineAsset p)
+    private PipelineAsset _pipelineAsset;
+
+    #endregion
+
+    #region PROPERTIES
+
+    public PipelineAsset PipelineAsset
     {
-        pipelineAsset = p;
+        get => _pipelineAsset;
+        set => _pipelineAsset = value;
     }
 
-    //used for sorting families in the hierarchy - mostly useful in the editor
+    #endregion
+
+    #region METHODS
+
+    public virtual void AssignPipeline(PipelineAsset pipelineAsset)
+    {
+        PipelineAsset = pipelineAsset;
+    }
+
+    /// <summary>
+    /// Used for sorting families in the hierarchy - mostly useful in the editor
+    /// </summary>
+    /// <param name="root"></param>
     public virtual void SetupNode(Transform root)
     {
-        //currently no shared functionality between inheritors
     }
 
-    //used all other custom nodes
+    /// <summary>
+    /// Used all other custom nodes
+    /// </summary>
+    /// <param name="node"></param>
     public virtual void SetupNode(CustomNode node)
     {
-        //currently no shared functionality between inheritors
     }
 
-    //used for grouping common components for interaction at runtime
-    public virtual void SetupGrouper(Grouper g)
+    /// <summary>
+    /// Used for Grouping Common Components for interaction at runtime
+    /// </summary>
+    /// <param name="grouper"></param>
+    public virtual void SetupGrouper(Grouper grouper)
     {
-        //currently no shared functionality between inheritors
     }
+
+    #endregion
 }

@@ -1,5 +1,4 @@
 ﻿#if UNITY_EDITOR
-using System;
 using System.IO;
 using UnityEngine;
 using UnityEditor;
@@ -18,11 +17,12 @@ namespace Zutari.Elements.Editors
 
         public static NodeWindow Window;
 
-        [MenuItem("Elements/Create/Node")]
+        [MenuItem("Elements/Create/Custom Node")]
         public static void OpenWindow()
         {
             Window = GetWindow<NodeWindow>("Node Creator");
             Window.Show();
+            Debug.Log("Show Window");
         }
 
         #endregion
@@ -44,11 +44,24 @@ namespace Zutari.Elements.Editors
 
         public void OnEnable()
         {
-            _nodeTemplate = Resources.Load<TextAsset>("template-unique-node");
+            NodeToTemplate();
             if (EditorPrefs.HasKey("$NAMESPACE")) _namespace = EditorPrefs.GetString("$NAMESPACE");
         }
 
         public void OnGUI()
+        {
+            NodeTemplateField();
+            NamespaceField();
+            ClassNameFields();
+            CategoryFields();
+            ButtonField();
+        }
+
+        #endregion
+
+        #region METHODS
+
+        private void NodeTemplateField()
         {
             EditorGUI.BeginChangeCheck();
             _nodeType = (NodeType) EditorGUILayout.EnumPopup("Node Type", _nodeType);
@@ -56,48 +69,50 @@ namespace Zutari.Elements.Editors
 
             if (EditorGUI.EndChangeCheck())
             {
-                switch (_nodeType)
-                {
-                    case NodeType.UniqueNode:
-                        _nodeTemplate = Resources.Load<TextAsset>("template-unique-node");
-                        break;
-                    case NodeType.UniversalNode:
-                        _nodeTemplate = Resources.Load<TextAsset>("template-universal-node");
-                        break;
-                }
+                NodeToTemplate();
             }
 
             _nodeTemplate =
                 (TextAsset) EditorGUILayout.ObjectField("Template:", _nodeTemplate, typeof(TextAsset), false);
             EditorGUILayout.Space();
+        }
 
+        private void NamespaceField()
+        {
             EditorGUI.BeginChangeCheck();
-
             _namespace = EditorGUILayout.TextField("Namespace:", _namespace);
-
             if (EditorGUI.EndChangeCheck())
             {
                 EditorPrefs.SetString("$NAMESPACE", _namespace);
             }
+        }
 
+        private void ClassNameFields()
+        {
             _nodeClassName = EditorGUILayout.TextField("Node Class Name:", _nodeClassName);
-
             _filterClassName = EditorGUILayout.TextField("Filter Class Name:", _filterClassName);
             EditorGUILayout.Space();
+        }
 
+        private void CategoryFields()
+        {
             _categoryName = EditorGUILayout.TextField("Category Name:", _categoryName);
 
             if (_nodeType == NodeType.UniqueNode)
             {
                 _subcategoryName = EditorGUILayout.TextField("SubCategory Name:", _subcategoryName);
             }
+        }
 
+        private void ButtonField()
+        {
             EditorGUILayout.Space();
-            if (GUILayout.Button("Create Custom Node"))
+            if (GUILayout.Button("Compile Node"))
             {
-                if (string.IsNullOrEmpty(_nodeClassName) || string.IsNullOrEmpty(_filterClassName))
+                if (string.IsNullOrEmpty(_nodeClassName) || string.IsNullOrEmpty(_filterClassName) ||
+                    string.IsNullOrEmpty(_categoryName)  || string.IsNullOrEmpty(_subcategoryName))
                 {
-                    Debug.LogError("Cannot have Empty Class Name!");
+                    Debug.LogError("You have Missing Information!");
                     return;
                 }
 
@@ -118,9 +133,19 @@ namespace Zutari.Elements.Editors
             }
         }
 
-        #endregion
+        private void NodeToTemplate()
+        {
+            switch (_nodeType)
+            {
+                case NodeType.UniqueNode:
+                    _nodeTemplate = Resources.Load<TextAsset>("template-unique-node");
+                    break;
+                case NodeType.UniversalNode:
+                    _nodeTemplate = Resources.Load<TextAsset>("template-universal-node");
+                    break;
+            }
+        }
 
-        #region METHODS
 
         private void UpdateTextForUniqueNode(out string data)
         {

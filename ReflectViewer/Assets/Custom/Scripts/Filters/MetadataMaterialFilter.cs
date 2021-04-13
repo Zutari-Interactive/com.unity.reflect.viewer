@@ -8,28 +8,28 @@ public class MetadataMaterialFilter : CustomFilter
     MaterialFilter m_MaterialFilterProcessor;
     SwapMaterial swapper;
 
-    public override void AssignPipeline(PipelineAsset p)
+    public override void AssignPipeline(PipelineAsset pipelineAsset)
     {
-        base.AssignPipeline(p);
+        base.AssignPipeline(pipelineAsset);
     }
 
     public override void SetupNode(Transform r)
     {
         // Create the node required
-        if (pipelineAsset.TryGetNode<MaterialNode>(out MaterialNode airTerminalNode))
+        if (PipelineAsset.TryGetNode<MaterialNode>(out MaterialNode airTerminalNode))
         {
             StartCoroutine(SetupFilter(swapper, airTerminalNode));
             return;
         }
 
 
-        var filterNode = pipelineAsset.CreateNode<MaterialNode>();
+        var filterNode = PipelineAsset.CreateNode<MaterialNode>();
 
-        pipelineAsset.TryGetNode<SyncObjectInstanceProviderNode>(out SyncObjectInstanceProviderNode syncNode);
-        pipelineAsset.TryGetNode<InstanceConverterNode>(out InstanceConverterNode instanceNode);
+        PipelineAsset.TryGetNode<SyncObjectInstanceProviderNode>(out SyncObjectInstanceProviderNode syncNode);
+        PipelineAsset.TryGetNode<InstanceConverterNode>(out InstanceConverterNode instanceNode);
 
-        pipelineAsset.CreateConnection(syncNode.output, filterNode.instanceInput);
-        pipelineAsset.CreateConnection(instanceNode.output, filterNode.gameObjectInput);
+        PipelineAsset.CreateConnection(syncNode.output, filterNode.instanceInput);
+        PipelineAsset.CreateConnection(instanceNode.output, filterNode.gameObjectInput);
 
         // Once the pipeline is started, keep a link to the processor node so we can control filtering from it
 

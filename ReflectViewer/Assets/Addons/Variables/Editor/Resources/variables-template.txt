@@ -1,0 +1,38 @@
+﻿using System.IO;
+using VariablesSO;
+using UnityEngine;
+
+
+namespace $NAMESPACE
+{
+    [CreateAssetMenu]
+    public class $SCRIPTNAME : VariablesBase
+    {
+        #region VARIABLES
+
+        #endregion
+
+        #region PROPERTIES
+
+        #endregion
+
+        #region SERIALIZATION METHODS
+
+        public override void WriteToFile()
+        {
+            base.WriteToFile();
+        }
+
+        public override void OverwriteFromFile()
+        {
+            base.OverwriteFromFile();
+        }
+
+        public override void DeleteFile()
+        {
+            base.DeleteFile();
+        }
+
+        #endregion
+    }
+}

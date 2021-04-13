@@ -7,28 +7,28 @@ public class MetadataCategoryFilter : CustomFilter
 {
     CategoryFilter m_CategoryFilterProcessor;
 
-    public override void AssignPipeline(PipelineAsset p)
+    public override void AssignPipeline(PipelineAsset pipelineAsset)
     {
-        base.AssignPipeline(p);
+        base.AssignPipeline(pipelineAsset);
     }
 
     public override void SetupNode(Transform r)
     {
         // Create the node required
-        if (pipelineAsset.TryGetNode<CategoryNode>(out CategoryNode categoryNode))
+        if (PipelineAsset.TryGetNode<CategoryNode>(out CategoryNode categoryNode))
         {
             StartCoroutine(SetupFilter(r, categoryNode));
             return;
         }
             
 
-        var filterNode = pipelineAsset.CreateNode<CategoryNode>();
+        var filterNode = PipelineAsset.CreateNode<CategoryNode>();
 
-        pipelineAsset.TryGetNode<SyncObjectInstanceProviderNode>(out SyncObjectInstanceProviderNode syncNode);
-        pipelineAsset.TryGetNode<InstanceConverterNode>(out InstanceConverterNode instanceNode);
+        PipelineAsset.TryGetNode<SyncObjectInstanceProviderNode>(out SyncObjectInstanceProviderNode syncNode);
+        PipelineAsset.TryGetNode<InstanceConverterNode>(out InstanceConverterNode instanceNode);
 
-        pipelineAsset.CreateConnection(syncNode.output, filterNode.instanceInput);
-        pipelineAsset.CreateConnection(instanceNode.output, filterNode.gameObjectInput);
+        PipelineAsset.CreateConnection(syncNode.output, filterNode.instanceInput);
+        PipelineAsset.CreateConnection(instanceNode.output, filterNode.gameObjectInput);
 
         // Once the pipeline is started, keep a link to the processor node so we can control filtering from it
 

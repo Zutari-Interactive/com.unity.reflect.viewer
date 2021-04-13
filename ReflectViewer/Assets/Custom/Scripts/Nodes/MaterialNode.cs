@@ -8,11 +8,13 @@ using UnityEngine.Reflect.Pipeline;
 //Zutari Elements custom node
 
 [SerializeField]
-class MaterialNode : ReflectNode<MaterialFilter>
+public class MaterialNode : ReflectNode<MaterialFilter>
 {
-    public StreamInstanceInput instanceInput = new StreamInstanceInput();
-    public GameObjectInput gameObjectInput = new GameObjectInput();
-    protected override MaterialFilter Create(ReflectBootstrapper hook, ISyncModelProvider provider, IExposedPropertyTable resolver)
+    public StreamInstanceInput instanceInput   = new StreamInstanceInput();
+    public GameObjectInput     gameObjectInput = new GameObjectInput();
+
+    protected override MaterialFilter Create(ReflectBootstrapper hook, ISyncModelProvider provider,
+                                             IExposedPropertyTable resolver)
     {
         Debug.Log("created category filter");
         var filter = new MaterialFilter();
@@ -25,11 +27,11 @@ class MaterialNode : ReflectNode<MaterialFilter>
 }
 
 
-class MaterialFilter : IReflectNodeProcessor
+public class MaterialFilter : IReflectNodeProcessor
 {
     class FilterData
     {
-        public bool visible = true;
+        public bool                visible   = true;
         public HashSet<GameObject> instances = new HashSet<GameObject>();
     }
 
@@ -51,6 +53,7 @@ class MaterialFilter : IReflectNodeProcessor
     {
         swapper = node as SwapMaterial;
     }
+
     //
     public IEnumerable<string> categories
     {
@@ -158,6 +161,4 @@ class MaterialFilter : IReflectNodeProcessor
     {
         // OnPipelineShutdown is called before the pipeline graph is destroyed.
     }
-
-
 }
