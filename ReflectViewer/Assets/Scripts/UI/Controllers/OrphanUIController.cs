@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Unity.Reflect.Viewer.UI
 {
-    class OrphanUIController : MonoBehaviour
+    public class OrphanUIController : MonoBehaviour
     {
 #pragma warning disable CS0649
         [SerializeField]

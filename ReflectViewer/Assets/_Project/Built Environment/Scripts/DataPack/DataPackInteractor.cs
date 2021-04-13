@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,7 @@ public class DataPackInteractor : MonoBehaviour
 
     private string address;
 
-    private void GetDataPack()
+    public void GetDataPack()
     {
         Debug.Log($"find pack with ID {address}");
         Addressables.LoadAssetAsync<DataPack>(address).Completed += OnAddressableLoadDone;
@@ -24,13 +25,9 @@ public class DataPackInteractor : MonoBehaviour
             Debug.LogWarning("No addressable asset found");
     }
 
-    private void OnMouseDown()
-    {
-        GetDataPack();
-    }
-
     public void SetAddress(string a)
     {
         address = a;
     }
+
 }

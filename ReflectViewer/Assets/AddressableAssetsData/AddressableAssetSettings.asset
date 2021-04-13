@@ -71,6 +71,9 @@ MonoBehaviour:
     m_LabelNames:
     - default
     - Air Flow
+    - 21203850
+    - 21343376
+    - 22151243
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 65b461568ff7e02429697749ba2ad3bf, type: 2}
