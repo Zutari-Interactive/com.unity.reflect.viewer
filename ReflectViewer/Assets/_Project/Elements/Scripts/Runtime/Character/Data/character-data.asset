@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 193bba7d00c4cc94eaf9d3b5d6815c52, type: 3}
   m_Name: character-data
   m_EditorClassIdentifier: 
-  Filename: variables.json
+  Filename: character-data.json
   Username: Zutari.Guest-Player
   Gender: -1
   SkinMaterialIndex: -1
