@@ -3,7 +3,7 @@ using System.IO;
 using UnityEngine;
 using UnityEditor;
 
-namespace Elements.Elements.Editors
+namespace Elements.Editors
 {
     public class FiltersWindow : EditorWindow
     {
