@@ -9,7 +9,7 @@ public class MaterialManagerEditor : Editor
 {
     Object revitLibrary;
 
-    [MenuItem("Zutari/Material Manager")]
+    // [MenuItem("Zutari/Material Manager")]
     public static void ShowWindow()
     {
         //EditorWindow.GetWindow<MaterialManagerEditor>("Zutari Material Manager");
@@ -29,14 +29,14 @@ public class MaterialManagerEditor : Editor
 
         if (GUILayout.Button("Swap Materials"))
         {
-            Debug.Log("swap materials");      
-        
+            Debug.Log("swap materials");
+
         }
 
         //Don't allow this until materials have been swapped
         if (GUILayout.Button("Delete Revit Materials"))
         {
-            
+
             Debug.Log("Delete Revit Materials");
         }
 

@@ -1,10 +1,10 @@
-﻿using UnityEngine;
-using Variables;
+﻿using SerializableSO;
+using UnityEngine;
 
-namespace Zutari.Character
+namespace Elements.Character
 {
     // [CreateAssetMenu]
-    public class CharacterData : VariablesBase
+    public class CharacterData : SerializableSOBase
     {
         #region VARIABLES
 

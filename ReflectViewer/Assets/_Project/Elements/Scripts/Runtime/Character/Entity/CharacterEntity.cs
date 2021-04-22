@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using Zutari.General;
+﻿using Elements.General;
+using UnityEngine;
 
-namespace Zutari.Character
+namespace Elements.Character
 {
     public class CharacterEntity : EntityBase
     {

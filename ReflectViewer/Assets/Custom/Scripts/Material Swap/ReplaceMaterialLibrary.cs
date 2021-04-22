@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using SerializableDictionary;
 using UnityEngine;
 
-namespace Zutari.Database
+namespace Elements.Database
 {
     [CreateAssetMenu(fileName = "ReplaceMaterialLibrary", menuName = "Zutari/Databases/ReplaceMaterialLibrary")]
     public class ReplaceMaterialLibrary : SODictionary<string, Material>

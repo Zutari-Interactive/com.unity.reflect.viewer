@@ -1,6 +1,6 @@
 ﻿using SFB;
 
-namespace Zutari.IO
+namespace Elements.IO
 {
     public static class FileBrowser
     {

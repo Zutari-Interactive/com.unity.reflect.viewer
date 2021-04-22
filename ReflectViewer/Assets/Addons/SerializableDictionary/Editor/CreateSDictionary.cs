@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace SerializableDictionary
 {
@@ -14,13 +15,17 @@ namespace SerializableDictionary
         private string _namespace = String.Empty;
         private string _className = String.Empty;
 
-        private PrimitiveType _keyType   = PrimitiveType.StringType;
-        private string     _key       = String.Empty;
+        private PrimitiveType _keyType = PrimitiveType.StringType;
+        private string _key = String.Empty;
         private PrimitiveType _valueType = PrimitiveType.StringType;
-        private string     _value     = String.Empty;
+        private string _value = String.Empty;
 
         private TextAsset _sDictionaryTemplate;
-        private string    _data = String.Empty;
+        private string _data = String.Empty;
+        private static string _path = String.Empty;
+
+        private readonly GUIContent _sDictionaryClassNameContent =
+            new GUIContent("Class Name: ", "Serializable Dictionary Name.");
 
         #endregion
 
@@ -28,12 +33,16 @@ namespace SerializableDictionary
 
         public static CreateSDictionary _window;
 
-        [MenuItem("Dictionary/Create/S-Dictionary", priority = 20)]
+        [MenuItem("Assets/Create/Dictionary/Serializable Dictionary", priority = 84)]
         public static void OpenWindow()
         {
             _window = GetWindow<CreateSDictionary>("Create S Dictionary");
             _window.Show();
             _window.maxSize = new Vector2(450, 200);
+
+            Object selectedObject = Selection.activeObject;
+            _path = AssetDatabase.GetAssetPath(selectedObject);
+            if (!Directory.Exists(_path)) _path = Path.GetDirectoryName(_path);
         }
 
         #endregion
@@ -61,7 +70,7 @@ namespace SerializableDictionary
 
             EditorGUILayout.Space();
 
-            _className = EditorGUILayout.TextField("Class Name:", _className);
+            _className = EditorGUILayout.TextField(_sDictionaryClassNameContent, _className);
             EditorGUILayout.Space();
 
             _keyType = (PrimitiveType) EditorGUILayout.EnumPopup("Select Key Type", _keyType);
@@ -79,33 +88,29 @@ namespace SerializableDictionary
 
             EditorGUILayout.Space();
 
-            if (GUILayout.Button("Create New SDictionary"))
+            if (!GUILayout.Button("Create")) return;
+            if (string.IsNullOrEmpty(_className))
             {
-                if (string.IsNullOrEmpty(_className))
-                {
-                    Debug.LogError("Cannot have Empty Class Name!");
-                    return;
-                }
-
-                _data = _sDictionaryTemplate.text.Replace("%S_DICTIONARY", _className);
-                _data = _data.Replace("%NAMESPACE", _namespace);
-                _data = _data.Replace("%KEY",
-                                      _keyType != PrimitiveType.CustomType
-                                          ? MyType.TypesDictionary[_keyType]
-                                          : _key);
-                _data = _data.Replace("%VALUE",
-                                      _valueType != PrimitiveType.CustomType
-                                          ? MyType.TypesDictionary[_valueType]
-                                          : _value);
-                string path = EditorUtility.SaveFilePanel("Save", Application.dataPath, _className, "cs");
-                File.WriteAllText(path, _data);
-                AssetDatabase.Refresh();
+                Debug.LogError("Cannot have Empty Class Name!");
+                return;
             }
+
+            _data = _sDictionaryTemplate.text.Replace("$S_DICTIONARY", _className);
+            _data = _data.Replace("$NAMESPACE", _namespace);
+            _data = _data.Replace("$KEY",
+                                  _keyType != PrimitiveType.CustomType
+                                      ? TypeString.TypesDictionary[_keyType]
+                                      : _key);
+            _data = _data.Replace("$VALUE",
+                                  _valueType != PrimitiveType.CustomType
+                                      ? TypeString.TypesDictionary[_valueType]
+                                      : _value);
+            if (string.IsNullOrEmpty(_path))
+                _path = EditorUtility.SaveFilePanel("Save", Application.dataPath, _className, "cs");
+            else _path = Path.Combine(_path, $"{_className}.cs");
+            File.WriteAllText(_path, _data);
+            AssetDatabase.Refresh();
         }
-
-        #endregion
-
-        #region METHODS
 
         #endregion
     }

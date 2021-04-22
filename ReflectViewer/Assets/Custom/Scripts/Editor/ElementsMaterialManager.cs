@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using System;
-using Zutari.Database;
+using Elements.Database;
 
 public class ElementsMaterialManager : EditorWindow
 {
@@ -49,7 +49,7 @@ public class ElementsMaterialManager : EditorWindow
         // Mirror value of uxml field into the C# field.
         uxmlField.RegisterCallback<ChangeEvent<UnityEngine.Object>>((evt) =>
         {
-            
+
             csharpField.value = evt.newValue;
         });
 

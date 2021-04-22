@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using UnityEngine;
 
-namespace Zutari.General
+namespace Elements.General
 {
     public class Constants : MonoBehaviour
     {

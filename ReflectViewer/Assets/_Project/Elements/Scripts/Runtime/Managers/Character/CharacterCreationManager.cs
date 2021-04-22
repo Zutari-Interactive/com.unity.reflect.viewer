@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Elements.Character;
 using Unity.Reflect.Viewer.UI;
 using UnityEngine;
-using Zutari.Character;
 
-namespace Zutari.Managers
+namespace Elements.Managers
 {
     public class CharacterCreationManager : MonoBehaviour
     {
@@ -74,7 +74,7 @@ namespace Zutari.Managers
 
         public void RecreateExistingCharacter()
         {
-            if (!CharacterData.Exists()) return;
+            if (!CharacterData.FileExist()) return;
 
             LoadCharacterData();
             Character = CharacterManager.ActivateCharacter();

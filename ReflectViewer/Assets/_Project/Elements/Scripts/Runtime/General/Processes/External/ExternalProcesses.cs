@@ -4,7 +4,7 @@ using System.IO;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-namespace Zutari.General.Processes
+namespace Elements.General.Processes
 {
     public static class ExternalProcesses
     {

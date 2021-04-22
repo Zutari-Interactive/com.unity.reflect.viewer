@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using SerializableDictionary;
 using UnityEngine;
 
-namespace %NAMESPACE
+namespace $NAMESPACE
 {
     [Serializable]
-    public class %S_DICTIONARY : SDictionary<%KEY, %VALUE>
+    public class $S_DICTIONARY : SDictionary<$KEY, $VALUE>
     {
     }
 }

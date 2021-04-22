@@ -1,8 +1,8 @@
 using System;
 using UnityEngine;
-using Zutari.General;
+using Elements.General;
 
-namespace Zutari.LifeCycle
+namespace Elements.LifeCycle
 {
     [Serializable]
     public class AssetLifeCycleState

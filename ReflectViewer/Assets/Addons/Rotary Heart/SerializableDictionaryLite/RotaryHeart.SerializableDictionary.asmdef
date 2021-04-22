@@ -1,3 +1,16 @@
-﻿{
-	"name": "RotaryHeart.SerializableDictionary"
+{
+    "name": "RotaryHeart.SerializableDictionary",
+    "rootNamespace": "",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [
+        "CloudRendering"
+    ],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

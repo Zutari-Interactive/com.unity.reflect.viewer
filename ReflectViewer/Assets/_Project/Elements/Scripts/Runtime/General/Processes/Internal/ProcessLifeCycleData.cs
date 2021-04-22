@@ -1,10 +1,10 @@
 using System;
+using Elements.LifeCycle;
 using SimpleJSON;
 using UnityEngine;
-using Zutari.Database;
-using Zutari.LifeCycle;
+using Elements.Database;
 
-namespace Zutari.General.Processes
+namespace Elements.General.Processes
 {
     public class ProcessLifeCycleData : MonoBehaviour
     {

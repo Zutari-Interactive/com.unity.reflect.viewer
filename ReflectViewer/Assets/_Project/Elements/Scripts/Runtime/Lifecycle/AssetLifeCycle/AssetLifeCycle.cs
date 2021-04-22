@@ -1,7 +1,7 @@
 ﻿using Unity.TouchFramework;
 using UnityEngine;
 
-namespace Zutari.LifeCycle
+namespace Elements.LifeCycle
 {
     public class AssetLifeCycle : MonoBehaviour
     {

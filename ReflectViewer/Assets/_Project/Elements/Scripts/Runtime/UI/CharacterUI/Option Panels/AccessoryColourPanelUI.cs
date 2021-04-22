@@ -1,6 +1,6 @@
-﻿using Zutari.General;
+﻿using Elements.General;
 
-namespace Zutari.UI
+namespace Elements.UI
 {
     public class AccessoryColourPanelUI : ColourSelectionBaseUI
     {

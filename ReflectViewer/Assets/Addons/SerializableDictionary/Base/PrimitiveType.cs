@@ -15,7 +15,7 @@ public enum PrimitiveType
     CustomType,
 }
 
-public static class MyType
+public static class TypeString
 {
     public static readonly Dictionary<PrimitiveType, string> TypesDictionary = new Dictionary<PrimitiveType, string>
     {

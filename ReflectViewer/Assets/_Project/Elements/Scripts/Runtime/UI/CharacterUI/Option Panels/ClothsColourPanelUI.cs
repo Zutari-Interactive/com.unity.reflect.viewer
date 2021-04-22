@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Zutari.General;
+using Elements.General;
 
-namespace Zutari.UI
+namespace Elements.UI
 {
     public class ClothsColourPanelUI : ColourSelectionBaseUI
     {
