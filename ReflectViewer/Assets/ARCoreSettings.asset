@@ -9,11 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60e5fa351c002454ea96f6c850da28f5, type: 3}
-  m_Name: DataPack_21343376
+  m_Script: {fileID: 11500000, guid: e9858e958182f2e4f8dea1aa0a92e5ad, type: 3}
+  m_Name: ARCoreSettings
   m_EditorClassIdentifier: 
-  paths:
-  - /StreamingAssets/Data/Falcon.pdf
-  - /StreamingAssets/Data/serial.jpg
-  - /StreamingAssets/Data/chiller.jpg
-  - /StreamingAssets/Data/MaintenanceLog.xlsx
+  m_Requirement: 0

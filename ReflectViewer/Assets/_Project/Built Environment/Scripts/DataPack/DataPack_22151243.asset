@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DataPack_22151243
   m_EditorClassIdentifier: 
   paths:
-  - /Resources/Falcon.pdf
-  - /Resources/serial.jpg
-  - /Resources/chiller.jpg
-  - /Resources/MaintenanceLog.xlsx
+  - /StreamingAssets/Data/Falcon.pdf
+  - /StreamingAssets/Data/serial.jpg
+  - /StreamingAssets/Data/chiller.jpg
+  - /StreamingAssets/Data/MaintenanceLog.xlsx

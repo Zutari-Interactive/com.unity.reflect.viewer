@@ -23,8 +23,10 @@ public class DataPath : MonoBehaviour
 
     public void OpenFile()
     {
-        if(filePath != "")
+#if PLATFORM_STANDALONE_WIN
+        if (filePath != "")
         {
+
             ShowFilePath();
             Process myProcess = new Process();
             try
@@ -39,6 +41,26 @@ public class DataPath : MonoBehaviour
                 UnityEngine.Debug.Log(e.Message);
             }
         }
+#endif
+
+#if UNITY_ANDROID
+
+           string androidPath = "jar:file://" + appPath;
+           WWW wwwfile = new WWW(path);
+           while (!wwwfile.isDone) { }
+           var path = string.Format("{0}/{1}", androidPath, filePath);
+           File.WriteAllBytes(path, wwwfile.bytes);
+   
+           StreamReader wr = new StreamReader(filepath);
+               string line;
+               while ((line = wr.ReadLine()) != null)
+               {
+               //your code
+               }
+
+
+
+#endif
     }
 
     public void ShowFilePath()
