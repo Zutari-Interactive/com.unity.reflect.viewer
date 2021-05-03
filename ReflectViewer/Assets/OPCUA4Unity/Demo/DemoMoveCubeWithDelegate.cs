@@ -1,5 +1,5 @@
 ﻿// Game4Automation (R) Framework for Automation Concept Design, Virtual Commissioning and 3D-HMI
-// (c) 2019 in2Sight GmbH - Usage of this source code only allowed based on License conditions see https://game4automation.com/lizenz  
+// (c) 2019 in2Sight GmbH - Usage of this source code only allowed based on License conditions see https://game4automation.com/lizenz
 
 
 using UnityEngine;
@@ -23,10 +23,9 @@ namespace game4automation
                subscription = Interface.Subscribe(NodeId, NodeChanged); /// Subscribe to the nodeid with NodeChanged
         }
 
-        public void
-            NodeChanged(OPCUANodeSubscription sub, object obj) // Is called when Node Value of Node nodeid is changed
+        public void NodeChanged(OPCUANodeSubscription sub, object obj) // Is called when Node Value of Node nodeid is changed
         {
-            PositionY = (float) obj; // sets the new position based on the new value 
+            PositionY = (float) obj; // sets the new position based on the new value
         }
 
         // Update is called once per frame

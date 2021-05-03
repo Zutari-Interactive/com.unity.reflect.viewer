@@ -59,6 +59,7 @@ namespace ElementsIOT.IOT.Temperature
             using (SqlCommand command = new SqlCommand(_latestQuery, _cachedConnection))
             {
                 command.Parameters.AddWithValue("@tagname", Tag);
+
                 print("Creating SQL Command.");
                 using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                 {

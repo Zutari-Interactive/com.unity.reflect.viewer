@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using ElementsIOT.General;
 using TMPro;
 using UnityEngine;
@@ -25,12 +24,6 @@ namespace ElementsIOT.IOT.Temperature
         #endregion
 
         #region UNITY METHODS
-
-        private void Start()
-        {
-            if (!StartImmediately) return;
-            StartUpdatingLatestRecord();
-        }
 
         private void OnEnable()
         {
