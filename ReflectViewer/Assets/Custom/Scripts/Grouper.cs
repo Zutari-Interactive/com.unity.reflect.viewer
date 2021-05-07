@@ -30,7 +30,6 @@ namespace UnityEngine.Reflect
 
         public virtual void FindDeviceIDs(Metadata data)
         {
-            Debug.Log("find ID");
             var id = data.GetParameter(SearchParameter);
             if (id != "")
             {

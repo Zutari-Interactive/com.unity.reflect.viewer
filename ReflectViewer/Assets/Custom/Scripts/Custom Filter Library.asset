@@ -16,4 +16,5 @@ MonoBehaviour:
   - {fileID: 1668065462958904315, guid: 89347710f2a686840a8d5d2fd7085777, type: 3}
   - {fileID: 7437955894642000544, guid: 74b6bf6914accf2468f2e0c5cead5caf, type: 3}
   - {fileID: 4662605113996720090, guid: 8f58d8811adff2c469f36196f7461b61, type: 3}
+  - {fileID: 9207568253708986672, guid: 16ecb05b3c46a594b81c49b7536b1365, type: 3}
   pipeline: {fileID: 11400000, guid: 6a5fff15c4399014685e487de9ab101a, type: 2}

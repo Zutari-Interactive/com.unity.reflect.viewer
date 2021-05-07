@@ -65,7 +65,7 @@ MonoBehaviour:
     helpModeEntryId: 0
     title: Bim Info
     content: View and filter detailed BIM information
-  - dialogTypeId: 0
+  - dialogTypeId: 11
     helpModeEntryId: 5
     title: Sun Study Dial
     content: Adjust the position of the sun relative to the scene environment

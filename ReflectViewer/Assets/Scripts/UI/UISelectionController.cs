@@ -19,7 +19,9 @@ namespace Unity.Reflect.Viewer.UI
 
         HighlightFilterInfo m_CurrentHighlightFilter;
         ObjectSelectionInfo m_CurrentObjectSelectionInfo;
-        GameObject m_CurrentSelectedGameObject;
+        //custom - made public
+        public GameObject m_CurrentSelectedGameObject;
+        //
 
         Vector2? m_PreviousScreenPoint;
         int m_CurrentLayer;
