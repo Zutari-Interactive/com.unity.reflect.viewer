@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Elements.Managers;
 using UnityEngine;
-using Zutari.Managers;
 
-namespace Zutari.UI
+namespace Elements.UI
 {
     public abstract class ColourSelectionBaseUI : MonoBehaviour
     {

@@ -5,15 +5,15 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-namespace Variables
+namespace SerializableSO
 {
-    [CustomEditor(typeof(VariablesBase), true)]
-    public class VariablesEditor : Editor
+    [CustomEditor(typeof(SerializableSOBase), true)]
+    public class SerializableSOEditor : Editor
     {
         #region VARIABLES
 
-        private VariablesBase _target;
-        private string        _filename = string.Empty;
+        private SerializableSOBase _target;
+        private bool _showPath = false;
 
         #endregion
 
@@ -21,7 +21,7 @@ namespace Variables
 
         private void OnEnable()
         {
-            _target = target as VariablesBase;
+            _target = target as SerializableSOBase;
             if (string.IsNullOrEmpty(_target.Filename)) _target.Filename = $"{_target.name}.json";
         }
 
@@ -42,6 +42,7 @@ namespace Variables
             {
                 AssignSelf();
                 Persistence();
+                SerializablePathField();
                 FilenameField();
             }
 
@@ -74,7 +75,7 @@ namespace Variables
                 }
 
                 EditorSceneManager.MarkAllScenesDirty();
-                EditorUtility.SetDirty(this);
+                EditorUtility.SetDirty(_target);
             }
         }
 
@@ -105,6 +106,27 @@ namespace Variables
             }
         }
 
+        private void SerializablePathField()
+        {
+            using (EditorGUI.ChangeCheckScope changeCheckScope = new EditorGUI.ChangeCheckScope())
+            {
+                _showPath = EditorGUILayout.ToggleLeft("", _showPath);
+                _target.SerializablePath =
+                    (SerializablePath) EditorGUILayout.EnumPopup("Serializable Path:", _target.SerializablePath);
+
+                if (_showPath)
+                {
+                    EditorGUILayout.TextField(_target.GetFilePath(), EditorStyles.wordWrappedLabel, GUILayout.Height(32f));
+                    EditorGUILayout.Space();
+                }
+
+                if (changeCheckScope.changed)
+                {
+                    EditorUtility.SetDirty(_target);
+                }
+            }
+        }
+
         private void Serialize()
         {
             if (!GUILayout.Button("Save", EditorStyles.miniButtonLeft)) return;
@@ -129,7 +151,7 @@ namespace Variables
         private void ShowFolder()
         {
             if (!GUILayout.Button("Show Folder", EditorStyles.miniButtonRight)) return;
-            EditorUtility.RevealInFinder(_target.FilePath);
+            EditorUtility.RevealInFinder(_target.GetFilePath());
         }
 
         #endregion

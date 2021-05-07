@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Elements.Character;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Zutari.Character;
 
-namespace Zutari.Managers
+namespace Elements.Managers
 {
     [DefaultExecutionOrder(-1)]
     public class CharacterManager : MonoBehaviour
@@ -77,7 +77,7 @@ namespace Zutari.Managers
 
         public void LoadExistingCharacter()
         {
-            if (!CharacterData.Exists())
+            if (!CharacterData.FileExist())
             {
                 SceneManager.LoadSceneAsync(CharacterCreationSceneName, LoadSceneMode.Additive);
                 return;

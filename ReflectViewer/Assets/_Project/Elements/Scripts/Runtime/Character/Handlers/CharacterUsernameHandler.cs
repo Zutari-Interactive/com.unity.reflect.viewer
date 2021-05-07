@@ -2,7 +2,7 @@
 using Unity.Reflect.Viewer.UI;
 using UnityEngine;
 
-namespace Zutari.Character
+namespace Elements.Character
 {
     public class CharacterUsernameHandler : MonoBehaviour
     {

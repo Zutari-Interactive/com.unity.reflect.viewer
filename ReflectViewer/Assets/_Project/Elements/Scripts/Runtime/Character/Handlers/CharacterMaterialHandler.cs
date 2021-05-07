@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Zutari.Character
+namespace Elements.Character
 {
     public class CharacterMaterialHandler : MonoBehaviour
     {

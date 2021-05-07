@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+﻿using Elements.Managers;
+using UnityEngine;
 using UnityEngine.UI;
-using Zutari.Managers;
 
-namespace Zutari.UI
+namespace Elements.UI
 {
     public class SelectGenderUI : MonoBehaviour
     {

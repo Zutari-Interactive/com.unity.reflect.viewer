@@ -3,22 +3,32 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-namespace Variables
+namespace SerializableSO
 {
-    public class VariablesWindow : EditorWindow
+    public enum SerializableTemplate
+    {
+        JsonUtilityTemplate,
+        JsonNetTemplate,
+    }
+
+    public class SerializableSOWindow : EditorWindow
     {
         #region WINDOW
 
-        public static VariablesWindow Window;
+        public static SerializableSOWindow Window;
 
-        [MenuItem("Window/Variables/Create Variables Script")]
-        [MenuItem("Assets/Create/Variables/New Variables Script", false, 90)]
+        [MenuItem("Assets/Create/C# Templates/Serializable-SO")]
         public static void OpenWindow()
         {
-            Window = GetWindow<VariablesWindow>("Variables Script Creator");
+            Window = GetWindow<SerializableSOWindow>("SerializableSO Creator");
             Window.Show();
-            Window.minSize = new Vector2(320, 96);
-            Window.maxSize = new Vector2(512, 96);
+            Window.minSize = new Vector2(320, 128);
+            Window.maxSize = new Vector2(512, 128);
+
+            Object selectedObject = Selection.activeObject;
+            _path = AssetDatabase.GetAssetPath(selectedObject);
+            if (string.IsNullOrEmpty(_path)) return;
+            if (!Directory.Exists(_path)) _path = Path.GetDirectoryName(_path);
         }
 
         #endregion
@@ -26,8 +36,10 @@ namespace Variables
         #region VARIABLES
 
         private string _scriptName = string.Empty;
-        private string _namespace = string.Empty;
+        private string _namespace = "SerializableSO";
+        private static string _path = string.Empty;
         private TextAsset _template;
+        private SerializableTemplate _serializableTemplate = SerializableTemplate.JsonUtilityTemplate;
 
         private static string SCRIPTNAME_KEY = "$SCRIPTNAME";
         private static string NAMESPACE_KEY = "$NAMESPACE";
@@ -39,7 +51,7 @@ namespace Variables
 
         private void OnEnable()
         {
-            _template = Resources.Load<TextAsset>("variables-template");
+            EnumToTemplate();
 
             if (EditorPrefs.HasKey(NAMESPACE_KEY))
                 _namespace = EditorPrefs.GetString(NAMESPACE_KEY);
@@ -59,7 +71,19 @@ namespace Variables
 
         private void TemplateField()
         {
+            using (EditorGUI.ChangeCheckScope checkScope = new EditorGUI.ChangeCheckScope())
+            {
+                _serializableTemplate =
+                    (SerializableTemplate) EditorGUILayout.EnumPopup("Template:", _serializableTemplate);
+
+                if (checkScope.changed)
+                {
+                    EnumToTemplate();
+                }
+            }
+
             _template = EditorGUILayout.ObjectField("Template:", _template, typeof(TextAsset), false) as TextAsset;
+            EditorGUILayout.Space();
         }
 
         private void NamespaceField()
@@ -68,7 +92,7 @@ namespace Variables
             {
                 _namespace = EditorGUILayout.TextField("Namespace:", _namespace);
                 if (!changeCheckScope.changed) return;
-                if (string.IsNullOrEmpty(_namespace)) return;
+                if (string.IsNullOrEmpty(_namespace)) _namespace = "SerializableSO";
                 EditorPrefs.SetString(NAMESPACE_KEY, _namespace);
             }
         }
@@ -78,26 +102,41 @@ namespace Variables
             _scriptName = EditorGUILayout.TextField("Script Name:", _scriptName);
         }
 
-
         private void CreateScriptButton()
         {
             if (!GUILayout.Button("Create Script")) return;
-            if (!_template || string.IsNullOrEmpty(_namespace) || string.IsNullOrEmpty(_scriptName)) return;
+            if (!_template || string.IsNullOrEmpty(_scriptName)) return;
 
             string text = _template.text;
-            text = text.Replace(SCRIPTNAME_KEY, _scriptName);
+            if (string.IsNullOrEmpty(_namespace)) _namespace = "SerializableSO";
             text = text.Replace(NAMESPACE_KEY, _namespace);
+            text = text.Replace(SCRIPTNAME_KEY, _scriptName);
 
-            string path = EditorUtility.SaveFilePanelInProject("Save Script", $"{_scriptName}", "cs", "");
-            if (string.IsNullOrEmpty(path)) return;
+            if (string.IsNullOrEmpty(_path))
+                _path = EditorUtility.SaveFilePanelInProject("Save Script", $"{_scriptName}", "cs", "");
+            else _path = Path.Combine(_path, $"{_scriptName}.cs");
+            if (string.IsNullOrEmpty(_path)) return;
 
-            File.WriteAllText(path, text);
+            File.WriteAllText(_path, text);
 
             EditorPrefs.SetString(SCRIPTNAME_KEY, _scriptName);
             EditorPrefs.SetString(NAMESPACE_KEY, _namespace);
-            EditorPrefs.SetString(PATH_KEY, Path.GetDirectoryName(path));
+            EditorPrefs.SetString(PATH_KEY, Path.GetDirectoryName(_path));
 
             AssetDatabase.Refresh();
+        }
+
+        private void EnumToTemplate()
+        {
+            switch (_serializableTemplate)
+            {
+                case SerializableTemplate.JsonUtilityTemplate:
+                    _template = Resources.Load<TextAsset>("template-json.utility");
+                    break;
+                case SerializableTemplate.JsonNetTemplate:
+                    _template = Resources.Load<TextAsset>("template-json.net");
+                    break;
+            }
         }
 
         [UnityEditor.Callbacks.DidReloadScripts]

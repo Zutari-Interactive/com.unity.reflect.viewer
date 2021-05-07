@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+﻿using Elements.Character;
+using UnityEngine;
 using UnityEngine.SceneManagement;
-using Zutari.Character;
 
-namespace Zutari.UI
+namespace Elements.UI
 {
     public class PreCreationUI : MonoBehaviour
     {
@@ -22,7 +22,7 @@ namespace Zutari.UI
 
         private void Awake()
         {
-            if (!CharacterData.Exists()) return;
+            if (!CharacterData.FileExist()) return;
             CharacterData.OverwriteFromFile();
             SceneManager.LoadSceneAsync(ReflectScene, LoadSceneMode.Single);
         }

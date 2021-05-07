@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Zutari.General
+namespace Elements.General
 {
     public class Events : MonoBehaviour
     {

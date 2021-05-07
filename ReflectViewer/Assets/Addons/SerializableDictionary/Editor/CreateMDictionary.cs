@@ -7,12 +7,12 @@ using Object = UnityEngine.Object;
 
 namespace SerializableDictionary
 {
-    public class CreateSODictionary : EditorWindow
+    public class CreateMDictionary : EditorWindow
     {
         #region VARIABLES
 
         private string _namespace = String.Empty;
-        private string _soClassName = String.Empty;
+        private string _cClassName = String.Empty;
         private string _sClassName = String.Empty;
 
         private PrimitiveType _keyType = PrimitiveType.StringType;
@@ -20,7 +20,7 @@ namespace SerializableDictionary
         private PrimitiveType _valueType = PrimitiveType.StringType;
         private string _value = String.Empty;
 
-        private TextAsset _soDatabaseTemplate;
+        private TextAsset _cDatabaseTemplate;
         private string _data = String.Empty;
         private static string _path = String.Empty;
 
@@ -31,12 +31,12 @@ namespace SerializableDictionary
 
         #region WINDOW METHODS
 
-        public static CreateSODictionary _window;
+        public static CreateMDictionary _window;
 
-        [MenuItem("Assets/Create/Dictionary/ScriptableObject Dictionary", priority = 84)]
+        [MenuItem("Assets/Create/Dictionary/MonoBehaviour Dictionary", priority = 84)]
         public static void OpenWindow()
         {
-            _window = GetWindow<CreateSODictionary>("Create SO Database");
+            _window = GetWindow<CreateMDictionary>("Create M Dictionary");
             _window.Show();
             _window.minSize = new Vector2(450, 200);
 
@@ -51,14 +51,13 @@ namespace SerializableDictionary
 
         private void OnEnable()
         {
-            _soDatabaseTemplate = Resources.Load<TextAsset>("template_so_dictionary");
-
+            _cDatabaseTemplate = Resources.Load<TextAsset>("template_m_dictionary");
             if (EditorPrefs.HasKey("$NAMESPACE")) _namespace = EditorPrefs.GetString("$NAMESPACE");
         }
 
         public void OnGUI()
         {
-            EditorGUILayout.ObjectField("Template:", _soDatabaseTemplate, typeof(TextAsset), false);
+            EditorGUILayout.ObjectField("Template:", _cDatabaseTemplate, typeof(TextAsset), false);
             EditorGUILayout.Space();
 
             EditorGUI.BeginChangeCheck();
@@ -70,7 +69,7 @@ namespace SerializableDictionary
             }
 
             EditorGUILayout.Space();
-            _soClassName = EditorGUILayout.TextField("SO-Dictionary Class Name:", _soClassName);
+            _cClassName = EditorGUILayout.TextField("MonoBehaviour Name:", _cClassName);
             _sClassName = EditorGUILayout.TextField(_sDictionaryClassNameContent, _sClassName);
 
             EditorGUILayout.Space();
@@ -91,13 +90,13 @@ namespace SerializableDictionary
             EditorGUILayout.Space();
 
             if (!GUILayout.Button("Create")) return;
-            if (string.IsNullOrEmpty(_soClassName) || string.IsNullOrEmpty(_sClassName))
+            if (string.IsNullOrEmpty(_cClassName) || string.IsNullOrEmpty(_sClassName))
             {
                 Debug.LogError("Cannot have Empty Class Name!");
                 return;
             }
 
-            _data = _soDatabaseTemplate.text.Replace("$NAME", _soClassName);
+            _data = _cDatabaseTemplate.text.Replace("$M_Dictionary", _cClassName);
             _data = _data.Replace("$NAMESPACE", _namespace);
             _data = _data.Replace("$S_DICTIONARY", _sClassName);
             _data = _data.Replace("$KEY",
@@ -108,9 +107,10 @@ namespace SerializableDictionary
                                   _valueType != PrimitiveType.CustomType
                                       ? TypeString.TypesDictionary[_valueType]
                                       : _value);
+
             if (string.IsNullOrEmpty(_path))
-                _path = EditorUtility.SaveFilePanel("Save", Application.dataPath, _soClassName, "cs");
-            else _path = Path.Combine(_path, $"{_soClassName}.cs");
+                _path = EditorUtility.SaveFilePanel("Save", Application.dataPath, _cClassName, "cs");
+            else _path = Path.Combine(_path, $"{_cClassName}.cs");
             File.WriteAllText(_path, _data);
             AssetDatabase.Refresh();
 

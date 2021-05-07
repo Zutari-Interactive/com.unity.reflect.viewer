@@ -636,7 +636,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: fa86979d88e33714bb42808acebb8078, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -999,7 +999,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: fa86979d88e33714bb42808acebb8078, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -58483,7 +58483,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: fa86979d88e33714bb42808acebb8078, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -59131,10 +59131,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09673859bf70514ba7448f6b2b3a1e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
-  Active: 0
-  FromTemplate: {fileID: 0}
-  Game4AutomationController: {fileID: 0}
   Server: opc.tcp://localhost:48010
   ConnectToServer: 1
   IsConnected: 0
@@ -59156,8 +59152,6 @@ MonoBehaviour:
   ReconnectTimeout: 1000
   MaxNumberOfNodesPerSubscription: 1000
   ShowFullLog: 0
-  CreateSignals: 1
-  AutomaticallyPLCInputOnWriteSignals: 0
   AutomaticallySubscribeOnImport: 1
   SubscriptionSamplingInterval: 20
   RegexWriteSignals: []

@@ -1,7 +1,7 @@
 using System;
 using SerializableDictionary;
 using UnityEngine;
-using Zutari.LifeCycle;
+using Elements.LifeCycle;
 
 public enum AssetState
 {
@@ -12,7 +12,7 @@ public enum AssetState
     Replace = 4,
 }
 
-namespace Zutari.LifeCycle
+namespace Elements.LifeCycle
 {
     [CreateAssetMenu(fileName = "AssetStateMaterialDatabase", menuName = "Zutari/Databases/AssetStateMaterialDatabase")]
     public class AssetStateMaterialSO : SODictionary<AssetState, Material>

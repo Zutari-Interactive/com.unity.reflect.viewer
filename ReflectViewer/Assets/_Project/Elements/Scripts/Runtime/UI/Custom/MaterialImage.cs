@@ -1,10 +1,10 @@
-﻿using UnityEngine;
+﻿using Elements.Managers;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using Zutari.General;
-using Zutari.Managers;
+using Elements.General;
 
-namespace Zutari.UI
+namespace Elements.UI
 {
     public class MaterialImage : MonoBehaviour, IPointerClickHandler
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Zutari.General
+namespace Elements.General
 {
     public abstract class EntityBase : MonoBehaviour
     {

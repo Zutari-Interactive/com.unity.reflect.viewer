@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace $NAMESPACE
 {
-    [CreateAssetMenu(fileName = "$NAME", menuName = "Dictionary/$NAME")]
-    public class $NAME : SODictionary<$KEY, $VALUE>
+    public class $M_Dictionary : CDictionary<$KEY, $VALUE>
     {
+
         #region VARIABLES
 
         [Header("$S_DICTIONARY")]
@@ -45,6 +45,16 @@ namespace $NAMESPACE
         public override bool ContainsKey($KEY key)
         {
             return $S_DICTIONARY.ContainsKey(key);
+        }
+        
+        public override ICollection<$KEY> Keys()
+        {
+            return $S_DICTIONARY.Keys;
+        }
+
+        public override ICollection<$VALUE> Values()
+        {
+            return $S_DICTIONARY.Values;
         }
 
         #endregion

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Zutari.UI
+namespace Elements.UI
 {
     public class AssetLifeCycleSliderControl : NumericInputFieldPropertyControl, IPointerDownHandler, IPointerUpHandler
     {

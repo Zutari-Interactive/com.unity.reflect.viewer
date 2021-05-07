@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: character-data
   m_EditorClassIdentifier: 
   Filename: character-data.json
+  SerializablePath: 1
   Username: Zutari.Guest-Player
   Gender: -1
   SkinMaterialIndex: -1

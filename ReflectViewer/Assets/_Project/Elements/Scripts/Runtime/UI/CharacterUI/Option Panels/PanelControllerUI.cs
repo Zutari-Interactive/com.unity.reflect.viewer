@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Zutari.UI
+namespace Elements.UI
 {
     public class PanelControllerUI : MonoBehaviour
     {

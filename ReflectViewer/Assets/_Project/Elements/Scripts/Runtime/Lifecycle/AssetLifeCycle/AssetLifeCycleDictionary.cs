@@ -1,7 +1,7 @@
 using System;
 using SerializableDictionary;
 
-namespace Zutari.LifeCycle
+namespace Elements.LifeCycle
 {
     [Serializable]
     public class AssetLifeCycleDictionary : SDictionary<int, AssetLifeCycleState>

@@ -1,9 +1,9 @@
-﻿using UnityEngine;
+﻿using Elements.Managers;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Zutari.Managers;
 
-namespace Zutari.UI
+namespace Elements.UI
 {
     public class CharacterSerializationUI : MonoBehaviour
     {

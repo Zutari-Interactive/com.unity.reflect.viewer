@@ -3,7 +3,7 @@ using System.IO;
 using UnityEngine;
 using UnityEditor;
 
-namespace Zutari.Elements.Editors
+namespace Elements.Editors
 {
     public enum NodeType
     {
