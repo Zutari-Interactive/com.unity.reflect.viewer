@@ -63,8 +63,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ConnectionString: {fileID: 11400000, guid: de7d5981784bc174d93e33513908b7fe, type: 2}
-  Tag: 3LIT01_ANALOG.value
-  HistoricalInterval: 14
+  Tag: temp
+  HistoricalInterval: 7
   LatestRecord: 
   HistoricalRecords: []
 --- !u!1 &5603155406968321100

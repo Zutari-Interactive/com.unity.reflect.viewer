@@ -24,7 +24,7 @@ namespace ElementsIOT.IOT.Temperature
         public SQLServerString ConnectionString;
 
         [Header("Temperature Tag")]
-        public string Tag = "3LIT01_ANALOG.value";
+        public string Tag = "temp";
 
         [Header("Historical Data Interval")]
         public HistoricalInterval HistoricalInterval = HistoricalInterval.PreviousDay;
