@@ -16,19 +16,19 @@ public class DataPackFilterCreator : CustomFilter
     public override void SetupNode(CustomNode n)
     {
         // Create the node required
-        if (pipelineAsset.TryGetNode<DataPackNode>(out DataPackNode dataPackNode))
+        if (PipelineAsset.TryGetNode<DataPackNode>(out DataPackNode dataPackNode))
         {
             StartCoroutine(SetupFilter(n, dataPackNode));
             return;
         }
 
-        var filterNode = pipelineAsset.CreateNode<DataPackNode>();
+        var filterNode = PipelineAsset.CreateNode<DataPackNode>();
 
-        pipelineAsset.TryGetNode<SyncObjectInstanceProviderNode>(out SyncObjectInstanceProviderNode syncNode);
-        pipelineAsset.TryGetNode<InstanceConverterNode>(out InstanceConverterNode instanceNode);
+        PipelineAsset.TryGetNode<SyncObjectInstanceProviderNode>(out SyncObjectInstanceProviderNode syncNode);
+        PipelineAsset.TryGetNode<InstanceConverterNode>(out InstanceConverterNode instanceNode);
 
-        pipelineAsset.CreateConnection(syncNode.output, filterNode.InstanceInput);
-        pipelineAsset.CreateConnection(instanceNode.output, filterNode.GameObjectInput);
+        PipelineAsset.CreateConnection(syncNode.output, filterNode.InstanceInput);
+        PipelineAsset.CreateConnection(instanceNode.output, filterNode.GameObjectInput);
 
         // Once the pipeline is started, keep a link to the processor node so we can control filtering from it
 
