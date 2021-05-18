@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5676402735742860579
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5676402735742860580}
+  m_Layer: 0
+  m_Name: '[spawn-point]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5676402735742860580
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5676402735742860579}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5676402736274882630}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5676402736274882629
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5676402736274882630}
+  - component: {fileID: 5676402736274882632}
+  - component: {fileID: 5676402736274882631}
+  m_Layer: 0
+  m_Name: '[character-manager]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5676402736274882630
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5676402736274882629}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5676402735742860580}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5676402736274882632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5676402736274882629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9a14d573dd55324e83faf4f18040b18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LoadOnStart: 0
+  CharacterCreationSceneName: Character Studio Light-dev
+  Characters:
+  - {fileID: 0}
+  - {fileID: 0}
+  Character: {fileID: 0}
+  CharacterData: {fileID: 11400000, guid: a92d23860132f1e47908119dc536fa2b, type: 2}
+  SpawnPoint: {fileID: 5676402735742860580}
+--- !u!114 &5676402736274882631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5676402736274882629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08aee5317aca01b438dd5d5e071629dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LoadOnStart: 1
+  CharacterManager: {fileID: 5676402736274882632}
+  Character: {fileID: 0}
+  CharacterData: {fileID: 11400000, guid: a92d23860132f1e47908119dc536fa2b, type: 2}
+  SkinMaterials:
+  - {fileID: 2100000, guid: c9f3aab9030522045b00a3230001ba93, type: 2}
+  - {fileID: 2100000, guid: 4edf60e92fa79c04688ffda79891c5ac, type: 2}
+  - {fileID: 2100000, guid: 59e0115398ade6d4ebe3a6cb6b740128, type: 2}
+  - {fileID: 2100000, guid: 9979781d94dc81b4d90d321b1bc62568, type: 2}
+  - {fileID: 2100000, guid: bec8c42f67513d84b971d8f14d5bc985, type: 2}
+  - {fileID: 2100000, guid: d80ed38904efacb4496641fb9c36fdf7, type: 2}
+  - {fileID: 2100000, guid: 7e2e28aea87bfa74bb31e22596235469, type: 2}
+  - {fileID: 2100000, guid: 6b0e1af53d785624b8a64c41a65df05f, type: 2}
+  - {fileID: 2100000, guid: c063e024c1b46b44a9717e49e8ea3238, type: 2}
+  - {fileID: 2100000, guid: 51568c3bd688558448474cac04eb2691, type: 2}
+  - {fileID: 2100000, guid: 268f6af6c32e2dd49a94f83d6563bbd9, type: 2}
+  - {fileID: 2100000, guid: 2c8bb2b7506bb3846b18f948252ba0fa, type: 2}
+  ClothesMaterials:
+  - {fileID: 2100000, guid: aac80aeca0c0e5d4fb86a3ae518c5cb6, type: 2}
+  - {fileID: 2100000, guid: 27b8ca2812cb15640bd51558fc284448, type: 2}
+  AccessoryMaterials:
+  - {fileID: 2100000, guid: 354b33f66e449fd41ad7e8972612c783, type: 2}
+  - {fileID: 2100000, guid: 9925b68b5560fc546ab2c5c0e5f731ea, type: 2}

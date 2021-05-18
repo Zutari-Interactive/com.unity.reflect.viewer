@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 193bba7d00c4cc94eaf9d3b5d6815c52, type: 3}
+  m_Name: character-data
+  m_EditorClassIdentifier: 
+  Filename: character-data.json
+  SerializablePath: 1
+  Username: Zutari.Guest-Player
+  Gender: -1
+  SkinMaterialIndex: -1
+  ClothesMaterialIndex: -1
+  AccessoryMaterialIndex: -1

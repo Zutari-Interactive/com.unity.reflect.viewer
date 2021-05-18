@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df9f0e815b77c8246b161f10c0e69de6, type: 3}
+  m_Name: Custom Filter Library
+  m_EditorClassIdentifier: 
+  customFilterPrefabs:
+  - {fileID: 1668065462958904315, guid: 89347710f2a686840a8d5d2fd7085777, type: 3}
+  - {fileID: 2846422517906597592, guid: c2eae21ad47926a458adaeabae6a6d99, type: 3}
+  pipeline: {fileID: 11400000, guid: 47f2fc0bbe45aa84492996fe8cea87a1, type: 2}
