@@ -44,4 +44,6 @@ ReflectViewer/obj
 Native~/**/x64/
 
 #Fastlane
-ReflectViewer/builds/**
+ReflectViewer2.1/builds/**
+Assets/Allegorithmic
+Assets/Reflect
