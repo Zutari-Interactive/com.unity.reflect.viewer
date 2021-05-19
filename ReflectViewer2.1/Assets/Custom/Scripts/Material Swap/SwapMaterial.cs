@@ -30,7 +30,7 @@ public class SwapMaterial : CustomNode
                 if (mats[i].name.Contains(matKeyWords[x]))
                 {
                     rend.material = library.FetchMaterial(matKeyWords[x]);
-                    Debug.Log($"{matKeyWords[x]} material changed");
+                    Debug.Log($"{matKeyWords[x]} material changed on {data.name}");
                 }
             }
         }
