@@ -15,4 +15,5 @@ MonoBehaviour:
   customFilterPrefabs:
   - {fileID: 1668065462958904315, guid: 89347710f2a686840a8d5d2fd7085777, type: 3}
   - {fileID: 2846422517906597592, guid: c2eae21ad47926a458adaeabae6a6d99, type: 3}
+  - {fileID: 6189550769793543158, guid: 57f81a52efcbfac4b95584821fe2fb7c, type: 3}
   pipeline: {fileID: 11400000, guid: 47f2fc0bbe45aa84492996fe8cea87a1, type: 2}
