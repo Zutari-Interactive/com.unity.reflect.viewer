@@ -23,6 +23,8 @@ EditorBuildSettings:
       type: 2}
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: dda154c85886d6c42933a361c2d0da02,
       type: 2}
+    com.unity.addressableassets: {fileID: 11400000, guid: 7021d6ba2835f344a84f750c080f29ad,
+      type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: c1837a2957f925244b9eb7c13fff6cc7,
       type: 2}
     com.unity.mars-ar-foundation-providers.xr_subsystem_settings: {fileID: 11400000,
