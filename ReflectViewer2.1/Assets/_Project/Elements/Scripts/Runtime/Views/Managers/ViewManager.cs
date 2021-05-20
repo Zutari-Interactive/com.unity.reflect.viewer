@@ -11,19 +11,28 @@ public class ViewManager : CustomNode
     private Vector3 viewPos;
     private Quaternion viewRot;
 
-    public GameObject viewPrefab;
+    private GameObject viewPrefab;
+    private StaticViewCollection viewCollection;
+
     private POI poi;
 
     private bool isOrthographic;
+    private bool viewsPresent;
 
 
     void OnEnable()
     {
         Addressables.LoadAssetAsync<GameObject>("View").Completed += OnAddressableLoadDone;
+        viewCollection = GetComponent<StaticViewCollection>();
     }
 
     public void CreateView(Metadata data)
     {
+        if (!viewsPresent)
+        {
+            viewsPresent = true;
+        }
+
         poi = FetchPOIComponent(data.gameObject);
         if(poi == null)
         {
@@ -43,7 +52,7 @@ public class ViewManager : CustomNode
         return obj.GetComponent<POI>();
     }
 
-    public void SetupView()
+    private void SetupView()
     {
         GameObject newView = Instantiate(viewPrefab);
 
@@ -60,7 +69,7 @@ public class ViewManager : CustomNode
             cam.orthographic = isOrthographic;
         }
 
-
+        viewCollection.AddCamera(cam);
     }
 
     private void OnAddressableLoadDone(AsyncOperationHandle<GameObject> obj)
