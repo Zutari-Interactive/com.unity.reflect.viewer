@@ -45,3 +45,10 @@ Native~/**/x64/
 
 #Fastlane
 ReflectViewer/builds/**
+ReflectViewer2.1/Builds/
+
+#Substance
+Assets/Allegorithmic
+
+#imported Reflect models
+Assets/Reflect/
