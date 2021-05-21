@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using Unity.TouchFramework;
 using UnityEngine;
@@ -77,6 +77,9 @@ namespace Unity.Reflect.Viewer.UI
         [SerializeField]
         DialogWindow m_LoginScreenDialog;
 
+        [SerializeField, Tooltip("Reference to the Collaboration Vertical User List")]
+        DialogWindow m_ViewsDialogController;
+
 #pragma warning restore CS0649
 
         DialogType m_CurrentActiveDialog = DialogType.None;
@@ -112,6 +115,7 @@ namespace Unity.Reflect.Viewer.UI
                 m_CollaborationUserListDialog.Close();
                 m_CollaborationUserInfoDialog.Close();
                 m_LoginScreenDialog.Close();
+                m_ViewsDialogController.Close();
 
                 if (stateData.dialogMode == DialogMode.Help)
                 {
@@ -180,6 +184,9 @@ namespace Unity.Reflect.Viewer.UI
                         break;
                     case DialogType.LoginScreen:
                         m_LoginScreenDialog.Open();
+                        break;
+                    case DialogType.ViewDialog:
+                        m_ViewsDialogController.Open();
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();

@@ -32,6 +32,7 @@ namespace Unity.Reflect.Viewer.UI
         CollaborationUserInfo = 22,
         LoginScreen = 23,
         LinkSharing = 24,
+        ViewDialog = 25
     }
     /// <summary>
     /// Defines a global mode for dialog buttons. For example Help Mode, which makes clicking any dialog button open a help dialog.
