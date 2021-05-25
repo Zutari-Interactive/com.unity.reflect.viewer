@@ -19,7 +19,6 @@ public class AirTerminalInteractor : Interactor
         }
 
         Addressables.LoadAssetAsync<GameObject>("Air_Flow").Completed += OnAddressableLoadDone;
-
     }
 
     private void OnAddressableLoadDone(AsyncOperationHandle<GameObject> obj)
@@ -27,7 +26,7 @@ public class AirTerminalInteractor : Interactor
         if (obj.Result != null)
             maxPrefab = obj.Result;
         else
-            Debug.LogWarning("No addressable asset found for Air Flow");
+            Debug.LogWarning("No addressable asset found");
     }
 
     private void OnMouseDown()

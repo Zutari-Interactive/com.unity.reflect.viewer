@@ -44,7 +44,6 @@ ReflectViewer/obj
 Native~/**/x64/
 
 #Fastlane
-<<<<<<< HEAD
 ReflectViewer/builds/**
 ReflectViewer2.1/Builds/
 
@@ -53,8 +52,3 @@ Assets/Allegorithmic
 
 #imported Reflect models
 Assets/Reflect/
-=======
-ReflectViewer2.1/builds/**
-Assets/Allegorithmic
-Assets/Reflect
->>>>>>> feature_materials
