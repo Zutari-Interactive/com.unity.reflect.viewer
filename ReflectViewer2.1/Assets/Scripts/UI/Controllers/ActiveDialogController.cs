@@ -77,9 +77,11 @@ namespace Unity.Reflect.Viewer.UI
         [SerializeField]
         DialogWindow m_LoginScreenDialog;
 
-        [SerializeField, Tooltip("Reference to the Collaboration Vertical User List")]
+        [SerializeField, Tooltip("Reference to the Views Dialog List")]
         DialogWindow m_ViewsDialogController;
 
+        [SerializeField, Tooltip("Reference to the View Camera Settings Dialog List")]
+        DialogWindow m_ViewCameraDialogController;
 #pragma warning restore CS0649
 
         DialogType m_CurrentActiveDialog = DialogType.None;
@@ -116,6 +118,7 @@ namespace Unity.Reflect.Viewer.UI
                 m_CollaborationUserInfoDialog.Close();
                 m_LoginScreenDialog.Close();
                 m_ViewsDialogController.Close();
+                m_ViewCameraDialogController.Close();
 
                 if (stateData.dialogMode == DialogMode.Help)
                 {
@@ -187,6 +190,9 @@ namespace Unity.Reflect.Viewer.UI
                         break;
                     case DialogType.ViewDialog:
                         m_ViewsDialogController.Open();
+                        break;
+                    case DialogType.ViewCameraDialog:
+                        m_ViewCameraDialogController.Open();
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Reflect.Viewer.UI;
+using Unity.TouchFramework;
 using UnityEngine;
 using UnityEngine.Reflect;
 
@@ -15,10 +16,15 @@ public class StaticViewCollection : MonoBehaviour
 
     private ViewsDialogController viewsController;
 
+    private ViewCameraDialogController viewCameraSettingController;
+
     private void Start()
     {
         viewsController = FindObjectOfType<ViewsDialogController>();
+        viewCameraSettingController = FindObjectOfType<ViewCameraDialogController>();
         mainCam = Camera.main.gameObject;
+        MinMaxPropertyControl sliderValue = viewCameraSettingController.GetComponentInChildren<MinMaxPropertyControl>();
+        sliderValue.onFloatValueChanged.AddListener(UpdateZoomValue);
     }
 
     public void AddCamera(Camera c)
@@ -55,4 +61,13 @@ public class StaticViewCollection : MonoBehaviour
             mainCam.SetActive(true);
         }
     }
+
+    public void UpdateZoomValue(float f)
+    {
+        if (viewCameras[currentlyActiveCameraIndex].orthographic)
+        {
+            viewCameras[currentlyActiveCameraIndex].orthographicSize = f;
+        }
+    }
+
 }

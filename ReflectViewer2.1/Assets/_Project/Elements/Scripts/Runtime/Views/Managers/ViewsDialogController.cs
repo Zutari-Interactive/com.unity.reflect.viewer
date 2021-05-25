@@ -112,18 +112,18 @@ namespace Unity.Reflect.Viewer.UI
             GameObject newButton = Instantiate(viewButtonPrefab);
             newButton.transform.SetParent(viewsParent);
             ToolButton tool = newButton.GetComponentInChildren<ToolButton>();
+
             Button baseButton = tool.gameObject.GetComponent<Button>();
             baseButton.interactable = true;
-            //add listener
-            //tool.buttonClicked += ViewButtonClicked;
             baseButton.onClick.AddListener(delegate { ButtonPressed(baseButton.gameObject); });
+
             View v = tool.gameObject.AddComponent<View>();
+            v.CreateView(tool);
             views.Add(tool);
 
             TextMeshProUGUI name = newButton.GetComponentInChildren<TextMeshProUGUI>();
             name.text = $"View {views.Count}";
             v.index = views.Count - 1;
-            
 
             Debug.Log("View Button Created");
         }

@@ -211,6 +211,7 @@ namespace Zutari.Elements.Nodes
         public void OnPipelineShutdown()
         {
             // OnPipelineShutdown is called before the pipeline graph is destroyed.
+            Debug.Log("pipeline shutdown");
         }
 
         #endregion
