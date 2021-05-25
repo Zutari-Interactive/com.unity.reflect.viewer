@@ -8,6 +8,7 @@ using System;
 using SharpFlux.Dispatching;
 using SharpFlux;
 using UnityEngine.UI;
+using Elements.General.IO;
 
 namespace Unity.Reflect.Viewer.UI
 {
@@ -18,8 +19,12 @@ namespace Unity.Reflect.Viewer.UI
     {
         
         public List<ToolButton> viewButtons = new List<ToolButton>();
+        public ToolButton screenshotButton;
+        public SlideToggle hideUIToggle;
 
         private StaticViewCollection viewCollection;
+
+        private bool hideUI;
 
         MinMaxPropertyControl fieldOfViewController;
 
@@ -45,6 +50,8 @@ namespace Unity.Reflect.Viewer.UI
         {
             m_DialogWindow = GetComponent<DialogWindow>();
             fieldOfViewController = GetComponentInChildren<MinMaxPropertyControl>();
+            screenshotButton.buttonClicked += TakeScreenshot;
+            hideUIToggle.onValueChanged.AddListener(ToggleUI);
         }
 
         private void OnViewButtonLongPressed()
@@ -124,7 +131,19 @@ namespace Unity.Reflect.Viewer.UI
             }
         }
 
+        private void ToggleUI(bool hide)
+        {
+            Debug.Log($"hide UI {hide}");
+            hideUI = hide;
+        }
 
+        private void TakeScreenshot()
+        {
+            ScreenshotManager ss = GetComponentInChildren<ScreenshotManager>();
+            ss.CreateScreenshot(viewCollection.FetchActiveCamera(), hideUI);
+            //TODO: set up toggle bool for whether UI should be hidden in screenshot
+        }
 
+        
     }
 }

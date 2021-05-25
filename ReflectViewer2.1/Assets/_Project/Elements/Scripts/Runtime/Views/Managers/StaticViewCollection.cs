@@ -62,6 +62,11 @@ public class StaticViewCollection : MonoBehaviour
         }
     }
 
+    public Camera FetchActiveCamera()
+    {
+        return viewCameras[currentlyActiveCameraIndex];
+    }
+
     public void UpdateZoomValue(float f)
     {
         if (viewCameras[currentlyActiveCameraIndex].orthographic)
