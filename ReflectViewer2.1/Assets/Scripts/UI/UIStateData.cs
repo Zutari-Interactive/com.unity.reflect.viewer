@@ -34,6 +34,8 @@ namespace Unity.Reflect.Viewer.UI
         LinkSharing = 24,
         CsvLoader = 26,
         AirTerminalFilter = 27,
+        ViewDialog = 28,
+        ViewCameraDialog = 29
     }
     /// <summary>
     /// Defines a global mode for dialog buttons. For example Help Mode, which makes clicking any dialog button open a help dialog.

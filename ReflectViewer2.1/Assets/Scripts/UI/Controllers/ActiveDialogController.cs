@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using Unity.TouchFramework;
 using UnityEngine;
@@ -83,6 +83,12 @@ namespace Unity.Reflect.Viewer.UI
         [SerializeField, Tooltip("Dialog to Control Air Terminal Filters within the Scene")]
         DialogWindow m_AirTerminalFilterDialog;
 
+        [SerializeField, Tooltip("Dialog to activate View Cameras within the Scene")]
+        DialogWindow m_ViewDialog;
+
+        [SerializeField, Tooltip("Dialog to Control View Camera Settings within the Scene")]
+        DialogWindow m_ViewCameraDialog;
+
 #pragma warning restore CS0649
 
         DialogType m_CurrentActiveDialog = DialogType.None;
@@ -120,6 +126,8 @@ namespace Unity.Reflect.Viewer.UI
                 m_LoginScreenDialog.Close();
                 m_CsvLoaderDialog.Close();
                 m_AirTerminalFilterDialog.Close();
+                m_ViewDialog.Close();
+                m_ViewCameraDialog.Close();
 
                 if (stateData.dialogMode == DialogMode.Help)
                 {
@@ -194,6 +202,12 @@ namespace Unity.Reflect.Viewer.UI
                         break;
                     case DialogType.AirTerminalFilter:
                         m_AirTerminalFilterDialog.Open();
+                        break;
+                    case DialogType.ViewDialog:
+                        m_ViewDialog.Open();
+                        break;
+                    case DialogType.ViewCameraDialog:
+                        m_ViewCameraDialog.Open();
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
