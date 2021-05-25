@@ -7,17 +7,16 @@ using UnityEngine.Reflect.MeasureTool;
 
 namespace Unity.Reflect.Viewer.UI
 {
-
     /// <summary>
     /// Component that hold the state of the UI.
     /// Partial Class with class definitions
     /// </summary>
     public partial class UIStateManager : MonoBehaviour,
-        IStore<UIStateData>, IStore<UISessionStateData>, IStore<UIProjectStateData>, IStore<UIARStateData>, IStore<UIDebugStateData>, IStore<ApplicationStateData>,
-        IStore<RoomConnectionStateData>,
-        IUsesSessionControl, IUsesPointCloud, IUsesPlaneFinding
+                                          IStore<UIStateData>, IStore<UISessionStateData>, IStore<UIProjectStateData>, IStore<UIARStateData>,
+                                          IStore<UIDebugStateData>, IStore<ApplicationStateData>,
+                                          IStore<RoomConnectionStateData>,
+                                          IUsesSessionControl, IUsesPointCloud, IUsesPlaneFinding
     {
-
         static UIStateManager s_Current;
 
         public static UIStateManager current => s_Current;
@@ -38,14 +37,14 @@ namespace Unity.Reflect.Viewer.UI
 
         void OnDestroy()
         {
-            stateChanged = delegate {};
-            sessionStateChanged = delegate {};
-            projectStateChanged = delegate {};
-            arStateChanged = delegate {};
-            debugStateChanged = delegate {};
-            applicationStateChanged = delegate {};
-            roomConnectionStateChanged = delegate {};
-            externalToolChanged = delegate {};
+            stateChanged = delegate { };
+            sessionStateChanged = delegate { };
+            projectStateChanged = delegate { };
+            arStateChanged = delegate { };
+            debugStateChanged = delegate { };
+            applicationStateChanged = delegate { };
+            roomConnectionStateChanged = delegate { };
+            externalToolChanged = delegate { };
             s_Current = null;
         }
 
@@ -86,7 +85,6 @@ namespace Unity.Reflect.Viewer.UI
 
         void OnSessionStateChanged()
         {
-
         }
 
         void OnProjectStateChanged()
@@ -111,6 +109,7 @@ namespace Unity.Reflect.Viewer.UI
         {
             stateChanged.Invoke(m_UIStateData);
         }
+
         /// <summary>
         /// Invoke model changed event.
         /// </summary>
@@ -149,7 +148,7 @@ namespace Unity.Reflect.Viewer.UI
         public void ForceSendConnectionChangedEvent()
         {
             roomConnectionStateChanged.Invoke(m_RoomConnectionStateData);
-		}
+        }
 
         /// <summary>
         /// Invoke Tool changed event.

@@ -1,6 +1,6 @@
 ﻿using SFB;
 
-namespace Elements.IO
+namespace Elements.General.IO
 {
     public static class FileBrowser
     {

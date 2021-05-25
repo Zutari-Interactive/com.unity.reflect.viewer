@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 676669659977043800}
   - component: {fileID: 8404012391863811334}
   m_Layer: 5
-  m_Name: MaterialColour
+  m_Name: UI_MaterialColour
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
