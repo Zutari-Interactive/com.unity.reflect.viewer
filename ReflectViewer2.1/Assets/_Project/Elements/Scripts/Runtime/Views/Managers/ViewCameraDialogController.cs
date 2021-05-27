@@ -9,6 +9,7 @@ using SharpFlux.Dispatching;
 using SharpFlux;
 using UnityEngine.UI;
 using Elements.General.IO;
+using System.Threading.Tasks;
 
 namespace Unity.Reflect.Viewer.UI
 {
@@ -20,7 +21,9 @@ namespace Unity.Reflect.Viewer.UI
         
         public List<ToolButton> viewButtons = new List<ToolButton>();
         public ToolButton screenshotButton;
+        public ToolButton returnButton;
         public SlideToggle hideUIToggle;
+        public Canvas uiRootCanvas;
 
         private StaticViewCollection viewCollection;
 
@@ -51,7 +54,18 @@ namespace Unity.Reflect.Viewer.UI
             m_DialogWindow = GetComponent<DialogWindow>();
             fieldOfViewController = GetComponentInChildren<MinMaxPropertyControl>();
             screenshotButton.buttonClicked += TakeScreenshot;
+            returnButton.buttonClicked += ReturnToMainCamera;
             hideUIToggle.onValueChanged.AddListener(ToggleUI);
+            if (hideUIToggle.on)
+            {
+                ToggleUI(true);
+            }
+        }
+
+        private void ReturnToMainCamera()
+        {
+            viewCollection.ReturnToMainCamera();
+            OnViewButtonClicked();
         }
 
         private void OnViewButtonLongPressed()
@@ -106,11 +120,12 @@ namespace Unity.Reflect.Viewer.UI
             if(viewButtons.Count == 0)
                 return;
 
-            for (int i = 0; i < viewButtons.Count; i++)
+            foreach (ToolButton b in viewButtons)
             {
+                Debug.Log("tool button state change");
                 if (m_CachedActiveDialog != data.activeDialog)
                 {
-                    viewButtons[i].selected = (data.activeDialog == DialogType.ViewCameraDialog || data.activeDialog == DialogType.DebugOptions);
+                    b.selected = (data.activeDialog == DialogType.ViewCameraDialog || data.activeDialog == DialogType.DebugOptions);
                     m_CachedActiveDialog = data.activeDialog;
                 }
                 //
@@ -119,15 +134,15 @@ namespace Unity.Reflect.Viewer.UI
                 {
                     if (data.toolState.infoType == InfoType.Info)
                     {
-                        viewButtons[i].SetIcon(m_InfoImage);
+                        b.SetIcon(m_InfoImage);
                     }
                     else if (data.toolState.infoType == InfoType.Debug)
                     {
-                        viewButtons[i].SetIcon(m_DebugImage);
+                        b.SetIcon(m_DebugImage);
                     }
                     m_CurrentToolState = data.toolState;
                 }
-                viewButtons[i].button.interactable = data.toolbarsEnabled;
+                b.button.interactable = data.toolbarsEnabled;
             }
         }
 
@@ -140,7 +155,7 @@ namespace Unity.Reflect.Viewer.UI
         private void TakeScreenshot()
         {
             ScreenshotManager ss = GetComponentInChildren<ScreenshotManager>();
-            ss.CreateScreenshot(viewCollection.FetchActiveCamera(), hideUI);
+            ss.CreateScreenshot(uiRootCanvas, hideUI);
             //TODO: set up toggle bool for whether UI should be hidden in screenshot
         }
 

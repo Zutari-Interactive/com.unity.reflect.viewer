@@ -135,6 +135,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!223 &215595154 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 7092235235558089805, guid: 008d43be80a2fce47912355248c02ac0,
+    type: 3}
+  m_PrefabInstance: {fileID: 3817192450461886637}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &249280252 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 227452426091970506, guid: e048479b734e780448a90e93991cf701,
+    type: 3}
+  m_PrefabInstance: {fileID: 423820259}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &399750834 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4035220525392314337, guid: f8e8bc7ff54f9df47a686cfa940a74cb,
@@ -330,6 +348,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8120185678442685162, guid: e048479b734e780448a90e93991cf701,
+        type: 3}
+      propertyPath: m_ButtonIcon
+      value: 
+      objectReference: {fileID: 249280252}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e048479b734e780448a90e93991cf701, type: 3}
 --- !u!114 &423820260 stripped
@@ -587,6 +610,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 704d3be7385923e4d85ad20917f569ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1344882771 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5049260313731194223, guid: 5c0610b89c74a114290b8fa58f0791fe,
+    type: 3}
+  m_PrefabInstance: {fileID: 2141219578}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a0de4336eed477991ed1188d670e1b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &1394075870 stripped
@@ -1219,6 +1254,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1755415040}
     - target: {fileID: 775006851, guid: 5c0610b89c74a114290b8fa58f0791fe, type: 3}
+      propertyPath: returnButton
+      value: 
+      objectReference: {fileID: 1344882771}
+    - target: {fileID: 775006851, guid: 5c0610b89c74a114290b8fa58f0791fe, type: 3}
+      propertyPath: uiRootCanvas
+      value: 
+      objectReference: {fileID: 215595154}
+    - target: {fileID: 775006851, guid: 5c0610b89c74a114290b8fa58f0791fe, type: 3}
       propertyPath: screenshotButton
       value: 
       objectReference: {fileID: 2141219579}
@@ -1515,6 +1558,26 @@ PrefabInstance:
     - target: {fileID: 7427317354098867175, guid: 5c0610b89c74a114290b8fa58f0791fe,
         type: 3}
       propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8229879548985360275, guid: 5c0610b89c74a114290b8fa58f0791fe,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8229879548985360275, guid: 5c0610b89c74a114290b8fa58f0791fe,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8229879548985360275, guid: 5c0610b89c74a114290b8fa58f0791fe,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8229879548985360275, guid: 5c0610b89c74a114290b8fa58f0791fe,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -8195,6 +8258,11 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1492264935}
+    - target: {fileID: 7092235235558089805, guid: 008d43be80a2fce47912355248c02ac0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7092235235558089805, guid: 008d43be80a2fce47912355248c02ac0,
         type: 3}
       propertyPath: m_RenderMode

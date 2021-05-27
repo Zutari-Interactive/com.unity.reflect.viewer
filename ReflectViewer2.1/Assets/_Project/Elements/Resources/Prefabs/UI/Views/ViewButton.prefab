@@ -333,7 +333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Button: {fileID: 6716170573651048253}
   m_ButtonRound: {fileID: 1966379278074566372}
-  m_ButtonIcon: {fileID: 0}
+  m_ButtonIcon: {fileID: 3439171001105086294}
 --- !u!1 &7528579992444013579
 GameObject:
   m_ObjectHideFlags: 0
