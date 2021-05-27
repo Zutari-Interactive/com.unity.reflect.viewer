@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using Unity.TouchFramework;
 using UnityEngine;
@@ -77,11 +77,11 @@ namespace Unity.Reflect.Viewer.UI
         [SerializeField]
         DialogWindow m_LoginScreenDialog;
 
-        [SerializeField, Tooltip("Select and Load a CSV on the Local Machine or via URL")]
-        DialogWindow m_CsvLoaderDialog;
+        //[SerializeField, Tooltip("Select and Load a CSV on the Local Machine or via URL")]
+        //DialogWindow m_CsvLoaderDialog;
 
-        [SerializeField, Tooltip("Dialog to Control Air Terminal Filters within the Scene")]
-        DialogWindow m_AirTerminalFilterDialog;
+        //[SerializeField, Tooltip("Dialog to Control Air Terminal Filters within the Scene")]
+        //DialogWindow m_AirTerminalFilterDialog;
 
 #pragma warning restore CS0649
 
@@ -118,8 +118,8 @@ namespace Unity.Reflect.Viewer.UI
                 m_CollaborationUserListDialog.Close();
                 m_CollaborationUserInfoDialog.Close();
                 m_LoginScreenDialog.Close();
-                m_CsvLoaderDialog.Close();
-                m_AirTerminalFilterDialog.Close();
+                //m_CsvLoaderDialog.Close();
+                //m_AirTerminalFilterDialog.Close();
 
                 if (stateData.dialogMode == DialogMode.Help)
                 {
@@ -189,12 +189,12 @@ namespace Unity.Reflect.Viewer.UI
                     case DialogType.LoginScreen:
                         m_LoginScreenDialog.Open();
                         break;
-                    case DialogType.CsvLoader:
-                        m_CsvLoaderDialog.Open();
-                        break;
-                    case DialogType.AirTerminalFilter:
-                        m_AirTerminalFilterDialog.Open();
-                        break;
+                    //case DialogType.CsvLoader:
+                    //    m_CsvLoaderDialog.Open();
+                    //    break;
+                    //case DialogType.AirTerminalFilter:
+                    //    m_AirTerminalFilterDialog.Open();
+                    //    break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }

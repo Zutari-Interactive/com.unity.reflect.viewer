@@ -78,6 +78,7 @@ MonoBehaviour:
   - {fileID: 9054189386101967454}
   - {fileID: -804273840831697117}
   - {fileID: 2731894357179034176}
+  - {fileID: 4459909533020345499}
   m_renderMode: 1
   m_depthSubmissionMode: 0
 --- !u!114 &-5957563285191378376
@@ -416,6 +417,28 @@ MonoBehaviour:
   company: Unity
   priority: 0
   required: 0
+--- !u!114 &4459909533020345499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 056125dd64c0ed540b40a4af74f7b495, type: 3}
+  m_Name: RuntimeDebuggerOpenXRFeature Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Runtime Debugger
+  version: 1
+  featureIdInternal: com.unity.openxr.features.runtimedebugger
+  openxrExtensionStrings: 
+  company: Unity
+  priority: 0
+  required: 0
+  cacheSize: 1048576
+  perThreadCacheSize: 51200
 --- !u!114 &5345141887982086243
 MonoBehaviour:
   m_ObjectHideFlags: 0

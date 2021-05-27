@@ -9,6 +9,7 @@ public class DataPath : MonoBehaviour
 {
     public string filePath;
     private string appPath;
+    private Stream filepath;
 
     void Awake()
     {
@@ -46,9 +47,10 @@ public class DataPath : MonoBehaviour
 #if UNITY_ANDROID
 
            string androidPath = "jar:file://" + appPath;
+           var path = string.Format("{0}/{1}", androidPath, filePath);
            WWW wwwfile = new WWW(path);
            while (!wwwfile.isDone) { }
-           var path = string.Format("{0}/{1}", androidPath, filePath);
+           
            File.WriteAllBytes(path, wwwfile.bytes);
    
            StreamReader wr = new StreamReader(filepath);
