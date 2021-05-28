@@ -62,12 +62,13 @@ namespace Unity.Reflect.Viewer.UI
 
             if (m_CurrentToolState.infoType == InfoType.Info)
             {
+                viewCollection.LogCamPosition();
                 var dialogType = m_DialogWindow.open ? DialogType.None : DialogType.ViewDialog;
                 Dispatcher.Dispatch(Payload<ActionTypes>.From(ActionTypes.OpenDialog, dialogType));
 
                 if (!m_DialogWindow.open)
                 {
-                    viewCollection.ReturnToMainCamera();
+                    viewCollection.ReturnCameraToOriginalPosition();
                 }
             }
             if (m_CurrentToolState.infoType == InfoType.Debug)
@@ -131,8 +132,9 @@ namespace Unity.Reflect.Viewer.UI
         private void ButtonPressed(GameObject obj)
         {
             int v = obj.GetComponent<View>().index;
-            viewCollection.DeActivateCameraView();
-            viewCollection.ActivateCameraView(v);
+            viewCollection.MoveCameraToView(v);
+            //viewCollection.DeActivateCameraView();
+            //viewCollection.ActivateCameraView(v);
         }
 
         private void ViewButtonClicked()

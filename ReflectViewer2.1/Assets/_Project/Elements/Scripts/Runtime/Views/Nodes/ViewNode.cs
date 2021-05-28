@@ -154,7 +154,7 @@ namespace Zutari.Elements.Nodes
                     // CALL ANY CUSTOM FUNCTIONALITY THAT YOUR REQUIRE HERE
 
                     // YOUR CODE START
-                    viewManager.CreateView(metadata);
+                    viewManager.SetupView(metadata);
                     // YOUR CODE END
                 }
 

@@ -26,6 +26,20 @@ public class ViewManager : CustomNode
         viewCollection = GetComponent<StaticViewCollection>();
     }
 
+    public void SetupView(Metadata data)
+    {
+        poi = FetchPOIComponent(data.gameObject);
+        if (poi == null)
+        {
+            Debug.LogError("no POI found on this view, aborting view creation");
+            return;
+        }
+        isOrthographic = poi.orthographic;
+        viewCollection.CreateNewView(data.transform, isOrthographic);
+        Debug.Log("created new view");
+    }
+
+    //deprecated
     public void CreateView(Metadata data)
     {
         if (!viewsPresent)
@@ -52,6 +66,7 @@ public class ViewManager : CustomNode
         return obj.GetComponent<POI>();
     }
 
+    //deprecated
     private void SetupView()
     {
         GameObject newView = Instantiate(viewPrefab);

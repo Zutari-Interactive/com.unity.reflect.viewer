@@ -64,7 +64,7 @@ namespace Unity.Reflect.Viewer.UI
 
         private void ReturnToMainCamera()
         {
-            viewCollection.ReturnToMainCamera();
+            viewCollection.ReturnCameraToOriginalPosition();
             OnViewButtonClicked();
         }
 
@@ -122,7 +122,6 @@ namespace Unity.Reflect.Viewer.UI
 
             foreach (ToolButton b in viewButtons)
             {
-                Debug.Log("tool button state change");
                 if (m_CachedActiveDialog != data.activeDialog)
                 {
                     b.selected = (data.activeDialog == DialogType.ViewCameraDialog || data.activeDialog == DialogType.DebugOptions);
