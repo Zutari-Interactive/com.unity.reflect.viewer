@@ -47,12 +47,6 @@ public class StaticViewCollection : MonoBehaviour
         sliderValue.onFloatValueChanged.AddListener(UpdateZoomValue);
     }
 
-    //Deprecated
-    public void AddCamera(Camera c)
-    {
-        viewCameras.Add(c);
-        AddViewButton();
-    }
 
     public void CreateNewView(Transform t, bool ortho)
     {
@@ -98,22 +92,6 @@ public class StaticViewCollection : MonoBehaviour
         originalCamPos = mainCam.transform;
     }
 
-    //Deprecated
-    public void ActivateCameraView(int i)
-    {
-        if (mainCam.activeInHierarchy)
-        {
-            mainCam.SetActive(false);
-        }
-        viewCameras[i].enabled = true;
-        currentlyActiveCameraIndex = i;
-    }
-
-    //Deprecated
-    public void DeActivateCameraView()
-    {
-        viewCameras[currentlyActiveCameraIndex].enabled = false;
-    }
 
     private void AddViewButton()
     {
@@ -133,23 +111,6 @@ public class StaticViewCollection : MonoBehaviour
 
         FreeFlyCamera ffCam = mainCam.GetComponent<FreeFlyCamera>();
         ffCam.enabled = true;
-    }
-
-    //Deprecated
-    public void ReturnToMainCamera()
-    {
-        if (!mainCam.activeInHierarchy)
-        {
-            DeActivateCameraView();
-            mainCam.SetActive(true);
-        }
-    }
-
-
-    //Deprecated
-    public Camera FetchActiveCamera()
-    {
-        return viewCameras[currentlyActiveCameraIndex];
     }
 
     public void UpdateZoomValue(float f)
