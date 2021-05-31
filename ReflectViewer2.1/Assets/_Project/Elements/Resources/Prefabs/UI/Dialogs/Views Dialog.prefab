@@ -159,7 +159,7 @@ MonoBehaviour:
   viewButton: {fileID: 0}
   viewButtonPrefab: {fileID: 0}
   viewsParent: {fileID: 0}
-  m_InfoImage: {fileID: 21300000, guid: c363ed5e019e4aa4fa537569bed21f51, type: 3}
+  m_InfoImage: {fileID: 21300000, guid: 960bd5828c5da5d40be85b8fbc8cd735, type: 3}
   m_DebugImage: {fileID: 21300000, guid: 5401a88c0e4e843fbacb253ef6f6225e, type: 3}
 --- !u!1 &5032922983717447105
 GameObject:

@@ -89,6 +89,9 @@ namespace Unity.Reflect.Viewer.UI
         [SerializeField, Tooltip("Dialog to Control View Camera Settings within the Scene")]
         DialogWindow m_ViewCameraDialog;
 
+        [SerializeField, Tooltip("Dialog to Control Screenshot Tool within the Scene")]
+        DialogWindow m_ScreenshotDialog;
+
 #pragma warning restore CS0649
 
         DialogType m_CurrentActiveDialog = DialogType.None;
@@ -124,6 +127,7 @@ namespace Unity.Reflect.Viewer.UI
                 m_CollaborationUserListDialog.Close();
                 m_CollaborationUserInfoDialog.Close();
                 m_LoginScreenDialog.Close();
+                m_ScreenshotDialog.Close();
                 m_CsvLoaderDialog.Close();
                 m_AirTerminalFilterDialog.Close();
                 m_ViewDialog.Close();
@@ -208,6 +212,9 @@ namespace Unity.Reflect.Viewer.UI
                         break;
                     case DialogType.ViewCameraDialog:
                         m_ViewCameraDialog.Open();
+                        break;
+                    case DialogType.Screenshot:
+                        m_ScreenshotDialog.Open();
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();

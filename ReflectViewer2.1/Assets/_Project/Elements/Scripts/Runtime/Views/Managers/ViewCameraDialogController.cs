@@ -155,7 +155,6 @@ namespace Unity.Reflect.Viewer.UI
         {
             ScreenshotManager ss = GetComponentInChildren<ScreenshotManager>();
             ss.CreateScreenshot(uiRootCanvas, hideUI);
-            //TODO: set up toggle bool for whether UI should be hidden in screenshot
         }
 
         

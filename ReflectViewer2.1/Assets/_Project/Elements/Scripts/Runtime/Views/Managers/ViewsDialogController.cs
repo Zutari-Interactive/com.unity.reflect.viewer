@@ -141,6 +141,12 @@ namespace Unity.Reflect.Viewer.UI
         {
             Debug.Log("view selected");
         }
+
+        private void OnDisable()
+        {
+            viewButton.buttonClicked -= OnViewButtonClicked;
+            viewButton.buttonLongPressed -= OnViewButtonLongPressed;
+        }
     }
 }
 
