@@ -72,3 +72,13 @@ Assets/UniMerge.meta
 # Samples files
 Assets/Samples/
 Assets/Samples.meta
+
+#Fastlane
+ReflectViewer/builds/**
+ReflectViewer2.1/Builds/
+
+#Substance
+Assets/Allegorithmic
+
+#imported Reflect models
+Assets/Reflect/

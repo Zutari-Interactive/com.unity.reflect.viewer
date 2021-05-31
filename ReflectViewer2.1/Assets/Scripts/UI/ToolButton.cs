@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Configuration;
 using Unity.TouchFramework;
@@ -39,7 +39,6 @@ namespace Unity.Reflect.Viewer.UI
             get
             {
                 return m_Selected;
-
             }
             set
             {

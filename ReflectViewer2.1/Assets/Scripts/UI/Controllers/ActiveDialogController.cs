@@ -77,11 +77,20 @@ namespace Unity.Reflect.Viewer.UI
         [SerializeField]
         DialogWindow m_LoginScreenDialog;
 
-        //[SerializeField, Tooltip("Select and Load a CSV on the Local Machine or via URL")]
-        //DialogWindow m_CsvLoaderDialog;
+        [SerializeField, Tooltip("Select and Load a CSV on the Local Machine or via URL")]
+        DialogWindow m_CsvLoaderDialog;
 
-        //[SerializeField, Tooltip("Dialog to Control Air Terminal Filters within the Scene")]
-        //DialogWindow m_AirTerminalFilterDialog;
+        [SerializeField, Tooltip("Dialog to Control Air Terminal Filters within the Scene")]
+        DialogWindow m_AirTerminalFilterDialog;
+
+        [SerializeField, Tooltip("Dialog to activate View Cameras within the Scene")]
+        DialogWindow m_ViewDialog;
+
+        [SerializeField, Tooltip("Dialog to Control View Camera Settings within the Scene")]
+        DialogWindow m_ViewCameraDialog;
+
+        [SerializeField, Tooltip("Dialog to Control Screenshot Tool within the Scene")]
+        DialogWindow m_ScreenshotDialog;
 
 #pragma warning restore CS0649
 
@@ -118,8 +127,11 @@ namespace Unity.Reflect.Viewer.UI
                 m_CollaborationUserListDialog.Close();
                 m_CollaborationUserInfoDialog.Close();
                 m_LoginScreenDialog.Close();
-                //m_CsvLoaderDialog.Close();
-                //m_AirTerminalFilterDialog.Close();
+                m_ScreenshotDialog.Close();
+                m_CsvLoaderDialog.Close();
+                m_AirTerminalFilterDialog.Close();
+                m_ViewDialog.Close();
+                m_ViewCameraDialog.Close();
 
                 if (stateData.dialogMode == DialogMode.Help)
                 {
@@ -189,12 +201,21 @@ namespace Unity.Reflect.Viewer.UI
                     case DialogType.LoginScreen:
                         m_LoginScreenDialog.Open();
                         break;
-                    //case DialogType.CsvLoader:
-                    //    m_CsvLoaderDialog.Open();
-                    //    break;
-                    //case DialogType.AirTerminalFilter:
-                    //    m_AirTerminalFilterDialog.Open();
-                    //    break;
+                    case DialogType.CsvLoader:
+                        m_CsvLoaderDialog.Open();
+                        break;
+                    case DialogType.AirTerminalFilter:
+                        m_AirTerminalFilterDialog.Open();
+                        break;
+                    case DialogType.ViewDialog:
+                        m_ViewDialog.Open();
+                        break;
+                    case DialogType.ViewCameraDialog:
+                        m_ViewCameraDialog.Open();
+                        break;
+                    case DialogType.Screenshot:
+                        m_ScreenshotDialog.Open();
+                        break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
