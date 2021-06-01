@@ -21,6 +21,7 @@ namespace UnityEngine.Reflect.Viewer
         readonly RaycastHit[] m_RaycastHitCache = new RaycastHit[k_MaxResultsCount];
         readonly List<ISpatialObject> m_SpatialObjects = new List<ISpatialObject>();
         internal Dictionary<int, MeshCollider> m_ColliderCache = new Dictionary<int, MeshCollider>();
+        //internal Dictionary<int, Collider> m_ColliderCache = new Dictionary<int, Collider>();
 
         RayData[] m_RayDatas;
 
@@ -36,6 +37,7 @@ namespace UnityEngine.Reflect.Viewer
                 if (obj.loadedObject == null)
                     continue;
 
+                
                 // add colliders to all children object too
                 AddMeshColliderRecursively(obj.loadedObject);
             }
@@ -50,6 +52,12 @@ namespace UnityEngine.Reflect.Viewer
                 {
                     m_ColliderCache.Add(obj.GetInstanceID(), obj.AddComponent<MeshCollider>());
                 }
+            }
+
+            // only add colliders if there aren't any present, keep track of them to destroy when we're done
+            if (obj.GetComponent<MeshRenderer>() != null && obj.GetComponent<Collider>() == null)
+            {
+                m_ColliderCache.Add(obj.GetInstanceID(), obj.AddComponent<MeshCollider>());
             }
 
             foreach (Transform childTransform in obj.transform)
@@ -78,12 +86,38 @@ namespace UnityEngine.Reflect.Viewer
         {
             var transformedRay = new Ray(WorldRoot.InverseTransformPoint(ray.origin), WorldRoot.InverseTransformDirection(ray.direction));
 
+            //if (TerrainCheck(transformedRay))
+            //    return;
+
             // narrow down the possible objects using the spatial picker
             SpatialPicker.Pick(transformedRay, m_SpatialObjects);
 
             PreRaycast();
             RaycastInternal(ray, results);
         }
+
+        //custom
+        //private bool TerrainCheck(Ray ray)
+        //{
+        //    if(Physics.Raycast(ray, out RaycastHit hit, 100f))
+        //    {
+        //        if (hit.collider.CompareTag("Dude"))
+        //        {
+        //            Debug.Log("terrain hit");
+        //            m_SpatialObjects.Add(hit.transform.gameObject);
+        //            List<Tuple<GameObject, RaycastHit>> tResults = new List<Tuple<GameObject, RaycastHit>>();
+        //            Tuple<GameObject, RaycastHit> result = new Tuple<GameObject, RaycastHit>(hit.collider.gameObject, hit);
+        //            tResults.Add(result);
+        //            PreRaycast();
+        //            RaycastInternal(ray, tResults);
+        //            return true;
+        //        }
+        //    }
+
+        //    return false;
+            
+
+        //}
 
         public void CleanCache()
         {
