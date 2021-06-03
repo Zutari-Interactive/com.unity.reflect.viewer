@@ -356,6 +356,16 @@ PrefabInstance:
       propertyPath: m_RightHandController
       value: 
       objectReference: {fileID: 1753218616}
+    - target: {fileID: 2151423452900280400, guid: d286bcaa7c013d441b06dcba75c76f87,
+        type: 3}
+      propertyPath: m_VRControllers.Array.data[0].Rotation.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151423452900280400, guid: d286bcaa7c013d441b06dcba75c76f87,
+        type: 3}
+      propertyPath: m_VRControllers.Array.data[4].Rotation.y
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 2151423452900280401, guid: d286bcaa7c013d441b06dcba75c76f87,
         type: 3}
       propertyPath: m_Name

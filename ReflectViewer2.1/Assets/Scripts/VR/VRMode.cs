@@ -232,8 +232,12 @@ namespace UnityEngine.Reflect.Viewer
                 var leftWidget = left.GetComponent<VRControllerWidget>();
                 var rightWidget = right.GetComponent<VRControllerWidget>();
 
+                
                 leftWidget.Rotation = vrController.Rotation;
                 rightWidget.Rotation = vrController.Rotation;
+
+                //left.SetParent(m_LeftHandController.transform);
+                //right.SetParent(m_RightHandController.transform);
             }
         }
     }
