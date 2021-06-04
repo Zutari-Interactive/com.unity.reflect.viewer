@@ -514,6 +514,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6606561118053990166, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: m_ValidColorGradient.key0.b
+      value: 0.09411765
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606561118053990166, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: m_ValidColorGradient.key0.g
+      value: 0.4862745
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606561118053990166, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: m_ValidColorGradient.key0.r
+      value: 0.39607844
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606561118053990166, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: m_InvalidColorGradient.key0.b
+      value: 0.19215687
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606561118053990166, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: m_InvalidColorGradient.key0.g
+      value: 0.101960786
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606561118053990166, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: m_InvalidColorGradient.key0.r
+      value: 0.84705883
+      objectReference: {fileID: 0}
     - target: {fileID: 6606561118053990169, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
         type: 3}
       propertyPath: m_SelectionTarget
@@ -524,6 +554,86 @@ PrefabInstance:
       propertyPath: m_TeleportationTarget
       value: 
       objectReference: {fileID: 702798715}
+    - target: {fileID: 6606561118053990170, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: teleportBeamColor.atime1
+      value: 15420
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606561118053990170, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: teleportBeamColor.atime2
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606561118053990170, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: teleportBeamColor.ctime1
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606561118053990170, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: teleportBeamColor.ctime2
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606561118053990170, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: teleportBeamColor.key0.b
+      value: 0.09411765
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606561118053990170, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: teleportBeamColor.key0.g
+      value: 0.4862745
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606561118053990170, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: teleportBeamColor.key0.r
+      value: 0.39607844
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606561118053990170, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: teleportBeamColor.key1.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606561118053990170, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: teleportBeamColor.key1.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606561118053990170, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: teleportBeamColor.key1.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606561118053990170, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: teleportBeamColor.key1.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606561118053990170, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: teleportBeamColor.key2.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606561118053990170, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: teleportBeamColor.key2.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606561118053990170, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: teleportBeamColor.key2.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606561118053990170, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: teleportBeamColor.m_NumAlphaKeys
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606561118053990170, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: teleportBeamColor.m_NumColorKeys
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6606561118237117580, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
         type: 3}
       propertyPath: m_Name
