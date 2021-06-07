@@ -21,6 +21,7 @@ namespace UnityEngine.Reflect.Viewer
         BaseTeleportationInteractable m_TeleportationTarget;
 #pragma warning restore 0649
 
+        public List<ParticleSystem> footstepPS = new List<ParticleSystem>();
         public Gradient teleportBeamColor;
         private Gradient originalInvalidGradient;
         private bool validTeleportHit = false;
@@ -45,6 +46,11 @@ namespace UnityEngine.Reflect.Viewer
         {
             if (m_XrRig == null)
                 m_XrRig = FindObjectOfType<XRRig>();
+
+            if(footstepPS.Count == 0)
+            {
+                Debug.LogError("no particles systems found");
+            }
 
             m_XrRayInteractor = GetComponent<XRRayInteractor>();
             m_XrInteractorLineVisual = GetComponent<XRInteractorLineVisual>();
@@ -136,6 +142,10 @@ namespace UnityEngine.Reflect.Viewer
 
             // disable the target first so it doesn't interfere with the raycasts
             m_TeleportationTarget.gameObject.SetActive(false);
+            foreach (var ps in footstepPS)
+            {
+                ps.Stop();
+            }
 
             // pick
             m_Results.Clear();
@@ -152,6 +162,10 @@ namespace UnityEngine.Reflect.Viewer
 
             m_TeleportationTarget.transform.position = m_Results[0].Item2.point;
             m_TeleportationTarget.gameObject.SetActive(true);
+            foreach (var ps in footstepPS)
+            {
+                ps.Play();
+            }
 
             // This help to keep a curve for the teleport line
             SetTeleportCurve(1.5f * Vector3.Distance(m_MainCamera.position, m_TeleportationTarget.transform.position));
