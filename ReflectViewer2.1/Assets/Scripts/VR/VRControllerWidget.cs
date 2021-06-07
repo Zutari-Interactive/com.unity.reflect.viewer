@@ -21,7 +21,7 @@ namespace UnityEngine.Reflect.Viewer
         {
             set
             {
-                m_Models.transform.rotation = Quaternion.Euler(value);
+                m_Models.transform.localRotation = Quaternion.Euler(value);
             }
         }
 

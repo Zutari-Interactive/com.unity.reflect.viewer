@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using SharpFlux;
 using SharpFlux.Dispatching;
@@ -21,6 +21,12 @@ namespace UnityEngine.Reflect.Viewer
         BaseTeleportationInteractable m_TeleportationTarget;
 #pragma warning restore 0649
 
+        [Tooltip("what is the maximum angle acceptable for player to teleport on?")]
+        public float normalTolerance;
+        public Gradient teleportBeamColor;
+        private Gradient originalInvalidGradient;
+        private bool validTeleportHit = false;
+
         InputAction m_TeleportAction;
         XRRayInteractor m_XrRayInteractor;
         XRInteractorLineVisual m_XrInteractorLineVisual;
@@ -42,8 +48,11 @@ namespace UnityEngine.Reflect.Viewer
             if (m_XrRig == null)
                 m_XrRig = FindObjectOfType<XRRig>();
 
+            
+
             m_XrRayInteractor = GetComponent<XRRayInteractor>();
             m_XrInteractorLineVisual = GetComponent<XRInteractorLineVisual>();
+            originalInvalidGradient = m_XrInteractorLineVisual.invalidColorGradient;
 
             m_LinePoints = new Vector3[k_MaxLinePoints];
 
@@ -68,6 +77,15 @@ namespace UnityEngine.Reflect.Viewer
 
         void Update()
         {
+            if (validTeleportHit)
+            {
+                m_XrInteractorLineVisual.invalidColorGradient = teleportBeamColor;
+            }
+            else
+            {
+                m_XrInteractorLineVisual.invalidColorGradient = originalInvalidGradient;
+            }
+
             var isButtonPressed = m_TeleportAction.ReadValue<float>() > 0;
 
             if (m_IsTeleporting)
@@ -84,6 +102,7 @@ namespace UnityEngine.Reflect.Viewer
         void OnStateDataChanged(UIStateData data)
         {
             m_CanTeleport = data.toolState.activeTool != ToolType.SelectTool;
+
         }
 
         void OnProjectStateDataChanged(UIProjectStateData data)
@@ -121,6 +140,7 @@ namespace UnityEngine.Reflect.Viewer
 
             // disable the target first so it doesn't interfere with the raycasts
             m_TeleportationTarget.gameObject.SetActive(false);
+            
 
             // pick
             m_Results.Clear();
@@ -128,7 +148,20 @@ namespace UnityEngine.Reflect.Viewer
 
             // enable the target if there is a valid hit
             if (m_Results.Count == 0)
+            {
+                validTeleportHit = false;
                 return;
+            }
+
+            if (m_Results[0].Item2.normal.y < normalTolerance)
+            {
+                Debug.Log(m_Results[0].Item2.normal);
+                validTeleportHit = false;
+                return;
+            }
+            
+
+            validTeleportHit = true;
 
             m_TeleportationTarget.transform.position = m_Results[0].Item2.point;
             m_TeleportationTarget.gameObject.SetActive(true);
