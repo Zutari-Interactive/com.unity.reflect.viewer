@@ -1209,7 +1209,7 @@ MonoBehaviour:
   m_InputActionAsset: {fileID: -944628639613478452, guid: 603b1280fd69e48d9b1e45442fbc61fe,
     type: 3}
   m_TeleportationTarget: {fileID: 0}
-  footstepPS: []
+  normalTolerance: 0
   teleportBeamColor:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 1}
