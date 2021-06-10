@@ -152,6 +152,7 @@ public class ScreenshotDialogController : MonoBehaviour
         hideUI = hide;
     }
 
+    //TODO - If in VR, option to save to predetermined path - currently crashing in VR when folder select window opens - circumvent the screenshot manager?
     private void TakeScreenshot()
     {
         ScreenshotManager ss = GetComponent<ScreenshotManager>();
