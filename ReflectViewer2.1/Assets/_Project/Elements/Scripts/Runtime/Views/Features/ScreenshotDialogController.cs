@@ -31,6 +31,8 @@ public class ScreenshotDialogController : MonoBehaviour
     ToolState m_CurrentToolState;
 
     public Canvas uiRootCanvas;
+    public GameObject viewerWindow;
+    public bool availableInVR;
 
     private Camera handCamera;
 
@@ -42,24 +44,33 @@ public class ScreenshotDialogController : MonoBehaviour
         UIStateManager.debugStateChanged += OnDebugStateDataChanged;
         m_DialogWindow = GetComponent<DialogWindow>();
 
-        XRRig rig = FindObjectOfType<XRRig>();
-        if(rig != null)
-        {
-            SetupVRScreenshotCam();
-        }
+        
         
     }
 
+    //TODO - if not available in VR, hide the screenshot button in left UI cluster 
     private void SetupVRScreenshotCam()
     {
-        handCamera = GetComponentInChildren<Camera>();
-
-        if (handCamera == null)
+        
+        XRRig rig = FindObjectOfType<XRRig>();
+        if (rig != null)
         {
-            Debug.LogError("no camera found for VR screenshot tool");
-            return;
+            handCamera = GetComponentInChildren<Camera>();
+
+            if (handCamera == null)
+            {
+                Debug.LogError("no camera found for VR screenshot tool");
+                return;
+            }
+            viewerWindow.SetActive(true);
+            ActivateCamera(true);
         }
-        ActivateCamera(false);
+        else
+        {
+            viewerWindow.SetActive(false);
+            ActivateCamera(false);
+        }
+        
     }
 
     private void Start()
@@ -94,7 +105,8 @@ public class ScreenshotDialogController : MonoBehaviour
             var dialogType = m_DialogWindow.open ? DialogType.None : DialogType.Screenshot;
             Dispatcher.Dispatch(Payload<ActionTypes>.From(ActionTypes.OpenDialog, dialogType));
 
-            ActivateCamera(true);
+            if(availableInVR)
+                SetupVRScreenshotCam();
             
         }
         if (m_CurrentToolState.infoType == InfoType.Debug)
