@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Unity.Reflect.Viewer.UI;
 using Unity.TouchFramework;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 [RequireComponent(typeof(DialogWindow))]
 public class ScreenshotDialogController : MonoBehaviour
@@ -31,6 +32,8 @@ public class ScreenshotDialogController : MonoBehaviour
 
     public Canvas uiRootCanvas;
 
+    private Camera handCamera;
+
     private bool hideUI;
 
     void Awake()
@@ -38,6 +41,25 @@ public class ScreenshotDialogController : MonoBehaviour
         UIStateManager.stateChanged += OnStateDataChanged;
         UIStateManager.debugStateChanged += OnDebugStateDataChanged;
         m_DialogWindow = GetComponent<DialogWindow>();
+
+        XRRig rig = FindObjectOfType<XRRig>();
+        if(rig != null)
+        {
+            SetupVRScreenshotCam();
+        }
+        
+    }
+
+    private void SetupVRScreenshotCam()
+    {
+        handCamera = GetComponentInChildren<Camera>();
+
+        if (handCamera == null)
+        {
+            Debug.LogError("no camera found for VR screenshot tool");
+            return;
+        }
+        ActivateCamera(false);
     }
 
     private void Start()
@@ -71,6 +93,9 @@ public class ScreenshotDialogController : MonoBehaviour
         {
             var dialogType = m_DialogWindow.open ? DialogType.None : DialogType.Screenshot;
             Dispatcher.Dispatch(Payload<ActionTypes>.From(ActionTypes.OpenDialog, dialogType));
+
+            ActivateCamera(true);
+            
         }
         if (m_CurrentToolState.infoType == InfoType.Debug)
         {
@@ -119,6 +144,14 @@ public class ScreenshotDialogController : MonoBehaviour
     {
         ScreenshotManager ss = GetComponent<ScreenshotManager>();
         ss.CreateScreenshot(uiRootCanvas, hideUI);
+    }
+
+    public void ActivateCamera(bool value)
+    {
+        if(handCamera != null)
+        {
+            handCamera.enabled = value;
+        }
     }
 
     private void OnDisable()
