@@ -26,6 +26,8 @@ namespace UnityEngine.Reflect.Viewer
         public Gradient teleportBeamColor;
         private Gradient originalInvalidGradient;
         private bool validTeleportHit = false;
+        //private Vector3 normalPos;
+        //private Vector3 normalDir;
 
         InputAction m_TeleportAction;
         XRRayInteractor m_XrRayInteractor;
@@ -153,6 +155,9 @@ namespace UnityEngine.Reflect.Viewer
                 return;
             }
 
+            //normalPos = m_Results[0].Item2.point;
+            //normalDir = m_Results[0].Item2.normal;
+
             if (m_Results[0].Item2.normal.y < normalTolerance)
             {
                 Debug.Log(m_Results[0].Item2.normal);
@@ -175,5 +180,11 @@ namespace UnityEngine.Reflect.Viewer
             m_XrRayInteractor.velocity = velocity;
             m_XrRayInteractor.acceleration = velocity * 0.6f;
         }
+
+        //public void OnDrawGizmos()
+        //{
+        //    Gizmos.color = Color.blue;
+        //    Gizmos.DrawLine(normalPos, (normalDir + normalPos));
+        //}
     }
 }

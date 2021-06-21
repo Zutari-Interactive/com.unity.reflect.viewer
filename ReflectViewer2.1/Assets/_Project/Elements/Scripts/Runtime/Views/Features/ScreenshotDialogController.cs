@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Unity.Reflect.Viewer.UI;
 using Unity.TouchFramework;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 [RequireComponent(typeof(DialogWindow))]
 public class ScreenshotDialogController : MonoBehaviour
@@ -30,6 +31,10 @@ public class ScreenshotDialogController : MonoBehaviour
     ToolState m_CurrentToolState;
 
     public Canvas uiRootCanvas;
+    public GameObject viewerWindow;
+    public bool availableInVR;
+
+    private Camera handCamera;
 
     private bool hideUI;
 
@@ -38,6 +43,34 @@ public class ScreenshotDialogController : MonoBehaviour
         UIStateManager.stateChanged += OnStateDataChanged;
         UIStateManager.debugStateChanged += OnDebugStateDataChanged;
         m_DialogWindow = GetComponent<DialogWindow>();
+
+        
+        
+    }
+
+    //TODO - if not available in VR, hide the screenshot button in left UI cluster 
+    private void SetupVRScreenshotCam()
+    {
+        
+        XRRig rig = FindObjectOfType<XRRig>();
+        if (rig != null)
+        {
+            handCamera = GetComponentInChildren<Camera>();
+
+            if (handCamera == null)
+            {
+                Debug.LogError("no camera found for VR screenshot tool");
+                return;
+            }
+            viewerWindow.SetActive(true);
+            ActivateCamera(true);
+        }
+        else
+        {
+            viewerWindow.SetActive(false);
+            ActivateCamera(false);
+        }
+        
     }
 
     private void Start()
@@ -71,6 +104,10 @@ public class ScreenshotDialogController : MonoBehaviour
         {
             var dialogType = m_DialogWindow.open ? DialogType.None : DialogType.Screenshot;
             Dispatcher.Dispatch(Payload<ActionTypes>.From(ActionTypes.OpenDialog, dialogType));
+
+            if(availableInVR)
+                SetupVRScreenshotCam();
+            
         }
         if (m_CurrentToolState.infoType == InfoType.Debug)
         {
@@ -115,10 +152,19 @@ public class ScreenshotDialogController : MonoBehaviour
         hideUI = hide;
     }
 
+    //TODO - If in VR, option to save to predetermined path - currently crashing in VR when folder select window opens - circumvent the screenshot manager?
     private void TakeScreenshot()
     {
         ScreenshotManager ss = GetComponent<ScreenshotManager>();
         ss.CreateScreenshot(uiRootCanvas, hideUI);
+    }
+
+    public void ActivateCamera(bool value)
+    {
+        if(handCamera != null)
+        {
+            handCamera.enabled = value;
+        }
     }
 
     private void OnDisable()

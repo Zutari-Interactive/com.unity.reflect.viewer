@@ -153,6 +153,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &273440478 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7660823341961392824, guid: f3ada26461e6f0047a93e5d6dfa7e9ef,
+    type: 3}
+  m_PrefabInstance: {fileID: 8716870102364256317}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &399750834 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4035220525392314337, guid: f8e8bc7ff54f9df47a686cfa940a74cb,
@@ -11316,6 +11322,11 @@ PrefabInstance:
       objectReference: {fileID: 215595154}
     - target: {fileID: 3762022353041153855, guid: f3ada26461e6f0047a93e5d6dfa7e9ef,
         type: 3}
+      propertyPath: viewerWindow
+      value: 
+      objectReference: {fileID: 273440478}
+    - target: {fileID: 3762022353041153855, guid: f3ada26461e6f0047a93e5d6dfa7e9ef,
+        type: 3}
       propertyPath: screenshotButton
       value: 
       objectReference: {fileID: 4946635879441612740}
@@ -11324,6 +11335,36 @@ PrefabInstance:
       propertyPath: takeScreenshotButton
       value: 
       objectReference: {fileID: 7371962212531871337}
+    - target: {fileID: 4063583822654638370, guid: f3ada26461e6f0047a93e5d6dfa7e9ef,
+        type: 3}
+      propertyPath: m_Device
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7660823341961392824, guid: f3ada26461e6f0047a93e5d6dfa7e9ef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7674902711077272864, guid: f3ada26461e6f0047a93e5d6dfa7e9ef,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7674902711077272864, guid: f3ada26461e6f0047a93e5d6dfa7e9ef,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7674902711077272864, guid: f3ada26461e6f0047a93e5d6dfa7e9ef,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7674902711077272864, guid: f3ada26461e6f0047a93e5d6dfa7e9ef,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3ada26461e6f0047a93e5d6dfa7e9ef, type: 3}
 --- !u!1001 &8738943093123766707
