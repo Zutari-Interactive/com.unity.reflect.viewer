@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 5676402736274882632}
   - component: {fileID: 5676402736274882631}
   m_Layer: 0
-  m_Name: '[character-manager]'
+  m_Name: character-manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
