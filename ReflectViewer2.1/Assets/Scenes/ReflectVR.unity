@@ -921,6 +921,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6606561118053990166, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
         type: 3}
+      propertyPath: m_LineLength
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606561118053990166, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
       propertyPath: m_ValidColorGradient.key0.b
       value: 0.09411765
       objectReference: {fileID: 0}
