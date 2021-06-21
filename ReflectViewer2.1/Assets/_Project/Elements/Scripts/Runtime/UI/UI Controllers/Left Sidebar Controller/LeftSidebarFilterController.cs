@@ -27,6 +27,7 @@ namespace Elements.UI.Controllers
 
         public void ActivateAirTerminalFilterButton(bool value)
         {
+
             AirTerminalFilterButton.gameObject.SetActive(value);
         }
 

@@ -57,6 +57,8 @@ namespace Unity.Reflect.Viewer.UI
             m_MeasureToolButton.buttonClicked += OnMeasureToolButtonClicked;
 
             m_ObjectSelector = new SpatialSelector();
+
+            print(m_ObjectSelector == null);
         }
 
         void OnExternalToolStateDataChanged(ExternalToolStateData data)
