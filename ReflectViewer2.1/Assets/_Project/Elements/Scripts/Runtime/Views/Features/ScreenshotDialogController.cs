@@ -105,7 +105,8 @@ public class ScreenshotDialogController : MonoBehaviour
             var dialogType = m_DialogWindow.open ? DialogType.None : DialogType.Screenshot;
             Dispatcher.Dispatch(Payload<ActionTypes>.From(ActionTypes.OpenDialog, dialogType));
 
-            if(availableInVR)
+            availableInVR = UIStateManager.current.stateData.VREnable;
+            if (availableInVR)
                 SetupVRScreenshotCam();
             
         }
@@ -156,7 +157,7 @@ public class ScreenshotDialogController : MonoBehaviour
     private void TakeScreenshot()
     {
         ScreenshotManager ss = GetComponent<ScreenshotManager>();
-        ss.CreateScreenshot(uiRootCanvas, hideUI);
+        ss.CreateScreenshot(uiRootCanvas, hideUI, availableInVR);
     }
 
     public void ActivateCamera(bool value)

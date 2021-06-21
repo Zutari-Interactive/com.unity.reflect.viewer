@@ -8,9 +8,11 @@ public class ScreenshotManager : MonoBehaviour
 {
 
     private Canvas canvas;
+    private bool vrMode;
 
-    public void CreateScreenshot(Canvas c, bool hideUI)
+    public void CreateScreenshot(Canvas c, bool hideUI, bool mode)
     {
+        vrMode = mode;
         canvas = c;
         if (hideUI)
         {
@@ -28,18 +30,25 @@ public class ScreenshotManager : MonoBehaviour
 
     IEnumerator SaveImage()
     {
-        string appPath = Application.dataPath;
-        var savePath = FileBrowser.OpenFolderPanel(appPath);
+        if (vrMode)
+        {
+            ScreenCapture.CaptureScreenshot(Application.dataPath);          //this path will put the files in the executablename/Data folder
+        }
+        else
+        {
+            string appPath = Application.dataPath;
+            var savePath = FileBrowser.OpenFolderPanel(appPath);
 
-        string actualPath = savePath[0];                                //this is very tenuous, need tightening up, currently assumes only one string is in the array
+            string actualPath = savePath[0];                                //this is very tenuous, need tightening up, currently assumes only one string is in the array
 
-        canvas.enabled = false;
+            canvas.enabled = false;
 
-        ScreenCapture.CaptureScreenshot(SaveFileBrowser(actualPath));
+            ScreenCapture.CaptureScreenshot(SaveFileBrowser(actualPath));
 
-        yield return new WaitForEndOfFrame();
-        canvas.enabled = true;
-        Debug.Log("taken screenshot");
+            yield return new WaitForEndOfFrame();
+            canvas.enabled = true;
+            Debug.Log("taken screenshot");
+        }
 
         yield return null;
     }
