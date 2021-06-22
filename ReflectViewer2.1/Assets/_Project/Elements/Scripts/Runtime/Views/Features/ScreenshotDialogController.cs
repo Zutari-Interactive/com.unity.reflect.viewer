@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Unity.Reflect.Viewer.UI;
 using Unity.TouchFramework;
 using UnityEngine;
+using UnityEngine.Reflect.Viewer;
 using UnityEngine.XR.Interaction.Toolkit;
 
 [RequireComponent(typeof(DialogWindow))]
@@ -43,19 +44,22 @@ public class ScreenshotDialogController : MonoBehaviour
         UIStateManager.stateChanged += OnStateDataChanged;
         UIStateManager.debugStateChanged += OnDebugStateDataChanged;
         m_DialogWindow = GetComponent<DialogWindow>();
-
-        
-        
     }
 
     //TODO - if not available in VR, hide the screenshot button in left UI cluster 
     private void SetupVRScreenshotCam()
     {
-        
-        XRRig rig = FindObjectOfType<XRRig>();
-        if (rig != null)
+        if (UIStateManager.current.stateData.VREnable)
         {
-            handCamera = GetComponentInChildren<Camera>();
+            VRSelector vrSelector = FindObjectOfType<VRSelector>();
+
+            if (vrSelector == null)
+            {
+                Debug.LogError("no VR Selector on right hand found for VR screenshot tool");
+                return;
+            }
+
+            handCamera = vrSelector.gameObject.GetComponentInChildren<Camera>();
 
             if (handCamera == null)
             {
@@ -105,7 +109,6 @@ public class ScreenshotDialogController : MonoBehaviour
             var dialogType = m_DialogWindow.open ? DialogType.None : DialogType.Screenshot;
             Dispatcher.Dispatch(Payload<ActionTypes>.From(ActionTypes.OpenDialog, dialogType));
 
-            availableInVR = UIStateManager.current.stateData.VREnable;
             if (availableInVR)
                 SetupVRScreenshotCam();
             
@@ -157,7 +160,7 @@ public class ScreenshotDialogController : MonoBehaviour
     private void TakeScreenshot()
     {
         ScreenshotManager ss = GetComponent<ScreenshotManager>();
-        ss.CreateScreenshot(uiRootCanvas, hideUI, availableInVR);
+        ss.CreateScreenshot(uiRootCanvas, hideUI, UIStateManager.current.stateData.VREnable, handCamera);
     }
 
     public void ActivateCamera(bool value)

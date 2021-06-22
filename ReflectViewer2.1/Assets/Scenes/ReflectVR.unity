@@ -919,6 +919,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4091793614188370325, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9961947
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091793614188370325, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.08715578
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091793614188370325, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432496562188015596, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: m_Name
+      value: HandCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432496562188015596, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002403761289941185, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606561117452459221, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: near clip plane
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 6606561118053990166, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
         type: 3}
       propertyPath: m_LineLength
@@ -1128,6 +1163,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TrackingOriginMode
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8153070985813165536, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: m_AllowXRRendering
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 248e7f10cee0b6a418abcbe0b59ee15b, type: 3}
