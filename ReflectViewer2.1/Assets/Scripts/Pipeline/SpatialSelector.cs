@@ -16,7 +16,7 @@ namespace UnityEngine.Reflect.Viewer
 
         const int k_MaxResultsCount = 10;
 
-        static int k_ObjectsLayer => ~LayerMask.GetMask("Avatars"); // All layers but avatars, can change this
+        static int k_ObjectsLayer => ~LayerMask.GetMask("Avatars", "Ignore Raycast"); // All layers but avatars, can change this
 
         readonly RaycastHit[] m_RaycastHitCache = new RaycastHit[k_MaxResultsCount];
         readonly List<ISpatialObject> m_SpatialObjects = new List<ISpatialObject>();

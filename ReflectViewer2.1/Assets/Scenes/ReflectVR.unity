@@ -919,6 +919,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6606561118053990164, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: m_RaycastMask.m_Bits
+      value: 3221683571
+      objectReference: {fileID: 0}
     - target: {fileID: 6606561118053990166, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
         type: 3}
       propertyPath: m_ValidColorGradient.key0.b
