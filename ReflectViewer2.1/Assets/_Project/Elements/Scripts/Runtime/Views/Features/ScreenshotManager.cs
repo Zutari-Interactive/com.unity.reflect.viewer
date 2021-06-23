@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class ScreenshotManager : MonoBehaviour
 {
@@ -11,8 +12,7 @@ public class ScreenshotManager : MonoBehaviour
     private Canvas canvas;
     private bool vrMode;
     private int counter = 0;
-
-    private RenderTexture origRT;
+    private bool grab;
 
     public void CreateScreenshot(Canvas c, bool hideUI, bool mode, Camera cam)
     {
@@ -62,8 +62,10 @@ public class ScreenshotManager : MonoBehaviour
         
         if (vrMode)
         {
-            yield return new WaitForEndOfFrame();
-            VRScreenshot();
+            RenderPipelineManager.endCameraRendering += OnEndCamerRenedering;
+            grab = true;
+            //yield return new WaitForEndOfFrame();
+            //VRScreenshot();
         }
         else
         {
@@ -82,6 +84,16 @@ public class ScreenshotManager : MonoBehaviour
         }
         
     }
+
+    private void OnEndCamerRenedering(ScriptableRenderContext arg1, Camera arg2)
+    {
+        if (grab)
+        {
+            Debug.Log("using Camera = " + arg2.name);
+            VRScreenshot();
+        }
+    }
+
     private string SaveFileBrowser(string savePath)
     {
        return FileBrowser.SaveFilePanel("Select Save Location", savePath, "untitled", "png");
@@ -104,7 +116,13 @@ public class ScreenshotManager : MonoBehaviour
         byte[] bytes = renderResult.EncodeToPNG();
         File.WriteAllBytes(path, bytes);
 
+        grab = false;
         Debug.Log("VR screenshot complete");
+    }
+
+    private void OnDisable()
+    {
+        RenderPipelineManager.endCameraRendering -= OnEndCamerRenedering;
     }
 
 }
