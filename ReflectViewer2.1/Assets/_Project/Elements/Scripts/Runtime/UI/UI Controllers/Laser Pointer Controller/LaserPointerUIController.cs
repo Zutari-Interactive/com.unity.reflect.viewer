@@ -59,7 +59,7 @@ namespace Elements.UI.Controllers
             Dispatcher.Dispatch(Payload<ActionTypes>.From(ActionTypes.SetObjectPicker, m_ObjectPicker));
             if (NetworkingManager.Singleton.ConnectedClients.TryGetValue(NetworkingManager.Singleton.LocalClientId, out var networkedClient))
             {
-                Pointer3D pointer3D = networkedClient.PlayerObject.GetComponent<Pointer3D>();
+                Pointer3D pointer3D = Camera.main.GetComponent<Pointer3D>();
                 if (pointer3D)
                 {
                     pointer3D.UsePointer3D(m_ObjectPicker);
