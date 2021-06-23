@@ -6,8 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Project/Elements/Resources/Scenes/Test/pointer3d-scene.unity
-    guid: d3b72cf4ebc51e74daa0ce1ff349c0c2
+    path: Assets/_Project/Elements/Resources/Scenes/Reflect/Reflect-dev.unity
+    guid: b9e13bdf7fbf08f4a8527c42cabfbab5
+  - enabled: 1
+    path: Assets/_Project/Elements/Resources/Scenes/Reflect/Reflect.unity
+    guid: 081d21ab9917afe4dbfcca337e585f2d
+  - enabled: 1
+    path: Assets/_Project/Elements/Resources/Scenes/Reflect/ReflectAR.unity
+    guid: 486ceecf125f6a3439cb0dd627447113
+  - enabled: 1
+    path: Assets/_Project/Elements/Resources/Scenes/Reflect/ReflectVR.unity
+    guid: 44797a00a353d6246afeea298e9ff12f
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: f8595a9732671fb43ac25fb91ddfd1ee,
       type: 2}
