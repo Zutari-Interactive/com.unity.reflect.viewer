@@ -19,8 +19,9 @@ public class ScreenshotManager : MonoBehaviour
         vrMode = mode;
         canvas = c;
 
-        if(screenshotCam == null && vrMode)
+        if(screenshotCam == null)
         {
+            Debug.Log("assign camera");
             screenshotCam = cam;
         }
 
@@ -82,7 +83,7 @@ public class ScreenshotManager : MonoBehaviour
             canvas.enabled = true;
             Debug.Log("taken screenshot");
         }
-        
+        yield return null;
     }
 
     private void OnEndCamerRenedering(ScriptableRenderContext arg1, Camera arg2)

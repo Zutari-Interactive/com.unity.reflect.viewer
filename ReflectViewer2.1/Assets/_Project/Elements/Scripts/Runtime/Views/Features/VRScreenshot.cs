@@ -3,23 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class VRScreenshot : RenderPipeline
+public class VRScreenshot : MonoBehaviour
 {
-    public VRScreenshot(Camera cam)
-    {
-        ScriptableRenderContext context = new ScriptableRenderContext();
-        Camera[] cams = new Camera[]
-        {
-            cam
-        };
-        Render(context, cams);
-    }
+    public Canvas canvas;
+    public Camera cam;
+    public bool vrMode;
+    public ScreenshotManager manager;
 
-    protected override void Render(ScriptableRenderContext context, Camera[] cameras)
+    private void Update()
     {
-        foreach (var c in cameras)
+        if (Input.GetKeyUp(KeyCode.Space))
         {
-            EndCameraRendering(context, c);
+            manager.CreateScreenshot(canvas, true, vrMode, cam);
         }
     }
+
 }
