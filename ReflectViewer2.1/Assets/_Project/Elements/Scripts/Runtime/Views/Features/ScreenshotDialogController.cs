@@ -32,7 +32,8 @@ public class ScreenshotDialogController : MonoBehaviour
     ToolState m_CurrentToolState;
 
     public Canvas uiRootCanvas;
-    public GameObject viewerWindow;
+    public GameObject standardView;
+    public GameObject VRView;
     public bool availableInVR;
 
     private Camera handCamera;
@@ -51,27 +52,26 @@ public class ScreenshotDialogController : MonoBehaviour
     {
         if (UIStateManager.current.stateData.VREnable)
         {
-            VRSelector vrSelector = FindObjectOfType<VRSelector>();
+            GameObject go = GameObject.FindGameObjectWithTag("VRScreenshotCam");
 
-            if (vrSelector == null)
-            {
-                Debug.LogError("no VR Selector on right hand found for VR screenshot tool");
-                return;
-            }
-
-            handCamera = vrSelector.gameObject.GetComponentInChildren<Camera>();
+            if (go != null)
+                handCamera = go.GetComponent<Camera>();
+            else
+                Debug.Log("no hand Camera found");
 
             if (handCamera == null)
             {
                 Debug.LogError("no camera found for VR screenshot tool");
                 return;
             }
-            viewerWindow.SetActive(true);
+            VRView.SetActive(true);
+            standardView.SetActive(false);
             ActivateCamera(true);
         }
         else
         {
-            viewerWindow.SetActive(false);
+            standardView.SetActive(true);
+            VRView.SetActive(false);
             ActivateCamera(false);
         }
         

@@ -944,6 +944,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4432496562188015596, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
+        type: 3}
+      propertyPath: m_TagString
+      value: VRScreenshotCam
+      objectReference: {fileID: 0}
     - target: {fileID: 5002403761289941185, guid: 248e7f10cee0b6a418abcbe0b59ee15b,
         type: 3}
       propertyPath: m_Enabled

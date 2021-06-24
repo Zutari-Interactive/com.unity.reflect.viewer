@@ -46,10 +46,8 @@ public class ScreenshotManager : MonoBehaviour
 
         if (hideUI)
         {
-
             StartCoroutine(SaveImage());
             Debug.Log("finished awaiting screenshot");
-
         }
         else
         {
@@ -90,7 +88,6 @@ public class ScreenshotManager : MonoBehaviour
     {
         if (grab)
         {
-            Debug.Log("using Camera = " + arg2.name);
             VRScreenshot();
         }
     }
@@ -102,21 +99,23 @@ public class ScreenshotManager : MonoBehaviour
 
     private void VRScreenshot()
     {
-        Debug.Log("starting VR screenshot");
         counter++;
-
+        Debug.Log("Taking VR Screenshot");
         var filename = "VR_screenshot_0" + counter.ToString() + ".png";
         var path = Application.dataPath + "/" + filename;
-        Debug.Log(path);
+
+        RenderTexture crt = RenderTexture.active;
+        Texture2D renderResult = new Texture2D(1920, 1080, TextureFormat.RGB24, false);
 
         RenderTexture rt = screenshotCam.targetTexture;
-
-        Texture2D renderResult = new Texture2D(rt.width, rt.height, TextureFormat.RGB24, false);
-        Rect rect = new Rect(0, 0, rt.width, rt.height);
+        RenderTexture.active = rt;
+        
+        Rect rect = new Rect(0, 0, 1920, 1080);
         renderResult.ReadPixels(rect, 0, 0);
         byte[] bytes = renderResult.EncodeToPNG();
         File.WriteAllBytes(path, bytes);
 
+        RenderTexture.active = crt;
         grab = false;
         Debug.Log("VR screenshot complete");
     }
