@@ -8,11 +8,17 @@ using UnityEngine.Rendering;
 
 public class ScreenshotManager : MonoBehaviour
 {
+    public GameObject confirmText;
     private Camera screenshotCam;
     private Canvas canvas;
     private bool vrMode;
     private int counter = 0;
     private bool grab;
+
+    private void OnEnable()
+    {
+        confirmText.SetActive(false);
+    }
 
     public void CreateScreenshot(Canvas c, bool hideUI, bool mode, Camera cam)
     {
@@ -63,8 +69,6 @@ public class ScreenshotManager : MonoBehaviour
         {
             RenderPipelineManager.endCameraRendering += OnEndCamerRenedering;
             grab = true;
-            //yield return new WaitForEndOfFrame();
-            //VRScreenshot();
         }
         else
         {
@@ -118,6 +122,13 @@ public class ScreenshotManager : MonoBehaviour
         RenderTexture.active = crt;
         grab = false;
         Debug.Log("VR screenshot complete");
+        confirmText.SetActive(true);
+        Invoke("NotificationTurnOff", 1f);
+    }
+
+    private void NotificationTurnOff()
+    {
+        confirmText.SetActive(false);
     }
 
     private void OnDisable()

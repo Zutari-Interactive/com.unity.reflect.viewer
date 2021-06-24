@@ -17,7 +17,11 @@ public class ScreenshotDialogController : MonoBehaviour
     [SerializeField]
     ToolButton takeScreenshotButton;
     [SerializeField]
+    ToolButton takeVRScreenshotButton;
+    [SerializeField]
     ToolButton closeDialogButton;
+    [SerializeField]
+    ToolButton closeVRDialogButton;
     [SerializeField]
     SlideToggle hideUIToggle;
 
@@ -82,7 +86,9 @@ public class ScreenshotDialogController : MonoBehaviour
         screenshotButton.buttonClicked += OnScreenShotButtonClicked;
         screenshotButton.buttonLongPressed += OnScreenshotButtonLongPressed;
         takeScreenshotButton.buttonClicked += TakeScreenshot;
+        takeVRScreenshotButton.buttonClicked += TakeScreenshot;
         closeDialogButton.buttonClicked += OnScreenShotButtonClicked;
+        closeVRDialogButton.buttonClicked += OnScreenShotButtonClicked;
         hideUIToggle.onValueChanged.AddListener(ToggleUI);
 
         CheckUIToggle();
@@ -176,7 +182,9 @@ public class ScreenshotDialogController : MonoBehaviour
         screenshotButton.buttonClicked -= OnScreenShotButtonClicked;
         screenshotButton.buttonLongPressed -= OnScreenshotButtonLongPressed;
         takeScreenshotButton.buttonClicked -= TakeScreenshot;
+        takeVRScreenshotButton.buttonClicked -= TakeScreenshot;
         closeDialogButton.buttonClicked -= OnScreenShotButtonClicked;
+        closeVRDialogButton.buttonClicked += OnScreenShotButtonClicked;
         hideUIToggle.onValueChanged.RemoveListener(ToggleUI);
     }
 }
