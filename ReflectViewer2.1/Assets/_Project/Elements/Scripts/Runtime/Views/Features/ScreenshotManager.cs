@@ -67,7 +67,7 @@ public class ScreenshotManager : MonoBehaviour
         
         if (vrMode)
         {
-            RenderPipelineManager.endCameraRendering += OnEndCamerRenedering;
+            RenderPipelineManager.endCameraRendering += OnEndCamerRendering;
             grab = true;
         }
         else
@@ -88,7 +88,7 @@ public class ScreenshotManager : MonoBehaviour
         yield return null;
     }
 
-    private void OnEndCamerRenedering(ScriptableRenderContext arg1, Camera arg2)
+    private void OnEndCamerRendering(ScriptableRenderContext arg1, Camera arg2)
     {
         if (grab)
         {
@@ -116,6 +116,17 @@ public class ScreenshotManager : MonoBehaviour
         
         Rect rect = new Rect(0, 0, 1920, 1080);
         renderResult.ReadPixels(rect, 0, 0);
+
+        //TODO - move this to another thread?
+        Color[] pixels = renderResult.GetPixels();
+        for (int p = 0; p < pixels.Length; p++)
+        {
+            pixels[p] = pixels[p].gamma;
+        }
+        renderResult.SetPixels(pixels);
+
+        renderResult.Apply();
+
         byte[] bytes = renderResult.EncodeToPNG();
         File.WriteAllBytes(path, bytes);
 
@@ -131,9 +142,14 @@ public class ScreenshotManager : MonoBehaviour
         confirmText.SetActive(false);
     }
 
+    //IEnumerator ChangePixelsToGamma()
+    //{
+
+    //}
+
     private void OnDisable()
     {
-        RenderPipelineManager.endCameraRendering -= OnEndCamerRenedering;
+        RenderPipelineManager.endCameraRendering -= OnEndCamerRendering;
     }
 
 }
