@@ -8,6 +8,7 @@ TagManager:
   - MiniWorldCamera
   - ShowInMiniWorld
   - Dude
+  - VRScreenshotCam
   layers:
   - Default
   - TransparentFX
