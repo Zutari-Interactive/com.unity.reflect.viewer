@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Unity.Reflect.Viewer.UI;
 using Unity.TouchFramework;
 using UnityEngine;
+using UnityEngine.Reflect.Viewer;
 using UnityEngine.XR.Interaction.Toolkit;
 
 [RequireComponent(typeof(DialogWindow))]
@@ -16,7 +17,11 @@ public class ScreenshotDialogController : MonoBehaviour
     [SerializeField]
     ToolButton takeScreenshotButton;
     [SerializeField]
+    ToolButton takeVRScreenshotButton;
+    [SerializeField]
     ToolButton closeDialogButton;
+    [SerializeField]
+    ToolButton closeVRDialogButton;
     [SerializeField]
     SlideToggle hideUIToggle;
 
@@ -31,7 +36,8 @@ public class ScreenshotDialogController : MonoBehaviour
     ToolState m_CurrentToolState;
 
     public Canvas uiRootCanvas;
-    public GameObject viewerWindow;
+    public GameObject standardView;
+    public GameObject VRView;
     public bool availableInVR;
 
     private Camera handCamera;
@@ -43,31 +49,33 @@ public class ScreenshotDialogController : MonoBehaviour
         UIStateManager.stateChanged += OnStateDataChanged;
         UIStateManager.debugStateChanged += OnDebugStateDataChanged;
         m_DialogWindow = GetComponent<DialogWindow>();
-
-        
-        
     }
 
     //TODO - if not available in VR, hide the screenshot button in left UI cluster 
     private void SetupVRScreenshotCam()
     {
-        
-        XRRig rig = FindObjectOfType<XRRig>();
-        if (rig != null)
+        if (UIStateManager.current.stateData.VREnable)
         {
-            handCamera = GetComponentInChildren<Camera>();
+            GameObject go = GameObject.FindGameObjectWithTag("VRScreenshotCam");
+
+            if (go != null)
+                handCamera = go.GetComponent<Camera>();
+            else
+                Debug.Log("no hand Camera found");
 
             if (handCamera == null)
             {
                 Debug.LogError("no camera found for VR screenshot tool");
                 return;
             }
-            viewerWindow.SetActive(true);
+            VRView.SetActive(true);
+            standardView.SetActive(false);
             ActivateCamera(true);
         }
         else
         {
-            viewerWindow.SetActive(false);
+            standardView.SetActive(true);
+            VRView.SetActive(false);
             ActivateCamera(false);
         }
         
@@ -78,7 +86,9 @@ public class ScreenshotDialogController : MonoBehaviour
         screenshotButton.buttonClicked += OnScreenShotButtonClicked;
         screenshotButton.buttonLongPressed += OnScreenshotButtonLongPressed;
         takeScreenshotButton.buttonClicked += TakeScreenshot;
+        takeVRScreenshotButton.buttonClicked += TakeScreenshot;
         closeDialogButton.buttonClicked += OnScreenShotButtonClicked;
+        closeVRDialogButton.buttonClicked += OnScreenShotButtonClicked;
         hideUIToggle.onValueChanged.AddListener(ToggleUI);
 
         CheckUIToggle();
@@ -105,7 +115,7 @@ public class ScreenshotDialogController : MonoBehaviour
             var dialogType = m_DialogWindow.open ? DialogType.None : DialogType.Screenshot;
             Dispatcher.Dispatch(Payload<ActionTypes>.From(ActionTypes.OpenDialog, dialogType));
 
-            if(availableInVR)
+            if (availableInVR)
                 SetupVRScreenshotCam();
             
         }
@@ -156,7 +166,7 @@ public class ScreenshotDialogController : MonoBehaviour
     private void TakeScreenshot()
     {
         ScreenshotManager ss = GetComponent<ScreenshotManager>();
-        ss.CreateScreenshot(uiRootCanvas, hideUI);
+        ss.CreateScreenshot(uiRootCanvas, hideUI, UIStateManager.current.stateData.VREnable, handCamera);
     }
 
     public void ActivateCamera(bool value)
@@ -172,7 +182,9 @@ public class ScreenshotDialogController : MonoBehaviour
         screenshotButton.buttonClicked -= OnScreenShotButtonClicked;
         screenshotButton.buttonLongPressed -= OnScreenshotButtonLongPressed;
         takeScreenshotButton.buttonClicked -= TakeScreenshot;
+        takeVRScreenshotButton.buttonClicked -= TakeScreenshot;
         closeDialogButton.buttonClicked -= OnScreenShotButtonClicked;
+        closeVRDialogButton.buttonClicked += OnScreenShotButtonClicked;
         hideUIToggle.onValueChanged.RemoveListener(ToggleUI);
     }
 }

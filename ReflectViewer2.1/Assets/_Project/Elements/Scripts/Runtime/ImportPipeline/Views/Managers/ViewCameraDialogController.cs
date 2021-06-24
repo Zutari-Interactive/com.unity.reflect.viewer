@@ -154,7 +154,7 @@ namespace Unity.Reflect.Viewer.UI
         private void TakeScreenshot()
         {
             ScreenshotManager ss = GetComponentInChildren<ScreenshotManager>();
-            ss.CreateScreenshot(uiRootCanvas, hideUI);
+            ss.CreateScreenshot(uiRootCanvas, hideUI, UIStateManager.current.stateData.VREnable);
         }
 
         
