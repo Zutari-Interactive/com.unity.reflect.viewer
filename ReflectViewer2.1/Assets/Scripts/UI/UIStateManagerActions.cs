@@ -27,9 +27,10 @@ namespace Unity.Reflect.Viewer.UI
     /// Partial Class with Actions and Dispatcher
     /// </summary>
     public partial class UIStateManager : MonoBehaviour,
-        IStore<UIStateData>, IStore<UISessionStateData>, IStore<UIProjectStateData>, IStore<UIARStateData>,
-        IStore<UIDebugStateData>, IStore<ApplicationStateData>, IStore<RoomConnectionStateData>,IStore<ExternalToolStateData>, IStore<DragStateData>,
-        IUsesSessionControl, IUsesPointCloud, IUsesPlaneFinding
+                                          IStore<UIStateData>, IStore<UISessionStateData>, IStore<UIProjectStateData>, IStore<UIARStateData>,
+                                          IStore<UIDebugStateData>, IStore<ApplicationStateData>, IStore<RoomConnectionStateData>,
+                                          IStore<ExternalToolStateData>, IStore<DragStateData>,
+                                          IUsesSessionControl, IUsesPointCloud, IUsesPlaneFinding
     {
         //Returns whether the store has changed during the most recent dispatch
         bool hasChanged;
@@ -105,22 +106,34 @@ namespace Unity.Reflect.Viewer.UI
         /// <summary>
         /// State of the Application
         /// </summary>
-        public ApplicationStateData applicationStateData { get => m_ApplicationStateData; }
+        public ApplicationStateData applicationStateData
+        {
+            get => m_ApplicationStateData;
+        }
 
         /// <summary>
         /// State of the Application
         /// </summary>
-        public RoomConnectionStateData roomConnectionStateData { get => m_RoomConnectionStateData; }
+        public RoomConnectionStateData roomConnectionStateData
+        {
+            get => m_RoomConnectionStateData;
+        }
 
         /// <summary>
         /// State of the Tool
         /// </summary>
-        public ExternalToolStateData externalToolStateData { get => m_ExternalToolStateData; }
+        public ExternalToolStateData externalToolStateData
+        {
+            get => m_ExternalToolStateData;
+        }
 
         /// <summary>
         /// State of Drag
         /// </summary>
-        public DragStateData dragStateData { get => m_DragStateData; }
+        public DragStateData dragStateData
+        {
+            get => m_DragStateData;
+        }
 
         UIStateData IStore<UIStateData>.Data => m_UIStateData;
 
@@ -185,18 +198,18 @@ namespace Unity.Reflect.Viewer.UI
         /// <summary>
         /// Event signaled when the state of a Tool has changed
         /// </summary>
-        public static event Action<ExternalToolStateData> externalToolChanged = delegate {};
+        public static event Action<ExternalToolStateData> externalToolChanged = delegate { };
 
         /// <summary>
         /// Event signaled when the Login Setting has changed
         /// </summary>
         ///
-        public static event Action loginSettingChanged = delegate {};
+        public static event Action loginSettingChanged = delegate { };
 
         /// <summary>
         /// Event signaled when the state of Drag has changed
         /// </summary>
-        public static event Action<DragStateData> dragStateChanged = delegate {};
+        public static event Action<DragStateData> dragStateChanged = delegate { };
 
         void AwakeActions()
         {
@@ -271,7 +284,7 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.Logout:
                 {
-                    if(m_WalkStateData.walkEnabled)
+                    if (m_WalkStateData.walkEnabled)
                         m_WalkStateData.instruction.Cancel();
 
                     m_UISessionStateData.sessionState.loggedState = LoginState.LoggingOut;
@@ -285,19 +298,19 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.OpenURL:
                 {
-                    Application.OpenURL((string)payload.Data);
+                    Application.OpenURL((string) payload.Data);
                     break;
                 }
                 case ActionTypes.SetToolState:
                 {
-                    var toolState = (ToolState)payload.Data;
+                    var toolState = (ToolState) payload.Data;
                     m_UIStateData.toolState = toolState;
                     stateChanged?.Invoke(m_UIStateData);
                     break;
                 }
                 case ActionTypes.OpenDialog:
                 {
-                    var dialogType = (DialogType)payload.Data;
+                    var dialogType = (DialogType) payload.Data;
                     m_UIStateData.activeDialog = dialogType;
                     m_UIStateData.activeSubDialog = DialogType.None;
                     stateChanged?.Invoke(m_UIStateData);
@@ -305,21 +318,21 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.OpenSubDialog:
                 {
-                    var dialogType = (DialogType)payload.Data;
+                    var dialogType = (DialogType) payload.Data;
                     m_UIStateData.activeSubDialog = dialogType;
                     stateChanged?.Invoke(m_UIStateData);
                     break;
                 }
                 case ActionTypes.SetProgressIndicator:
                 {
-                    var progressIndicatorData = (ProgressData)payload.Data;
+                    var progressIndicatorData = (ProgressData) payload.Data;
                     m_UIStateData.progressData = progressIndicatorData;
                     stateChanged?.Invoke(m_UIStateData);
                     break;
                 }
                 case ActionTypes.SetSync:
                 {
-                    var enabled = (bool)payload.Data;
+                    var enabled = (bool) payload.Data;
                     m_ReflectPipeline.SetSync(enabled);
                     m_UIStateData.syncEnabled = enabled;
                     stateChanged?.Invoke(m_UIStateData);
@@ -327,28 +340,28 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.SetActiveToolbar:
                 {
-                    var toolbarType = (ToolbarType)payload.Data;
+                    var toolbarType = (ToolbarType) payload.Data;
                     m_UIStateData.activeToolbar = toolbarType;
                     stateChanged?.Invoke(m_UIStateData);
                     break;
                 }
                 case ActionTypes.OpenOptionDialog:
                 {
-                    var optionDialogType = (OptionDialogType)payload.Data;
+                    var optionDialogType = (OptionDialogType) payload.Data;
                     m_UIStateData.activeOptionDialog = optionDialogType;
                     stateChanged?.Invoke(m_UIStateData);
                     break;
                 }
                 case ActionTypes.SetProjectSortMethod:
                 {
-                    var sortData = (ProjectListSortData)payload.Data;
+                    var sortData = (ProjectListSortData) payload.Data;
                     m_UIProjectStateData.projectSortData = sortData;
                     projectStateChanged?.Invoke(m_UIProjectStateData);
                     break;
                 }
                 case ActionTypes.SetOptionProject:
                 {
-                    var project = (Project)payload.Data;
+                    var project = (Project) payload.Data;
                     m_UIStateData.selectedProjectOption = project;
                     m_UIStateData.projectOptionIndex = 0;
                     stateChanged?.Invoke(m_UIStateData);
@@ -366,33 +379,33 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.SetDialogMode:
                 {
-                    var dialogMode = (DialogMode)payload.Data;
+                    var dialogMode = (DialogMode) payload.Data;
                     m_UIStateData.dialogMode = dialogMode;
                     stateChanged?.Invoke(m_UIStateData);
                     break;
                 }
                 case ActionTypes.SetHelpModeID:
                 {
-                    var activeEntry = (HelpModeEntryID)payload.Data;
+                    var activeEntry = (HelpModeEntryID) payload.Data;
                     m_UIStateData.helpModeEntryId = activeEntry;
                     stateChanged?.Invoke(m_UIStateData);
                     break;
                 }
                 case ActionTypes.SetStatusMessage:
                 {
-                    var message = (string)payload.Data;
+                    var message = (string) payload.Data;
                     m_MessageManager.SetStatusMessage(message);
                     break;
                 }
                 case ActionTypes.SetStatusWithType:
                 {
-                    var messageData = (StatusMessageData)payload.Data;
+                    var messageData = (StatusMessageData) payload.Data;
                     m_MessageManager.SetStatusMessage(messageData.text, messageData.type);
                     break;
                 }
                 case ActionTypes.SetStatusInstructionMode:
                 {
-                    var mode = (bool)payload.Data;
+                    var mode = (bool) payload.Data;
                     m_MessageManager.SetInstructionMode(mode);
                     break;
                 }
@@ -403,7 +416,7 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.SetObjectPicker:
                 {
-                    SpatialSelector picker = (SpatialSelector)payload.Data;
+                    SpatialSelector picker = (SpatialSelector) payload.Data;
                     picker.SpatialPicker = m_SpatialFilter.SpatialPicker;
                     picker.WorldRoot = m_RootNode.transform;
                     m_UIProjectStateData.objectPicker = picker;
@@ -412,7 +425,7 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.OpenProject:
                 {
-                    UIProjectStateData projectData = (UIProjectStateData)payload.Data;
+                    UIProjectStateData projectData = (UIProjectStateData) payload.Data;
                     OpenProject(projectData.activeProject);
                     break;
                 }
@@ -423,7 +436,7 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.DownloadProject:
                 {
-                    var project = (Project)payload.Data;
+                    var project = (Project) payload.Data;
                     ReflectPipelineFactory.DownloadProject(project);
 
                     m_UIStateData.progressData.progressState = ProgressData.ProgressState.PendingIndeterminate;
@@ -432,7 +445,7 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.RemoveProject:
                 {
-                    var project = (Project)payload.Data;
+                    var project = (Project) payload.Data;
                     ReflectPipelineFactory.DeleteProjectLocally(project);
 
                     m_UIStateData.progressData.progressState = ProgressData.ProgressState.PendingIndeterminate;
@@ -441,7 +454,7 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.SetVisibleFilter:
                 {
-                    var filterItemInfo = (FilterItemInfo)payload.Data;
+                    var filterItemInfo = (FilterItemInfo) payload.Data;
                     m_MetadataFilter?.processor.SetVisibility(filterItemInfo.groupKey, filterItemInfo.filterKey, filterItemInfo.visible);
 
                     if (m_UseExperimentalActorSystem)
@@ -462,7 +475,7 @@ namespace Unity.Reflect.Viewer.UI
 
                 case ActionTypes.SetHighlightFilter:
                 {
-                    var highlightFilterInfo = (HighlightFilterInfo)payload.Data;
+                    var highlightFilterInfo = (HighlightFilterInfo) payload.Data;
 
                     if (!m_UseExperimentalActorSystem)
                     {
@@ -482,39 +495,43 @@ namespace Unity.Reflect.Viewer.UI
                     else
                     {
                         GetFilterItemInfos(m_UIStateData.filterGroup, filters =>
-                        {
-                            var filter = filters.FirstOrDefault(x => x.groupKey == highlightFilterInfo.groupKey && x.filterKey == highlightFilterInfo.filterKey);
-                            if (filter.groupKey == string.Empty && filter.filterKey == string.Empty ||
-                                filter.highlight)
-                            {
-                                m_UIProjectStateData.highlightFilter.groupKey = string.Empty;
-                                m_UIProjectStateData.highlightFilter.filterKey = string.Empty;
-                            }
-                            else
-                                m_UIProjectStateData.highlightFilter = highlightFilterInfo;
+                                                                      {
+                                                                          var filter =
+                                                                              filters.FirstOrDefault(x =>
+                                                                                  x.groupKey  == highlightFilterInfo.groupKey &&
+                                                                                  x.filterKey == highlightFilterInfo.filterKey);
+                                                                          if (filter.groupKey == string.Empty && filter.filterKey == string.Empty ||
+                                                                              filter.highlight)
+                                                                          {
+                                                                              m_UIProjectStateData.highlightFilter.groupKey = string.Empty;
+                                                                              m_UIProjectStateData.highlightFilter.filterKey = string.Empty;
+                                                                          }
+                                                                          else
+                                                                              m_UIProjectStateData.highlightFilter = highlightFilterInfo;
 
-                            m_Bridge.SetHighlightFilter(highlightFilterInfo.groupKey, highlightFilterInfo.filterKey);
-                            projectStateChanged?.Invoke(m_UIProjectStateData);
-                        });
+                                                                          m_Bridge.SetHighlightFilter(highlightFilterInfo.groupKey,
+                                                                              highlightFilterInfo.filterKey);
+                                                                          projectStateChanged?.Invoke(m_UIProjectStateData);
+                                                                      });
                     }
 
                     break;
                 }
                 case ActionTypes.SetFilterGroup:
                 {
-                    m_UIStateData.filterGroup = (string)payload.Data;
+                    m_UIStateData.filterGroup = (string) payload.Data;
                     stateChanged?.Invoke(m_UIStateData);
 
                     GetFilterItemInfos(m_UIStateData.filterGroup, filters =>
-                    {
-                        m_UIProjectStateData.filterItemInfos = filters;
-                        projectStateChanged?.Invoke(m_UIProjectStateData);
-                    });
+                                                                  {
+                                                                      m_UIProjectStateData.filterItemInfos = filters;
+                                                                      projectStateChanged?.Invoke(m_UIProjectStateData);
+                                                                  });
                     break;
                 }
                 case ActionTypes.SetFilterSearch:
                 {
-                    var searchString = (string)payload.Data;
+                    var searchString = (string) payload.Data;
 
                     m_UIProjectStateData.filterSearchString = searchString;
                     projectStateChanged?.Invoke(m_UIProjectStateData);
@@ -522,7 +539,7 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.SetViewOption:
                 {
-                    var sceneOptionData = (SceneOptionData)payload.Data;
+                    var sceneOptionData = (SceneOptionData) payload.Data;
 
                     if (sceneOptionData.enableTexture != m_UIStateData.sceneOptionData.enableTexture)
                     {
@@ -545,7 +562,8 @@ namespace Unity.Reflect.Viewer.UI
                     {
                         var settings = m_Bridge.GetFirstMatchingSettings<LightActor.Settings>();
                         if (settings != null)
-                            m_Bridge.UpdateSetting<LightActor.Settings>(settings.Id, nameof(LightActor.Settings.EnableLights), sceneOptionData.enableLightData);
+                            m_Bridge.UpdateSetting<LightActor.Settings>(settings.Id, nameof(LightActor.Settings.EnableLights),
+                                                                        sceneOptionData.enableLightData);
                     }
 
                     m_UIStateData.sceneOptionData = sceneOptionData;
@@ -554,7 +572,7 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.SetSkybox:
                 {
-                    var sceneOptionData = (SceneOptionData)payload.Data;
+                    var sceneOptionData = (SceneOptionData) payload.Data;
 
                     // set skybox option
                     // sceneOptionData.skyboxData
@@ -565,7 +583,7 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.SetClimateOption:
                 {
-                    var sceneOptionData = (SceneOptionData)payload.Data;
+                    var sceneOptionData = (SceneOptionData) payload.Data;
 
                     // sceneOptionData.climateSimulation;
                     // sceneOptionData.weatherType;
@@ -577,13 +595,13 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.SetSunStudy:
                 {
-                    var sunStudyData = (SunStudyData)payload.Data;
+                    var sunStudyData = (SunStudyData) payload.Data;
                     sunStudyData = SunStudyData.Format(sunStudyData);
                     SunStudyData.SetSunStudyData(m_SunStudy, sunStudyData);
                     m_UIStateData.sunStudyData = sunStudyData;
 
                     var sunStatusMessage = SunStudyData.GetSunStatusMessage(m_UIStateData.activeToolbar, m_UIStateData.sunStudyData);
-                    if(!string.IsNullOrEmpty(sunStatusMessage))
+                    if (!string.IsNullOrEmpty(sunStatusMessage))
                         m_MessageManager.SetStatusMessage(sunStatusMessage);
 
                     stateChanged?.Invoke(m_UIStateData);
@@ -591,14 +609,14 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.SetSunStudyMode:
                 {
-                    var isStatic = (bool)payload.Data;
+                    var isStatic = (bool) payload.Data;
                     m_UIStateData.sunStudyData.isStaticMode = isStatic;
                     stateChanged?.Invoke(m_UIStateData);
                     break;
                 }
                 case ActionTypes.SetCameraOption:
                 {
-                    var cameraOptionData = (CameraOptionData)payload.Data;
+                    var cameraOptionData = (CameraOptionData) payload.Data;
                     if (m_UIStateData.cameraOptionData.cameraProjectionType != cameraOptionData.cameraProjectionType)
                     {
                         // set camera projection Type
@@ -618,7 +636,7 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.SetJoystickOption:
                 {
-                    var cameraOptionData = (CameraOptionData)payload.Data;
+                    var cameraOptionData = (CameraOptionData) payload.Data;
 
                     // set Enable Joystick
                     // cameraOptionData.enableJoysticks;
@@ -632,7 +650,7 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.SetNavigationOption:
                 {
-                    var cameraOptionData = (CameraOptionData)payload.Data;
+                    var cameraOptionData = (CameraOptionData) payload.Data;
 
                     // cameraOptionData.autoNavigationSpeed;
                     // cameraOptionData.navigationSpeed;
@@ -640,9 +658,10 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.SetNavigationState:
                 {
-                    var navigationState = (NavigationState)payload.Data;
+                    var navigationState = (NavigationState) payload.Data;
 
-                    if (navigationState.navigationMode != m_UIStateData.navigationState.navigationMode && navigationState.navigationMode == NavigationMode.AR)
+                    if (navigationState.navigationMode != m_UIStateData.navigationState.navigationMode &&
+                        navigationState.navigationMode == NavigationMode.AR)
                     {
                         // Reset instruction UI Step when start AR mode
                         m_ARStateData.instructionUIStep = 0;
@@ -664,7 +683,8 @@ namespace Unity.Reflect.Viewer.UI
                         else if (m_Bridge.IsInitialized)
                         {
                             var settings = m_Bridge.GetFirstMatchingSettings<BoundingBoxActor.Settings>();
-                            m_Bridge.UpdateSetting<BoundingBoxActor.Settings>(settings.Id, nameof(BoundingBoxActor.Settings.DisplayOnlyBoundingBoxes), false);
+                            m_Bridge.UpdateSetting<BoundingBoxActor.Settings>(settings.Id, nameof(BoundingBoxActor.Settings.DisplayOnlyBoundingBoxes),
+                                                                              false);
                         }
                     }
 
@@ -674,7 +694,7 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.SelectObjects:
                 {
-                    var selectionInfo = (ObjectSelectionInfo)payload.Data;
+                    var selectionInfo = (ObjectSelectionInfo) payload.Data;
                     m_UIProjectStateData.objectSelectionInfo = selectionInfo;
                     SetNetworkSelected(selectionInfo);
                     projectStateChanged?.Invoke(m_UIProjectStateData);
@@ -682,13 +702,13 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.SetBimGroup:
                 {
-                    m_UIStateData.bimGroup = (string)payload.Data;
+                    m_UIStateData.bimGroup = (string) payload.Data;
                     stateChanged?.Invoke(m_UIStateData);
                     break;
                 }
                 case ActionTypes.SetBimSearch:
                 {
-                    var searchString = (string)payload.Data;
+                    var searchString = (string) payload.Data;
 
                     m_UIProjectStateData.bimSearchString = searchString;
                     projectStateChanged?.Invoke(m_UIProjectStateData);
@@ -700,14 +720,14 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.SetLandingScreenFilter:
                 {
-                    var filterData = (ProjectListFilterData)payload.Data;
+                    var filterData = (ProjectListFilterData) payload.Data;
                     m_UIStateData.landingScreenFilterData = filterData;
                     stateChanged?.Invoke(m_UIStateData);
                     break;
                 }
                 case ActionTypes.LoadScene:
                 {
-                    var name = (string)payload.Data;
+                    var name = (string) payload.Data;
                     if (!string.IsNullOrEmpty(name) && !SceneManager.GetSceneByName(name).IsValid())
                     {
                         StartCoroutine(LoadAsyncScene(name));
@@ -717,7 +737,7 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.UnloadScene:
                 {
-                    var name = (string)payload.Data;
+                    var name = (string) payload.Data;
                     if (!string.IsNullOrEmpty(name) && SceneManager.GetSceneByName(name).IsValid())
                     {
                         StartCoroutine(UnloadAsyncScene(name));
@@ -727,10 +747,11 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.SetInstructionUIState:
                 {
-                    m_ARStateData.instructionUIState = (InstructionUIState)payload.Data;
+                    m_ARStateData.instructionUIState = (InstructionUIState) payload.Data;
                     arStateChanged?.Invoke(m_ARStateData);
 
-                    if (m_ARStateData.instructionUIState == InstructionUIState.Completed && m_UIStateData.progressData.progressState == ProgressData.ProgressState.NoPendingRequest)
+                    if (m_ARStateData.instructionUIState         == InstructionUIState.Completed &&
+                        m_UIStateData.progressData.progressState == ProgressData.ProgressState.NoPendingRequest)
                     {
                         // This has to be delayed because the renderers are
                         // not activated instantly after the instruction is complete
@@ -741,7 +762,7 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.SetInstructionUI:
                 {
-                    m_ARStateData.currentInstructionUI = (IInstructionUI)payload.Data;
+                    m_ARStateData.currentInstructionUI = (IInstructionUI) payload.Data;
                     arStateChanged?.Invoke(m_ARStateData);
                     break;
                 }
@@ -756,7 +777,7 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.Teleport:
                 {
-                    m_UIProjectStateData.teleportTarget = (Vector3)payload.Data;
+                    m_UIProjectStateData.teleportTarget = (Vector3) payload.Data;
                     projectStateChanged?.Invoke(m_UIProjectStateData);
 
                     if (m_UIStateData.navigationState.navigationMode == NavigationMode.VR)
@@ -785,21 +806,21 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.SetStatsInfo:
                 {
-                    var statsInfoData = (StatsInfoData)payload.Data;
+                    var statsInfoData = (StatsInfoData) payload.Data;
                     m_UIDebugStateData.statsInfoData = statsInfoData;
                     debugStateChanged?.Invoke(m_UIDebugStateData);
                     break;
                 }
                 case ActionTypes.SetQuality:
                 {
-                    var qualityData = (QualityState)payload.Data;
+                    var qualityData = (QualityState) payload.Data;
                     m_ApplicationStateData.qualityStateData = qualityData;
                     applicationStateChanged?.Invoke(m_ApplicationStateData);
                     break;
                 }
                 case ActionTypes.ShowModel:
                 {
-                    var active = (bool)payload.Data;
+                    var active = (bool) payload.Data;
                     m_RootNode.SetActive(active);
 
                     if (active)
@@ -814,7 +835,8 @@ namespace Unity.Reflect.Viewer.UI
                         else
                         {
                             var settings = m_Bridge.GetFirstMatchingSettings<BoundingBoxActor.Settings>();
-                            m_Bridge.UpdateSetting<BoundingBoxActor.Settings>(settings.Id, nameof(BoundingBoxActor.Settings.DisplayOnlyBoundingBoxes), false);
+                            m_Bridge.UpdateSetting<BoundingBoxActor.Settings>(settings.Id, nameof(BoundingBoxActor.Settings.DisplayOnlyBoundingBoxes),
+                                                                              false);
                         }
                     }
 
@@ -822,7 +844,7 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.ShowBoundingBoxModel:
                 {
-                    var active = (bool)payload.Data;
+                    var active = (bool) payload.Data;
                     m_BoundingBoxRootNode.SetActive(active);
 
                     if (!m_UseExperimentalActorSystem)
@@ -835,18 +857,19 @@ namespace Unity.Reflect.Viewer.UI
                     else
                     {
                         var settings = m_Bridge.GetFirstMatchingSettings<BoundingBoxActor.Settings>();
-                        m_Bridge.UpdateSetting<BoundingBoxActor.Settings>(settings.Id, nameof(BoundingBoxActor.Settings.DisplayOnlyBoundingBoxes), active);
+                        m_Bridge.UpdateSetting<BoundingBoxActor.Settings>(settings.Id, nameof(BoundingBoxActor.Settings.DisplayOnlyBoundingBoxes),
+                                                                          active);
                     }
 
                     break;
                 }
                 case ActionTypes.SetModelScale:
                 {
-                    var scale = (ArchitectureScale)payload.Data;
+                    var scale = (ArchitectureScale) payload.Data;
                     m_UIStateData.modelScale = scale;
 
                     // TODO: Use Mars World Scale to scale objects
-                    float scalef = (float)m_UIStateData.modelScale;
+                    float scalef = (float) m_UIStateData.modelScale;
 
                     m_PlacementRoot.gameObject.transform.localScale = new Vector3(1.0f / scalef, 1.0f / scalef, 1.0f / scalef);
                     stateChanged?.Invoke(m_UIStateData);
@@ -854,7 +877,7 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.SetModelRotation:
                 {
-                    var rotation = (Vector3)payload.Data;
+                    var rotation = (Vector3) payload.Data;
                     m_PlacementRoot.transform.Rotate(rotation);
                     break;
                 }
@@ -868,7 +891,7 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.SetPlacementRules:
                 {
-                    var value = (PlacementRule)payload.Data;
+                    var value = (PlacementRule) payload.Data;
 
                     if (m_PlacementRules != null && value == m_ARStateData.placementStateData.placementRule)
                     {
@@ -890,8 +913,9 @@ namespace Unity.Reflect.Viewer.UI
 
                     if (value != PlacementRule.None)
                     {
-                        m_PlacementRules = Instantiate(m_PlacementRulesPrefabs[(int)value - 1], m_BoundingBoxRootNode.transform);
-                        ModuleLoaderCore.instance.GetModule<FunctionalityInjectionModule>().activeIsland.InjectFunctionalitySingle(m_PlacementRules.gameObject.GetComponent<Replicator>());
+                        m_PlacementRules = Instantiate(m_PlacementRulesPrefabs[(int) value - 1], m_BoundingBoxRootNode.transform);
+                        ModuleLoaderCore.instance.GetModule<FunctionalityInjectionModule>().activeIsland
+                                        .InjectFunctionalitySingle(m_PlacementRules.gameObject.GetComponent<Replicator>());
                         m_PlacementRules.transform.parent = null;
                         m_PlacementRules.transform.localScale = Vector3.one;
                         m_PlacementRules.SetActive(true);
@@ -902,27 +926,27 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.Cancel:
                 {
-                    var value = (bool)payload.Data;
+                    var value = (bool) payload.Data;
                     m_UIStateData.operationCancelled = value;
                     stateChanged?.Invoke(m_UIStateData);
                     break;
                 }
                 case ActionTypes.SetTheme:
                 {
-                    var value = (string)payload.Data;
+                    var value = (string) payload.Data;
                     m_UIStateData.themeName = value;
                     stateChanged?.Invoke(m_UIStateData);
                     break;
                 }
                 case ActionTypes.SetDisplay:
                 {
-                    var value = (DisplayData)payload.Data;
+                    var value = (DisplayData) payload.Data;
                     UpdateDisplayData(value);
                     break;
                 }
                 case ActionTypes.EnableAR:
                 {
-                    var value = (bool)payload.Data;
+                    var value = (bool) payload.Data;
 
                     if (value == false)
                     {
@@ -944,7 +968,7 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.EnableWalk:
                 {
-                    m_WalkStateData.walkEnabled = (bool)payload.Data;
+                    m_WalkStateData.walkEnabled = (bool) payload.Data;
                     m_WalkStateData.instructionUIState = InstructionUIState.Init;
                     m_WalkStateData.instruction ??= new WalkModeInstruction();
                     walkStateChanged?.Invoke(m_WalkStateData);
@@ -952,7 +976,7 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.EnableVR:
                 {
-                    var value = (bool)payload.Data;
+                    var value = (bool) payload.Data;
                     m_UIStateData.VREnable = value;
                     stateChanged?.Invoke(m_UIStateData);
                     // disable depth culling in VR due to depth shader incompatibility with SinglePassInstanced
@@ -970,47 +994,48 @@ namespace Unity.Reflect.Viewer.UI
                             m_Bridge.UpdateSetting<SpatialActor.Settings>(settings.Id, nameof(SpatialActor.Settings.UseDepthCulling), !value);
                         }
                     }
+
                     break;
                 }
                 case ActionTypes.SetARToolState:
                 {
-                    var value = (ARToolStateData)payload.Data;
+                    var value = (ARToolStateData) payload.Data;
                     m_ARStateData.arToolStateData = value;
                     arStateChanged?.Invoke(m_ARStateData);
                     break;
                 }
                 case ActionTypes.SetPlacementState:
                 {
-                    var value = (ARPlacementStateData)payload.Data;
+                    var value = (ARPlacementStateData) payload.Data;
                     m_ARStateData.placementStateData = value;
                     arStateChanged?.Invoke(m_ARStateData);
                     break;
                 }
                 case ActionTypes.SetARMode:
                 {
-                    var value = (ARMode)payload.Data;
+                    var value = (ARMode) payload.Data;
                     m_ARStateData.arMode = value;
                     arStateChanged?.Invoke(m_ARStateData);
                     break;
                 }
                 case ActionTypes.SetSettingsToolState:
                 {
-                    var value = (SettingsToolStateData)payload.Data;
+                    var value = (SettingsToolStateData) payload.Data;
                     m_UIStateData.settingsToolStateData = value;
                     stateChanged?.Invoke(m_UIStateData);
                     break;
                 }
                 case ActionTypes.SetDebugOptions:
                 {
-                    var value = (DebugOptionsData)payload.Data;
+                    var value = (DebugOptionsData) payload.Data;
                     m_UIDebugStateData.debugOptionsData = value;
                     debugStateChanged?.Invoke(m_UIDebugStateData);
                     break;
                 }
                 case ActionTypes.SetPrivateMode:
                 {
-                    m_UISessionStateData.sessionState.isInPrivateMode = (bool)payload.Data;
-                    if(m_UISessionStateData.sessionState.isInPrivateMode)
+                    m_UISessionStateData.sessionState.isInPrivateMode = (bool) payload.Data;
+                    if (m_UISessionStateData.sessionState.isInPrivateMode)
                     {
                         PlayerClientBridge.MatchmakerManager.LeaveRoom();
                         // We dont disconnect from the room so the player identity is kept on the matchmaker when we reconnect
@@ -1018,48 +1043,52 @@ namespace Unity.Reflect.Viewer.UI
                     }
                     else
                     {
-                        PlayerClientBridge.MatchmakerManager.Connect( m_UISessionStateData.sessionState.user.AccessToken, m_MultiplayerController.connectToLocalServer);
+                        PlayerClientBridge.MatchmakerManager.Connect(m_UISessionStateData.sessionState.user.AccessToken,
+                                                                     m_MultiplayerController.connectToLocalServer);
                         PlayerClientBridge.MatchmakerManager.MonitorRooms(sessionStateData.sessionState.rooms.Select(r => r.project.serverProjectId));
-                        if(m_UIProjectStateData.activeProject != Project.Empty)
+                        if (m_UIProjectStateData.activeProject != Project.Empty)
                         {
                             PlayerClientBridge.MatchmakerManager.JoinRoom(m_UIProjectStateData.activeProject.serverProjectId);
                         }
                     }
+
                     break;
                 }
                 case ActionTypes.FollowUser:
                 {
-                    NetworkUserData? user = (NetworkUserData?)payload.Data;
+                    NetworkUserData? user = (NetworkUserData?) payload.Data;
                     var shouldFollowThisUser = (user != null && m_UIStateData.toolState.followUserTool.userId != user.Value.matchmakerId);
-                    m_UIStateData.toolState.followUserTool.userId = shouldFollowThisUser ? user.Value.matchmakerId: null;
+                    m_UIStateData.toolState.followUserTool.userId = shouldFollowThisUser ? user.Value.matchmakerId : null;
                     m_UIStateData.toolState.followUserTool.userObject = shouldFollowThisUser ? user.Value.visualRepresentation.gameObject : null;
                     stateChanged?.Invoke(m_UIStateData);
                     break;
                 }
                 case ActionTypes.SetUserInfo:
                 {
-                    UserInfoDialogData user = (UserInfoDialogData)payload.Data;
+                    UserInfoDialogData user = (UserInfoDialogData) payload.Data;
                     m_UIStateData.SelectedUserData = user;
                     stateChanged?.Invoke(m_UIStateData);
                     break;
                 }
                 case ActionTypes.ToggleUserMicrophone:
                 {
-                    var user = (string)payload.Data;
-                    if(m_VivoxManager.IsConnected)
+                    var user = (string) payload.Data;
+                    if (m_VivoxManager.IsConnected)
                     {
                         ToggleUserMicrophone(user);
                     }
                     else
                     {
-                        m_RoomConnectionStateData.localUser.voiceStateData.isServerMuted = !m_RoomConnectionStateData.localUser.voiceStateData.isServerMuted;
+                        m_RoomConnectionStateData.localUser.voiceStateData.isServerMuted =
+                            !m_RoomConnectionStateData.localUser.voiceStateData.isServerMuted;
                         roomConnectionStateChanged?.Invoke(m_RoomConnectionStateData);
                     }
+
                     break;
                 }
                 case ActionTypes.SetSpatialPriorityWeights:
                 {
-                    var value = (Vector3)payload.Data;
+                    var value = (Vector3) payload.Data;
                     if (!m_UseExperimentalActorSystem)
                     {
                         if (m_ReflectPipeline.TryGetNode<SpatialFilterNode>(out var spatialFilterNode))
@@ -1076,11 +1105,12 @@ namespace Unity.Reflect.Viewer.UI
                         m_Bridge.UpdateSetting<SpatialActor.Settings>(settings.Id, nameof(SpatialActor.Settings.PriorityWeightDistance), value.y);
                         m_Bridge.UpdateSetting<SpatialActor.Settings>(settings.Id, nameof(SpatialActor.Settings.PriorityWeightSize), value.z);
                     }
+
                     break;
                 }
                 case ActionTypes.SetDebugBoundingBoxMaterials:
                 {
-                    var value = (bool)payload.Data;
+                    var value = (bool) payload.Data;
                     if (!m_UseExperimentalActorSystem)
                     {
                         if (m_ReflectPipeline.TryGetNode<BoundingBoxControllerNode>(out var boundingBoxControllerNode))
@@ -1091,11 +1121,12 @@ namespace Unity.Reflect.Viewer.UI
                         var settings = m_Bridge.GetFirstMatchingSettings<BoundingBoxActor.Settings>();
                         m_Bridge.UpdateSetting<BoundingBoxActor.Settings>(settings.Id, nameof(BoundingBoxActor.Settings.UseDebugMaterials), value);
                     }
+
                     break;
                 }
                 case ActionTypes.SetCulling:
                 {
-                    var value = (bool)payload.Data;
+                    var value = (bool) payload.Data;
                     if (!m_UseExperimentalActorSystem)
                     {
                         if (m_ReflectPipeline.TryGetNode<SpatialFilterNode>(out var spatialFilterNode))
@@ -1106,11 +1137,12 @@ namespace Unity.Reflect.Viewer.UI
                         var settings = m_Bridge.GetFirstMatchingSettings<SpatialActor.Settings>();
                         m_Bridge.UpdateSetting<SpatialActor.Settings>(settings.Id, nameof(SpatialActor.Settings.UseCulling), value);
                     }
+
                     break;
                 }
                 case ActionTypes.SetStaticBatching:
                 {
-                    var value = (bool)payload.Data;
+                    var value = (bool) payload.Data;
                     if (!m_UseExperimentalActorSystem)
                     {
                         if (m_ReflectPipeline.TryGetNode<BoundingBoxControllerNode>(out var boundingBoxControllerNode))
@@ -1121,18 +1153,19 @@ namespace Unity.Reflect.Viewer.UI
                         var settings = m_Bridge.GetFirstMatchingSettings<BoundingBoxActor.Settings>();
                         m_Bridge.UpdateSetting<BoundingBoxActor.Settings>(settings.Id, nameof(BoundingBoxActor.Settings.UseStaticBatching), value);
                     }
+
                     break;
                 }
                 case ActionTypes.SetMeasureToolOptions:
                 {
-                    var value = (MeasureToolStateData)payload.Data;
+                    var value = (MeasureToolStateData) payload.Data;
                     m_ExternalToolStateData.measureToolStateData = value;
                     externalToolChanged?.Invoke(m_ExternalToolStateData);
                     break;
                 }
                 case ActionTypes.SetLoginSetting:
                 {
-                    var value = (EnvironmentInfo)payload.Data;
+                    var value = (EnvironmentInfo) payload.Data;
                     LocaleUtils.SaveEnvironmentInfo(value);
                     UnityEngine.Reflect.ProjectServer.Cleanup();
                     UnityEngine.Reflect.ProjectServer.Init();
@@ -1149,21 +1182,21 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.BeginDrag:
                 {
-                    var value = (DragStateData)payload.Data;
+                    var value = (DragStateData) payload.Data;
                     m_DragStateData = value;
                     dragStateChanged?.Invoke(m_DragStateData);
                     break;
                 }
                 case ActionTypes.OnDrag:
                 {
-                    var value = (DragStateData)payload.Data;
+                    var value = (DragStateData) payload.Data;
                     m_DragStateData = value;
                     dragStateChanged?.Invoke(m_DragStateData);
                     break;
                 }
                 case ActionTypes.EndDrag:
                 {
-                    var value = (DragStateData)payload.Data;
+                    var value = (DragStateData) payload.Data;
                     m_DragStateData = value;
                     dragStateChanged?.Invoke(m_DragStateData);
                     break;
@@ -1175,7 +1208,7 @@ namespace Unity.Reflect.Viewer.UI
                 }
                 case ActionTypes.SetLinkSharePermission:
                 {
-                    var value = (LinkPermission)payload.Data;
+                    var value = (LinkPermission) payload.Data;
                     m_UISessionStateData.sessionState.linkSharePermission = value;
                     sessionStateChanged?.Invoke(sessionStateData);
                     break;

@@ -65,6 +65,7 @@ namespace Unity.Reflect.Viewer.UI
         Cancel,
         ARSelect, // Select button without opening subdialog
         MeasureTool,
+        PointerTool,
         Microphone,
         LinkSharing
     }

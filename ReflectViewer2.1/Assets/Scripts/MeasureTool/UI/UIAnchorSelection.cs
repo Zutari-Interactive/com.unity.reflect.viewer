@@ -50,7 +50,9 @@ namespace UnityEngine.Reflect.MeasureTool
 
         void LabelFOV(Vector3 start, Vector3 end, Transform label)
         {
-            if (m_MainCamera != null && GeometryUtils.ClosestTimesOnTwoLines(start, end - start, m_MainCamera.transform.position, m_MainCamera.transform.forward, out var t, out _))
+            if (m_MainCamera != null &&
+                GeometryUtils.ClosestTimesOnTwoLines(start, end - start, m_MainCamera.transform.position, m_MainCamera.transform.forward, out var t,
+                                                     out _))
             {
                 var targetPositionOnLine = Vector3.Lerp(start, end, Mathf.Clamp(t, 0.1f, 0.9f));
                 label.transform.position = targetPositionOnLine; // TODO easing or non-continuous movement towards target position
@@ -70,20 +72,22 @@ namespace UnityEngine.Reflect.MeasureTool
                 {
                     // Keep measureText screen position between anchors when camera moving
                     var measureText = m_MeasureText.transform.parent.parent;
-                    var pos1 = m_MainCamera.WorldToScreenPoint(((PointAnchor)m_AnchorsList[0]).position);
-                    var pos2 = m_MainCamera.WorldToScreenPoint(((PointAnchor)m_AnchorsList[1]).position);
+                    var pos1 = m_MainCamera.WorldToScreenPoint(((PointAnchor) m_AnchorsList[0]).position);
+                    var pos2 = m_MainCamera.WorldToScreenPoint(((PointAnchor) m_AnchorsList[1]).position);
 
                     // Update the line width with the camera distance
-                    m_Line.startWidth = Vector3.Distance(((PointAnchor)m_AnchorsList[0]).position, m_MainCamera.transform.position) / m_LineWidthMultiplier;
-                    m_Line.endWidth = Vector3.Distance(((PointAnchor)m_AnchorsList[1]).position, m_MainCamera.transform.position) / m_LineWidthMultiplier;
+                    m_Line.startWidth = Vector3.Distance(((PointAnchor) m_AnchorsList[0]).position, m_MainCamera.transform.position) /
+                                        m_LineWidthMultiplier;
+                    m_Line.endWidth = Vector3.Distance(((PointAnchor) m_AnchorsList[1]).position, m_MainCamera.transform.position) /
+                                      m_LineWidthMultiplier;
 
                     if (UIStateManager.current.stateData.VREnable)
                     {
                         measureText.transform.gameObject.SetActive(true);
                         measureText.localScale = Vector3.one * 2f;
 
-                        pos1 = ((PointAnchor)m_AnchorsList[0]).position;
-                        pos2 = ((PointAnchor)m_AnchorsList[1]).position;
+                        pos1 = ((PointAnchor) m_AnchorsList[0]).position;
+                        pos2 = ((PointAnchor) m_AnchorsList[1]).position;
                         LabelFOV(pos1, pos2, measureText);
                     }
                     else if (pos1.z >= 0 && pos2.z >= 0)
@@ -123,7 +127,8 @@ namespace UnityEngine.Reflect.MeasureTool
                 // Keep draggablePad screen position when camera moving
                 if (m_CurrentSelectedAnchorIndex != null && !UIStateManager.current.stateData.VREnable)
                 {
-                    var currentCursor = m_AnchorIndexToCursorObject.Where(r => r.Item1 == m_CurrentSelectedAnchorIndex).Select(r => r.Item2).FirstOrDefault();
+                    var currentCursor = m_AnchorIndexToCursorObject.Where(r => r.Item1 == m_CurrentSelectedAnchorIndex).Select(r => r.Item2)
+                                                                   .FirstOrDefault();
                     var position = m_MainCamera.WorldToScreenPoint(currentCursor.transform.position) + new Vector3(0f, -m_Offset, 0f);
 
                     if ((m_DraggablePad.transform.position - position).magnitude >= m_Tolerance)
@@ -170,9 +175,11 @@ namespace UnityEngine.Reflect.MeasureTool
                             if (!UIStateManager.current.stateData.VREnable)
                                 m_DraggablePad.gameObject.SetActive(true);
                         }
-                        else if ((UIStateManager.current.stateData.VREnable || m_DraggablePad.button.IsActive()) && m_CurrentSelectedAnchorIndex != null)
+                        else if ((UIStateManager.current.stateData.VREnable || m_DraggablePad.button.IsActive()) &&
+                                 m_CurrentSelectedAnchorIndex != null)
                         {
-                            var currentCursor = m_AnchorIndexToCursorObject.Where(r => r.Item1 == m_CurrentSelectedAnchorIndex).Select(r => r.Item2).FirstOrDefault();
+                            var currentCursor = m_AnchorIndexToCursorObject.Where(r => r.Item1 == m_CurrentSelectedAnchorIndex).Select(r => r.Item2)
+                                                                           .FirstOrDefault();
 
                             SetCursorUI(anchor, ref currentCursor);
 
@@ -193,8 +200,8 @@ namespace UnityEngine.Reflect.MeasureTool
             {
                 case AnchorType.Point:
                 default:
-                    cursor.transform.position = ((PointAnchor)selectedAnchor).position;
-                    cursor.transform.forward =  UIStateManager.current.m_RootNode.transform.localRotation * ((PointAnchor)selectedAnchor).normal;
+                    cursor.transform.position = ((PointAnchor) selectedAnchor).position;
+                    cursor.transform.forward = UIStateManager.current.m_RootNode.transform.localRotation * ((PointAnchor) selectedAnchor).normal;
 
                     break;
             }
@@ -210,8 +217,8 @@ namespace UnityEngine.Reflect.MeasureTool
                 if (!m_Line.gameObject.activeSelf)
                     m_Line.gameObject.SetActive(true);
 
-                m_Line.SetPosition(0, ((PointAnchor)m_AnchorsList[0]).position);
-                m_Line.SetPosition(1, ((PointAnchor)m_AnchorsList[1]).position);
+                m_Line.SetPosition(0, ((PointAnchor) m_AnchorsList[0]).position);
+                m_Line.SetPosition(1, ((PointAnchor) m_AnchorsList[1]).position);
             }
 
             if (m_MeasureText != null)
@@ -294,7 +301,8 @@ namespace UnityEngine.Reflect.MeasureTool
         {
             if (m_CurrentSelectedAnchorIndex != null)
             {
-                var currentCursor = m_AnchorIndexToCursorObject.Where(r => r.Item1 == m_CurrentSelectedAnchorIndex).Select(r => r.Item2).FirstOrDefault();
+                var currentCursor = m_AnchorIndexToCursorObject.Where(r => r.Item1 == m_CurrentSelectedAnchorIndex).Select(r => r.Item2)
+                                                               .FirstOrDefault();
                 if (currentCursor != null && currentCursor.Equals(cursor))
                     return;
             }

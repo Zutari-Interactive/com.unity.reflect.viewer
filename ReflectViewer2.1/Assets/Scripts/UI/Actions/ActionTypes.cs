@@ -100,6 +100,7 @@ namespace Unity.Reflect.Viewer.UI
         // External Tools
         ResetExternalTools,
         SetMeasureToolOptions,
+        SetPointerToolOptions,
 
         SetLoginSetting,
         DeleteCloudEnvironmentSetting,

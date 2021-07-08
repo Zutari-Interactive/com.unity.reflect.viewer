@@ -15,8 +15,7 @@ namespace Unity.Reflect.Viewer.UI
 
         public string ToString(string format)
         {
-            return string.Format(format,
-                measureToolStateData);
+            return string.Format(format, measureToolStateData);
         }
 
         public override int GetHashCode()

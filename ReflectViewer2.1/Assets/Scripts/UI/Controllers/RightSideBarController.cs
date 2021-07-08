@@ -57,8 +57,6 @@ namespace Unity.Reflect.Viewer.UI
             m_MeasureToolButton.buttonClicked += OnMeasureToolButtonClicked;
 
             m_ObjectSelector = new SpatialSelector();
-
-            print(m_ObjectSelector == null);
         }
 
         void OnExternalToolStateDataChanged(ExternalToolStateData data)
@@ -118,6 +116,7 @@ namespace Unity.Reflect.Viewer.UI
                     m_OrbitButton.selected = true;
                     m_OrbitButton.SetIcon(m_PanImage);
                 }
+
                 m_CachedToolState = data.toolState;
             }
         }
@@ -149,7 +148,7 @@ namespace Unity.Reflect.Viewer.UI
                 Dispatcher.Dispatch(Payload<ActionTypes>.From(ActionTypes.OpenDialog, DialogType.None));
 
             var toolState = UIStateManager.current.stateData.toolState;
-            toolState.activeTool =  m_LookAroundButton.selected ? ToolType.None : ToolType.OrbitTool;
+            toolState.activeTool = m_LookAroundButton.selected ? ToolType.None : ToolType.OrbitTool;
             toolState.orbitType = OrbitType.WorldOrbit;
             Dispatcher.Dispatch(Payload<ActionTypes>.From(ActionTypes.SetToolState, toolState));
         }
@@ -176,6 +175,7 @@ namespace Unity.Reflect.Viewer.UI
                 toolState.activeTool = m_CurrentOrbitButtonType;
                 toolState.orbitType = OrbitType.OrbitAtPoint;
             }
+
             Dispatcher.Dispatch(Payload<ActionTypes>.From(ActionTypes.SetToolState, toolState));
         }
 
@@ -215,7 +215,8 @@ namespace Unity.Reflect.Viewer.UI
 
             if (data.toolState)
             {
-                if (UIStateManager.current.stateData.toolState.activeTool == ToolType.SelectTool && UIStateManager.current.projectStateData.objectSelectionInfo.CurrentSelectedObject() == null)
+                if (UIStateManager.current.stateData.toolState.activeTool                               == ToolType.SelectTool &&
+                    UIStateManager.current.projectStateData.objectSelectionInfo.CurrentSelectedObject() == null)
                 {
                     var toolState = UIStateManager.current.stateData.toolState;
                     toolState.activeTool = ToolType.None;
@@ -224,7 +225,11 @@ namespace Unity.Reflect.Viewer.UI
                 }
 
                 Dispatcher.Dispatch(Payload<ActionTypes>.From(ActionTypes.SetStatusWithType,
-                    new StatusMessageData() { text = UIMeasureToolController.instructionStart, type = StatusMessageType.Instruction }));
+                                                              new StatusMessageData()
+                                                              {
+                                                                  text = UIMeasureToolController.instructionStart,
+                                                                  type = StatusMessageType.Instruction
+                                                              }));
             }
             else
             {
