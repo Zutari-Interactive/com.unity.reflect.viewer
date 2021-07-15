@@ -3,10 +3,13 @@ using UnityEngine;
 using UnityEngine.Reflect;
 using Unity.Reflect.Viewer.UI;
 using UnityEngine.EventSystems;
+using game4automation;
 
 public class DataPackManager : CustomNode
 {
     public string[] Ids;
+
+    private OPCUA_Interface opcInterface;
 
     private Canvas c;
     private bool _buttonEnabled;
@@ -27,6 +30,13 @@ public class DataPackManager : CustomNode
         OrphanUIController.onPointerClick += OnObjectClick;
 
         selectionController = FindObjectOfType<UISelectionController>();
+
+        if(opcInterface == null)
+        {
+            opcInterface = GetComponent<OPCUA_Interface>();
+            opcInterface.Connect();
+        }
+        
     }
 
     public void FindID(Metadata data)

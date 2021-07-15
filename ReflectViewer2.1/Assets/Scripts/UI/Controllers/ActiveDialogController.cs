@@ -92,6 +92,9 @@ namespace Unity.Reflect.Viewer.UI
         [SerializeField, Tooltip("Dialog to Control Screenshot Tool within the Scene")]
         DialogWindow m_ScreenshotDialog;
 
+        [SerializeField, Tooltip("Dialog to Control IOT Tool within the Scene")]
+        DialogWindow m_IOTDialog;
+
 #pragma warning restore CS0649
 
         DialogType m_CurrentActiveDialog = DialogType.None;
@@ -132,6 +135,7 @@ namespace Unity.Reflect.Viewer.UI
                 m_AirTerminalFilterDialog.Close();
                 m_ViewDialog.Close();
                 m_ViewCameraDialog.Close();
+                m_IOTDialog.Close();
 
                 if (stateData.dialogMode == DialogMode.Help)
                 {
@@ -215,6 +219,9 @@ namespace Unity.Reflect.Viewer.UI
                         break;
                     case DialogType.Screenshot:
                         m_ScreenshotDialog.Open();
+                        break;
+                    case DialogType.IOTData:
+                        m_IOTDialog.Open();
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
