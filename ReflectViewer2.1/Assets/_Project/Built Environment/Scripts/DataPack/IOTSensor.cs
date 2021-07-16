@@ -89,7 +89,7 @@ public class IOTSensor : MonoBehaviour
 
         for (int i = 0; i < nodes.Length; i++)
         {
-            if (nodes[i].NodeId.Equals(nodeID))
+            if (nodes[i].NodeId.Contains(nodeID))
             {
                 Debug.Log("node found");
                 node = nodes[i];

@@ -46,9 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ids:
-  - 21203850
-  - 21343376
-  - 22151243
+  - AHU-GR-1
+  - ROOM TEMP Z1
+  - ROOM TEMP Z2
+  iotSensorDisplayPrefab: {fileID: 3523847640596643653, guid: 7fcac2d66c8517e4a92225385fcee963,
+    type: 3}
 --- !u!114 &9207568253708986672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,7 +107,19 @@ MonoBehaviour:
   IsConnecting: 0
   EventOnConnected:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5094571806851782632}
+        m_TargetAssemblyTypeName: game4automation.OPCUA_Interface, game4automation.interfaces.opocua
+        m_MethodName: ImportNodes
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   EventOnDisconnected:
     m_PersistentCalls:
       m_Calls: []

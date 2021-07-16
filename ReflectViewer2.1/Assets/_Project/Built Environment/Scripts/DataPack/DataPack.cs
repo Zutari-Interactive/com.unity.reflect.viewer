@@ -6,4 +6,11 @@ using UnityEngine;
 public class DataPack : ScriptableObject
 {
     public string[] paths;
+
+    public IOTSensorGroup sensorGroup;
+
+    private void Awake()
+    {
+        sensorGroup = new IOTSensorGroup();
+    }
 }

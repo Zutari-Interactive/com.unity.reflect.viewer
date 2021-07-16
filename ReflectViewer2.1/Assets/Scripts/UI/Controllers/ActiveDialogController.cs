@@ -95,6 +95,9 @@ namespace Unity.Reflect.Viewer.UI
         [SerializeField, Tooltip("Dialog to Control IOT Tool within the Scene")]
         DialogWindow m_IOTDialog;
 
+        [SerializeField, Tooltip("Dialog to Control IOT Group within the Scene")]
+        DialogWindow m_IOTGroupDialog;
+
 #pragma warning restore CS0649
 
         DialogType m_CurrentActiveDialog = DialogType.None;
@@ -136,6 +139,7 @@ namespace Unity.Reflect.Viewer.UI
                 m_ViewDialog.Close();
                 m_ViewCameraDialog.Close();
                 m_IOTDialog.Close();
+                m_IOTGroupDialog.Close();
 
                 if (stateData.dialogMode == DialogMode.Help)
                 {
@@ -222,6 +226,9 @@ namespace Unity.Reflect.Viewer.UI
                         break;
                     case DialogType.IOTData:
                         m_IOTDialog.Open();
+                        break;
+                    case DialogType.IOTDataGroup:
+                        m_IOTGroupDialog.Open();
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();

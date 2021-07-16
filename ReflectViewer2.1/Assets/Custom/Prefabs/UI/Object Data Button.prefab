@@ -156,6 +156,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Object Data Button
       objectReference: {fileID: 0}
+    - target: {fileID: 7431689930018894367, guid: 473baf46eceace940a99828b642f8ef7,
+        type: 3}
+      propertyPath: m_TagString
+      value: DataPath
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 473baf46eceace940a99828b642f8ef7, type: 3}
 --- !u!1 &7207230142865195900 stripped

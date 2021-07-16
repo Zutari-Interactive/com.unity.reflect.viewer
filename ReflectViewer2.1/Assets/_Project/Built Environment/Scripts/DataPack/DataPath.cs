@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using UnityEngine;
 
-public class DataPath : MonoBehaviour
+public class DataPath 
 {
     public string filePath;
     private string appPath;
@@ -19,6 +19,25 @@ public class DataPath : MonoBehaviour
     public void AssignPath(string p)
     {
         filePath = p;
+    }
+
+    public void OpenFolder()
+    {
+        string completePath = appPath + filePath;
+        if (Directory.Exists(completePath))
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo
+            {
+                Arguments = completePath,
+                FileName = "explorer.exe"
+            };
+
+            Process.Start(startInfo);
+        }
+        else
+        {
+            UnityEngine.Debug.Log(string.Format("{0} Directory does not exist!", completePath));
+        }
     }
 
     public void OpenFile()

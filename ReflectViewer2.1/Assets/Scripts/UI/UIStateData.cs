@@ -37,7 +37,8 @@ namespace Unity.Reflect.Viewer.UI
         ViewDialog = 28,
         ViewCameraDialog = 29,
         Screenshot = 30,
-        IOTData = 31
+        IOTData = 31,
+        IOTDataGroup = 32
 
     }
     /// <summary>

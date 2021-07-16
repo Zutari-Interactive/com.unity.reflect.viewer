@@ -9,6 +9,8 @@ TagManager:
   - ShowInMiniWorld
   - Dude
   - VRScreenshotCam
+  - DataPath
+  - DataPack
   layers:
   - Default
   - TransparentFX

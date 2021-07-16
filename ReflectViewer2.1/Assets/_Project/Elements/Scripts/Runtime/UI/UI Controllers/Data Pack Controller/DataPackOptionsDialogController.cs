@@ -28,6 +28,10 @@ public class DataPackOptionsDialogController : MonoBehaviour
     [SerializeField]
     Sprite m_DebugImage;
 
+    public IOTSensorGroupDisplay IOTGroupDisplay;
+    private IOTSensorGroup currentSensorGroup;
+    private DataPack currentDataPack;
+
     DialogWindow m_DialogWindow;
     StatsInfoData m_CurrentStatsInfoData;
     DialogType m_CachedActiveDialog;
@@ -51,7 +55,7 @@ public class DataPackOptionsDialogController : MonoBehaviour
         manualButton.buttonClicked += OnManualInfoButtonClicked;
         photoButton.buttonClicked += OnPhotoButtonClicked;
         reportButton.buttonClicked += OnReportButtonClicked;
-        exitButton.buttonClicked += OnExitButtonClicked; // might need to be OnStateDataChanged
+        exitButton.buttonClicked += OnDataInfoButtonClicked;
     }
 
     
@@ -102,27 +106,47 @@ public class DataPackOptionsDialogController : MonoBehaviour
 
     private void OnIOTButtonClicked()
     {
-        throw new NotImplementedException();
+        if (m_CurrentToolState.infoType == InfoType.Info)
+        {
+            var dialogType = m_DialogWindow.open ? DialogType.None : DialogType.IOTDataGroup;
+            Dispatcher.Dispatch(Payload<ActionTypes>.From(ActionTypes.OpenDialog, dialogType));
+
+            IOTGroupDisplay.SetupGroupUI(currentSensorGroup);
+        }
+        if (m_CurrentToolState.infoType == InfoType.Debug)
+        {
+            //var dialogType = m_DebugDialogWindow.open ? DialogType.None : DialogType.DebugOptions;
+            //Dispatcher.Dispatch(Payload<ActionTypes>.From(ActionTypes.OpenDialog, dialogType));
+            Debug.LogWarning("no debug dialog available currently");
+        }
     }
 
     private void OnManualInfoButtonClicked()
     {
-        throw new NotImplementedException();
+        DataPath path = new DataPath();
+        path.AssignPath(currentDataPack.paths[0]);
     }
 
     private void OnPhotoButtonClicked()
     {
-        throw new NotImplementedException();
+        DataPath path = new DataPath();
+        path.AssignPath(currentDataPack.paths[1]);
     }
 
     private void OnReportButtonClicked()
     {
-        throw new NotImplementedException();
+        DataPath path = new DataPath();
+        path.AssignPath(currentDataPack.paths[2]);
     }
 
-    private void OnExitButtonClicked()
+    public void SetSensorGroup(IOTSensorGroup group)
     {
-        throw new NotImplementedException();
+        currentSensorGroup = group;
+    }
+
+    public void SetDataPack(DataPack pack)
+    {
+        currentDataPack = pack;
     }
 
     private void OnDisable()
@@ -132,6 +156,6 @@ public class DataPackOptionsDialogController : MonoBehaviour
         manualButton.buttonClicked -= OnManualInfoButtonClicked;
         photoButton.buttonClicked -= OnPhotoButtonClicked;
         reportButton.buttonClicked-= OnReportButtonClicked;
-        exitButton.buttonClicked -= OnExitButtonClicked; // might need to be OnStateDataChanged
+        exitButton.buttonClicked -= OnDataInfoButtonClicked;
     }
 }
