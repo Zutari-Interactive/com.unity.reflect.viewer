@@ -577,7 +577,7 @@ MonoBehaviour:
   sensorValueText: {fileID: 3523847640150127197}
   sensorNameText: {fileID: 3523847639765377430}
   dataType: 0
-  valueOffset: 1000
+  valueOffset: 100
   update: 0
   canWrite: 0
   nodeID: 

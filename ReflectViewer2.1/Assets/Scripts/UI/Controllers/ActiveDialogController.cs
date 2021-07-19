@@ -229,6 +229,7 @@ namespace Unity.Reflect.Viewer.UI
                         break;
                     case DialogType.IOTDataGroup:
                         m_IOTGroupDialog.Open();
+                        Debug.Log("open sensor group dialog");
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();

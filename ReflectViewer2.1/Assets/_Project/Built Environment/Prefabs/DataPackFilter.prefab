@@ -49,6 +49,9 @@ MonoBehaviour:
   - AHU-GR-1
   - ROOM TEMP Z1
   - ROOM TEMP Z2
+  - CHILLER 1
+  - CHILLER 2
+  - T1-L05-E1148
   iotSensorDisplayPrefab: {fileID: 3523847640596643653, guid: 7fcac2d66c8517e4a92225385fcee963,
     type: 3}
 --- !u!114 &9207568253708986672

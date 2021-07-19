@@ -70,6 +70,7 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
+    - DataPack
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: ef006e10d21ea414e92ab41a4374d683, type: 2}

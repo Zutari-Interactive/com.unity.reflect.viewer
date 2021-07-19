@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using UnityEngine;
 
-public class DataPath 
+public class DataPath : MonoBehaviour
 {
     public string filePath;
     private string appPath;
@@ -23,16 +23,16 @@ public class DataPath
 
     public void OpenFolder()
     {
+        if (String.IsNullOrEmpty(appPath))
+        {
+            appPath = Application.dataPath;
+        }
+
         string completePath = appPath + filePath;
+        UnityEngine.Debug.Log("Opening Explorer at " + completePath);
         if (Directory.Exists(completePath))
         {
-            ProcessStartInfo startInfo = new ProcessStartInfo
-            {
-                Arguments = completePath,
-                FileName = "explorer.exe"
-            };
-
-            Process.Start(startInfo);
+            Process.Start(completePath);
         }
         else
         {

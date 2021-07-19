@@ -9,25 +9,40 @@ public class DataPackInteractor : MonoBehaviour
 {
     public DataPack dp;
 
-    private DataPackOptionsDialogController dialogController;
+    private DataPackOptionsDialogController dataPackdialogController;
+    private IOTSensorGroupDisplay sensorGroupDisplay;
 
     private string address;
+    private IOTSensorGroup sensorGroup;
+    private bool active;
+
+    public bool Active
+    {
+        get => active;
+        set { active = value; }
+    }
 
     public void GetDataPack()
     {
-        Debug.Log($"find pack with ID {address}");
         Addressables.LoadAssetAsync<DataPack>(address).Completed += OnAddressableLoadDone;
 
-        dialogController = FindObjectOfType<DataPackOptionsDialogController>();
+        dataPackdialogController = FindObjectOfType<DataPackOptionsDialogController>();
+        sensorGroupDisplay = FindObjectOfType<IOTSensorGroupDisplay>();
     }
 
     private void OnAddressableLoadDone(AsyncOperationHandle<DataPack> obj)
     {
         if (obj.Result != null)
+        {
             dp = obj.Result;
+            //dp.sensorGroup = sensorGroup;
+            sensorGroup.SaveIDs(dp.sensorIDs);
+        }   
         else
             Debug.LogWarning("No addressable asset found");
     }
+
+    
 
     public void SetAddress(string a)
     {
@@ -36,8 +51,19 @@ public class DataPackInteractor : MonoBehaviour
 
     public void PrimeController()
     {
-        dialogController.SetDataPack(dp);
-        dialogController.SetSensorGroup(dp.sensorGroup);
+        if (Active == false)
+        {
+            Active = true;
+            sensorGroup.SetupSensors(dp.iotSensorDisplayPrefab);
+            dataPackdialogController.SetDataPack(dp);
+            sensorGroupDisplay.SetSensorGroup(sensorGroup);
+        }
+        
+    }
+
+    public void SetSensorGroup(IOTSensorGroup g)
+    {
+        sensorGroup = g;
     }
 
 }

@@ -47,6 +47,48 @@ MonoBehaviour:
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
+  - m_GUID: b670b79020b22d346b4e4834a4d98bc7
+    m_Address: AHU-GR-1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - DataPack
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 1e2a305b1e13ded499fcdf585c67880f
+    m_Address: CHILLER 1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - DataPack
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: f5964113247470446b53cc08493e7296
+    m_Address: CHILLER 2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - DataPack
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: c47716679361ce3459de1156f6cdd2a4
+    m_Address: T1-L05-E1148
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - DataPack
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 9a153f635aebda243afdf5e479fa0a55
+    m_Address: ROOM TEMP Z1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - DataPack
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: c7cc0e5624d563441afc0ba7ee2dbd6d
+    m_Address: ROOM TEMP Z2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - DataPack
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: baba5ec04ef4d2541a5f5f14f8b992df, type: 2}
   m_SchemaSet:

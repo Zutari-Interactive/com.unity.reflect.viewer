@@ -12,8 +12,8 @@ public class DataPackOptionsDialogController : MonoBehaviour
 {
     [SerializeField]
     ToolButton dataInfoButton;
-    [SerializeField]
-    ToolButton iotButton;
+    //[SerializeField]
+    //ToolButton iotButton;
     [SerializeField]
     ToolButton manualButton;
     [SerializeField]
@@ -28,7 +28,6 @@ public class DataPackOptionsDialogController : MonoBehaviour
     [SerializeField]
     Sprite m_DebugImage;
 
-    public IOTSensorGroupDisplay IOTGroupDisplay;
     private IOTSensorGroup currentSensorGroup;
     private DataPack currentDataPack;
 
@@ -51,7 +50,7 @@ public class DataPackOptionsDialogController : MonoBehaviour
     void Start()
     {
         dataInfoButton.buttonClicked += OnDataInfoButtonClicked;
-        iotButton.buttonClicked += OnIOTButtonClicked;
+        //iotButton.buttonClicked += OnIOTButtonClicked;
         manualButton.buttonClicked += OnManualInfoButtonClicked;
         photoButton.buttonClicked += OnPhotoButtonClicked;
         reportButton.buttonClicked += OnReportButtonClicked;
@@ -62,7 +61,7 @@ public class DataPackOptionsDialogController : MonoBehaviour
 
     private void OnDebugStateDataChanged(UIDebugStateData data)
     {
-        throw new NotImplementedException();
+        Debug.LogWarning("debug on this dialog not currently available");
     }
 
     private void OnStateDataChanged(UIStateData data)
@@ -104,39 +103,43 @@ public class DataPackOptionsDialogController : MonoBehaviour
         }
     }
 
-    private void OnIOTButtonClicked()
-    {
-        if (m_CurrentToolState.infoType == InfoType.Info)
-        {
-            var dialogType = m_DialogWindow.open ? DialogType.None : DialogType.IOTDataGroup;
-            Dispatcher.Dispatch(Payload<ActionTypes>.From(ActionTypes.OpenDialog, dialogType));
+    //private void OnIOTButtonClicked()
+    //{
+    //    Debug.Log("Open Sensor Group Dialog");
+    //    if (m_CurrentToolState.infoType == InfoType.Info)
+    //    {
+    //        var dialogType = m_DialogWindow.open ? DialogType.None : DialogType.IOTDataGroup;
+    //        Dispatcher.Dispatch(Payload<ActionTypes>.From(ActionTypes.OpenDialog, dialogType));
 
-            IOTGroupDisplay.SetupGroupUI(currentSensorGroup);
-        }
-        if (m_CurrentToolState.infoType == InfoType.Debug)
-        {
-            //var dialogType = m_DebugDialogWindow.open ? DialogType.None : DialogType.DebugOptions;
-            //Dispatcher.Dispatch(Payload<ActionTypes>.From(ActionTypes.OpenDialog, dialogType));
-            Debug.LogWarning("no debug dialog available currently");
-        }
-    }
+    //        //IOTGroupDisplay.SetupGroupUI(currentSensorGroup);
+    //    }
+    //    if (m_CurrentToolState.infoType == InfoType.Debug)
+    //    {
+    //        //var dialogType = m_DebugDialogWindow.open ? DialogType.None : DialogType.DebugOptions;
+    //        //Dispatcher.Dispatch(Payload<ActionTypes>.From(ActionTypes.OpenDialog, dialogType));
+    //        Debug.LogWarning("no debug dialog available currently");
+    //    }
+    //}
 
     private void OnManualInfoButtonClicked()
     {
         DataPath path = new DataPath();
         path.AssignPath(currentDataPack.paths[0]);
+        path.OpenFolder();
     }
 
     private void OnPhotoButtonClicked()
     {
         DataPath path = new DataPath();
         path.AssignPath(currentDataPack.paths[1]);
+        path.OpenFolder();
     }
 
     private void OnReportButtonClicked()
     {
         DataPath path = new DataPath();
         path.AssignPath(currentDataPack.paths[2]);
+        path.OpenFolder();
     }
 
     public void SetSensorGroup(IOTSensorGroup group)
@@ -146,13 +149,14 @@ public class DataPackOptionsDialogController : MonoBehaviour
 
     public void SetDataPack(DataPack pack)
     {
+        Debug.Log("Set data pack");
         currentDataPack = pack;
     }
 
     private void OnDisable()
     {
         dataInfoButton.buttonClicked -= OnDataInfoButtonClicked;
-        iotButton.buttonClicked -= OnIOTButtonClicked;
+        //iotButton.buttonClicked -= OnIOTButtonClicked;
         manualButton.buttonClicked -= OnManualInfoButtonClicked;
         photoButton.buttonClicked -= OnPhotoButtonClicked;
         reportButton.buttonClicked-= OnReportButtonClicked;

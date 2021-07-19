@@ -404,6 +404,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7071542200024980602, guid: 01dfc9a2620991142833542b8bb9c3ab,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7506507990735778189, guid: 01dfc9a2620991142833542b8bb9c3ab,
         type: 3}
       propertyPath: m_Name
@@ -1418,6 +1423,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 1.2999992
+      objectReference: {fileID: 0}
+    - target: {fileID: 3609780560178466040, guid: 5c0610b89c74a114290b8fa58f0791fe,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6085091799491508001, guid: 5c0610b89c74a114290b8fa58f0791fe,
         type: 3}
@@ -11372,11 +11382,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: DataPackOptionsDialog
       objectReference: {fileID: 0}
+    - target: {fileID: 4820704306095627533, guid: e8822b882bc1f804eaf9551b7d7ed7bd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4820704306095627534, guid: e8822b882bc1f804eaf9551b7d7ed7bd,
         type: 3}
       propertyPath: iotButton
       value: 
       objectReference: {fileID: 165573973}
+    - target: {fileID: 4820704306095627534, guid: e8822b882bc1f804eaf9551b7d7ed7bd,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4820704306095627534, guid: e8822b882bc1f804eaf9551b7d7ed7bd,
         type: 3}
       propertyPath: dataInfoButton
@@ -11995,6 +12015,23 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3817192450461886639}
     m_Modifications:
+    - target: {fileID: 2805784862784561634, guid: 26025aec4e189a44ba5b9fba7ecada2d,
+        type: 3}
+      propertyPath: iotButton
+      value: 
+      objectReference: {fileID: 165573973}
+    - target: {fileID: 2805784862784561634, guid: 26025aec4e189a44ba5b9fba7ecada2d,
+        type: 3}
+      propertyPath: m_InfoImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a13305045b7e9e48ac04bb9f0023374,
+        type: 3}
+    - target: {fileID: 2805784862784561634, guid: 26025aec4e189a44ba5b9fba7ecada2d,
+        type: 3}
+      propertyPath: m_DebugImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 315e01b3c6560413998307d448aba7a8,
+        type: 3}
     - target: {fileID: 4936661753595828887, guid: 26025aec4e189a44ba5b9fba7ecada2d,
         type: 3}
       propertyPath: m_Enabled
@@ -12018,22 +12055,22 @@ PrefabInstance:
     - target: {fileID: 4936661753595828888, guid: 26025aec4e189a44ba5b9fba7ecada2d,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4936661753595828888, guid: 26025aec4e189a44ba5b9fba7ecada2d,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4936661753595828888, guid: 26025aec4e189a44ba5b9fba7ecada2d,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4936661753595828888, guid: 26025aec4e189a44ba5b9fba7ecada2d,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4936661753595828888, guid: 26025aec4e189a44ba5b9fba7ecada2d,
         type: 3}
@@ -12083,12 +12120,12 @@ PrefabInstance:
     - target: {fileID: 4936661753595828888, guid: 26025aec4e189a44ba5b9fba7ecada2d,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 881
+      value: 303
       objectReference: {fileID: 0}
     - target: {fileID: 4936661753595828888, guid: 26025aec4e189a44ba5b9fba7ecada2d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 378
+      value: 53
       objectReference: {fileID: 0}
     - target: {fileID: 4936661753595828888, guid: 26025aec4e189a44ba5b9fba7ecada2d,
         type: 3}
@@ -12109,6 +12146,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: IOTGroupDisplayObjectDialog
+      objectReference: {fileID: 0}
+    - target: {fileID: 4936661753595828891, guid: 26025aec4e189a44ba5b9fba7ecada2d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4936661754532976995, guid: 26025aec4e189a44ba5b9fba7ecada2d,
         type: 3}
@@ -12276,6 +12318,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7207230142865195900, guid: 006dd3b8bac2a9b49a22d7bec6a10f71,
         type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7207230142865195900, guid: 006dd3b8bac2a9b49a22d7bec6a10f71,
+        type: 3}
       propertyPath: m_TagString
       value: DataPack
       objectReference: {fileID: 0}
@@ -12384,7 +12431,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1937218504153342141, guid: 006dd3b8bac2a9b49a22d7bec6a10f71, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 006dd3b8bac2a9b49a22d7bec6a10f71, type: 3}
 --- !u!114 &9201426479431004060 stripped
 MonoBehaviour:

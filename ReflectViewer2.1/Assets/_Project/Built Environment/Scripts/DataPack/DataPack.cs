@@ -7,10 +7,20 @@ public class DataPack : ScriptableObject
 {
     public string[] paths;
 
-    public IOTSensorGroup sensorGroup;
+    public string[] sensorIDs;
+
+    public GameObject iotSensorDisplayPrefab;
+
+    public bool pathsAvailable;
+
+    //public IOTSensorGroup sensorGroup;
 
     private void Awake()
     {
-        sensorGroup = new IOTSensorGroup();
+        //sensorGroup = new IOTSensorGroup();
+        if(paths.Length > 0)
+        {
+            pathsAvailable = true;
+        }
     }
 }

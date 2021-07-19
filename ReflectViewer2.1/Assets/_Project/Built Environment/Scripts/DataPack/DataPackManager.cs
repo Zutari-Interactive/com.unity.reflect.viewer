@@ -8,7 +8,7 @@ using System.Collections.Generic;
 public class DataPackManager : CustomNode
 {
     public string[] Ids;
-    public GameObject iotSensorDisplayPrefab;
+    //public GameObject iotSensorDisplayPrefab;
 
     private OPCUA_Interface opcInterface;
 
@@ -17,6 +17,8 @@ public class DataPackManager : CustomNode
     private Dictionary<string, IOTSensorGroup> sensorGroups = new Dictionary<string, IOTSensorGroup>();
 
     UISelectionController selectionController;
+
+    private DataPackInteractor currentInteractor;
 
     public void Start()
     {
@@ -32,7 +34,8 @@ public class DataPackManager : CustomNode
             opcInterface = GetComponent<OPCUA_Interface>();
             opcInterface.Connect();
         }
-        
+
+        sensorGroups.Clear();
     }
 
     public void FindID(Metadata data)
@@ -40,11 +43,11 @@ public class DataPackManager : CustomNode
             foreach (var item in Ids)
             {
                 string id = data.GetParameter("Mark");
-                if (item.Equals(id))
+                if (item.Contains(id))
                 {
+                    Debug.Log($"Data Object Found {data.GetParameter("Id")} with Mark {id}");
+
                     CreateDataPack(data.gameObject, id);
-                    //create sensor group
-                    //add sensor display object at position
                 }
             }
         }
@@ -56,8 +59,8 @@ public class DataPackManager : CustomNode
             if (selectionController.m_CurrentSelectedGameObject.GetComponent<DataPackInteractor>())
             {
                 Debug.Log("mouse clicked");
-                DataPackInteractor interactor = selectionController.m_CurrentSelectedGameObject.GetComponent<DataPackInteractor>();
-                interactor.PrimeController();
+                currentInteractor = selectionController.m_CurrentSelectedGameObject.GetComponent<DataPackInteractor>();
+                currentInteractor.PrimeController();
                 ButtonEnabled(true);
             }
             else
@@ -81,37 +84,39 @@ public class DataPackManager : CustomNode
 
     private void CreateDataPack(GameObject g, string id)
     {
-        Debug.Log("data object found");
+        
         if (!sensorGroups.ContainsKey(id))
         {
             DataPackInteractor dp = g.AddComponent(typeof(DataPackInteractor)) as DataPackInteractor;
             dp.SetAddress(id);
             dp.GetDataPack();
             SetupSensorGroup(g.transform, id);
+            dp.SetSensorGroup(sensorGroups[id]);
+        }
+        //else
+        //{
+        //    sensorGroups[id].AddSensor(SetupSensor(g.transform, id));
+        //}
 
-        }
-        else
-        {
-            sensorGroups[id].AddSensor(SetupSensor(sensorGroups[id], g.transform, id));
-        }
-        
     }
 
-    private void SetupSensorGroup(Transform t, string id)
+    //maybe these should go in the interactor?
+    private IOTSensorGroup SetupSensorGroup(Transform t, string id)
     {
         IOTSensorGroup sensorGroup = new IOTSensorGroup();
-        sensorGroup.SetGroupName(id);
+        sensorGroup.SetGroup(id, t);
         sensorGroups.Add(id, sensorGroup);
-        sensorGroup.AddSensor(SetupSensor(sensorGroup, t, id));
+        //sensorGroup.AddSensor(SetupSensor(t, id));
+        return sensorGroup;
     }
 
-    private IOTSensor SetupSensor(IOTSensorGroup sg, Transform t, string id)
-    {
-        GameObject obj = Instantiate(iotSensorDisplayPrefab);
-        obj.transform.position = t.position;
-        IOTSensor sensor = obj.GetComponent<IOTSensor>();
-        sensor.SetupNode(id);
-        return sensor;
-    }
+    //private IOTSensor SetupSensor(Transform t, string id)
+    //{
+    //    GameObject obj = Instantiate(iotSensorDisplayPrefab);
+    //    obj.transform.position = t.position;
+    //    IOTSensor sensor = obj.GetComponent<IOTSensor>();
+    //    sensor.SetupNode(id);
+    //    return sensor;
+    //}
 }
 

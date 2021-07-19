@@ -49,11 +49,6 @@ public class IOTSensor : MonoBehaviour
         }
     }
 
-    public void AssignDataType(int i)
-    {
-        dataType = (DataTypes)i;
-    }
-
     private void UpdateValue()
     {
         switch (dataType)
@@ -70,7 +65,7 @@ public class IOTSensor : MonoBehaviour
             case DataTypes.None:
                 return;
         }
-        sensorValueText.text = node.Value;
+        
     }
 
     public void SetupNode(string nodeID)
@@ -89,36 +84,60 @@ public class IOTSensor : MonoBehaviour
 
         for (int i = 0; i < nodes.Length; i++)
         {
-            if (nodes[i].NodeId.Contains(nodeID))
+            string nodeName = ExtractName(nodes[i].NodeId);
+            if (nodeName.Equals(nodeID))
             {
-                Debug.Log("node found");
+                if(nodes[i].Name == "EU Units" || nodes[i].Name == "Item Time Zone")
+                {
+                    nodes[i].enabled = false;
+                    continue;
+                }
+                Debug.Log($"node {nodes[i].Name} found");
                 node = nodes[i];
                 watchedNode = node.Interface.AddWatchedNode(nodeID);
                 //sensorValue = Int16.Parse(node.Value);
-                SensorName = ExtractName(node.Name);
+                SensorName = nodeID;
                 sensorNameText.text = SensorName;
-                sensorValueText.text = node.Value;
-                update = true;
+                DetermineValueType();
+                UpdateValue();
                 return;
             }
         }
     }
 
+    
+
     private string ExtractName(string s)
     {
         var split = s.Split('.');
-        return split[3];
+        return split[split.Length - 1];
+    }
+
+    private void DetermineValueType()
+    {
+        Debug.Log("Sensor data type = " + node.Type);
+        switch (node.Type)
+        {
+            case "UInt16":
+                dataType = DataTypes.Temperature;
+                break;
+            case "Boolean":
+                dataType = DataTypes.Bool;
+                break;
+        }
     }
 
     private void BooleanUpdate()
     {
-        if (node.Value.Equals("0"))
+        if (node.Value.Equals("False"))
         {
             sensorValueText.text = "Off";
+            SensorValue = "Off";
         }
-        else if (node.Value.Equals("1"))
+        else if (node.Value.Equals("True"))
         {
             sensorValueText.text = "On";
+            SensorValue = "On";
         }
         else
         {
@@ -132,6 +151,7 @@ public class IOTSensor : MonoBehaviour
         var offsettValue = OffsetCalculation(node.Value);
         SensorValue = offsettValue.ToString("F") + suffix;
         sensorValueText.text = SensorValue;
+        
     }
 
     private float OffsetCalculation(string value)
