@@ -54,6 +54,12 @@ public class DataPackManager : CustomNode
 
     public void OnObjectClick(BaseEventData data)
     {
+        //if(currentInteractor != null)
+        //{
+        //    currentInteractor.CloseController();
+        //}
+        
+
         if(selectionController.m_CurrentSelectedGameObject != null)
         {
             if (selectionController.m_CurrentSelectedGameObject.GetComponent<DataPackInteractor>())

@@ -94,25 +94,16 @@ public class IOTSensorGroupDisplay : MonoBehaviour
 
         for (int i = 0; i < currentSensorGroup.sensorGroup.Count; i++)
         {
-            if(sensorNames[i].gameObject.activeInHierarchy == false)
-            {
-                sensorNames[i].gameObject.SetActive(true);
-            }
 
             sensorNames[i].text = currentSensorGroup.sensorGroup[i].SensorName;
-
-            if (sensorValues[i].gameObject.activeInHierarchy == false)
-            {
-                sensorValues[i].gameObject.SetActive(true);
-            }
             
             sensorValues[i].text = currentSensorGroup.sensorGroup[i].SensorValue;
         }
 
-        for (int i = sensorNames.Count; i == currentSensorGroup.sensorGroup.Count; i--)
+        for (int i = sensorNames.Count -1; i == currentSensorGroup.sensorGroup.Count; i--)
         {
-            sensorNames[i].gameObject.SetActive(false);
-            sensorValues[i].gameObject.SetActive(false);
+            sensorNames[i].text = "";
+            sensorValues[i].text = "";
         }
 
         StartUpdatingSensorValues();

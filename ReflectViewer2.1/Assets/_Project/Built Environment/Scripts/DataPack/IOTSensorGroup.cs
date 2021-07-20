@@ -40,4 +40,14 @@ public class IOTSensorGroup : MonoBehaviour
             AddSensor(sensor);
         }
     }
+
+    public void Close()
+    {
+        for (int i = 0; i < sensorGroup.Count; i++)
+        {
+            IOTSensor sensor = sensorGroup[i];
+            sensorGroup.Remove(sensor);
+            Destroy(sensor.gameObject);
+        }
+    }
 }

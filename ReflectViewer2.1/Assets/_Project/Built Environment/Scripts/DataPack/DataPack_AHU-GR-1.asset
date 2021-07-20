@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DataPack_AHU-GR-1
   m_EditorClassIdentifier: 
   paths:
-  - /StreamingAssets/AHU-GR-1/O&M_Manuals/
+  - \StreamingAssets\AHU-GR-1\O&M_Manuals
   - /StreamingAssets/AHU-GR-1/Photos/
   - /StreamingAssets/AHU-GR-1/Reports/
   sensorIDs:

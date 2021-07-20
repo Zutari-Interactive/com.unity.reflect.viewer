@@ -61,6 +61,12 @@ public class DataPackInteractor : MonoBehaviour
         
     }
 
+    public void CloseController()
+    {
+        sensorGroup.Close();
+        Active = false;
+    }
+
     public void SetSensorGroup(IOTSensorGroup g)
     {
         sensorGroup = g;

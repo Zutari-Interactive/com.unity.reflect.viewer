@@ -12,16 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60e5fa351c002454ea96f6c850da28f5, type: 3}
   m_Name: DataPack_CHILLER 1
   m_EditorClassIdentifier: 
-  paths: []
+  paths:
+  - \StreamingAssets\CHILLER_1\O&M_Manuals
+  - \StreamingAssets\CHILLER_1/Photos
+  - \StreamingAssets\CHILLER_1/Reports
   sensorIDs:
   - Chiller 1 %
   - Chiller 1 Evap Ent Temp
   - Chiller 1 Evap Leaving Temp
   - Chiller 1 On/Off Status
+  iotSensorDisplayPrefab: {fileID: 3523847640596643653, guid: 7fcac2d66c8517e4a92225385fcee963,
+    type: 3}
   pathsAvailable: 0
-  sensorGroup:
-    sensorGroup:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    groupName: CHILLER 1

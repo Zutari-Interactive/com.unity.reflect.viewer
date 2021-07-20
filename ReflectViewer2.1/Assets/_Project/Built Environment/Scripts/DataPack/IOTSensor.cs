@@ -82,6 +82,18 @@ public class IOTSensor : MonoBehaviour
             return;
         }
 
+        //OPCUA_Interface opcinterface = FindObjectOfType<OPCUA_Interface>();
+
+        //if(opcinterface == null)
+        //{
+        //    Debug.LogError("no interface found, exiting");
+        //    return;
+        //}
+
+
+        //node = opcinterface.GetOPCUANode
+
+
         for (int i = 0; i < nodes.Length; i++)
         {
             string nodeName = ExtractName(nodes[i].NodeId);
@@ -94,7 +106,9 @@ public class IOTSensor : MonoBehaviour
                 }
                 Debug.Log($"node {nodes[i].Name} found");
                 node = nodes[i];
-                watchedNode = node.Interface.AddWatchedNode(nodeID);
+
+                //use this watchednode and then also subscribe to value change in the OPCUAConnection instead of updating in Fixedpdate
+                //watchedNode = node.Interface.AddWatchedNode(nodeID);
                 //sensorValue = Int16.Parse(node.Value);
                 SensorName = nodeID;
                 sensorNameText.text = SensorName;
@@ -104,7 +118,6 @@ public class IOTSensor : MonoBehaviour
             }
         }
     }
-
     
 
     private string ExtractName(string s)
