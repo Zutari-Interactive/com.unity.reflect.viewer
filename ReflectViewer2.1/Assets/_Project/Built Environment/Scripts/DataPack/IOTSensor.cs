@@ -173,4 +173,9 @@ public class IOTSensor : MonoBehaviour
         float newValue = fValue / valueOffset;
         return newValue;
     }
+
+    private void OnDestroy()
+    {
+        //node.wa
+    }
 }

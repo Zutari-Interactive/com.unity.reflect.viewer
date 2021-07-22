@@ -410,6 +410,7 @@ namespace Unity.Reflect.Viewer.UI
             m_ProjectListItemPrefab.gameObject.SetActive(false);
 
             FilterProjectList(m_CurrentFilterData);
+
         }
 
         ProjectListItem GetProjectListItemAt(int index)

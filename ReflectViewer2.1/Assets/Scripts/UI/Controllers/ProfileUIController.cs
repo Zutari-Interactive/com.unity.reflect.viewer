@@ -83,8 +83,8 @@ namespace Unity.Reflect.Viewer.UI
         //HACK - false result was stopping stream of model - unsure why
         bool IsConnected()
         {
-            return string.IsNullOrEmpty(UIStateManager.current.projectStateData.activeProject?.projectId);
-                //|| !string.IsNullOrEmpty(UIStateManager.current.sessionStateData.sessionState.userIdentity.matchmakerId);
+            return string.IsNullOrEmpty(UIStateManager.current.projectStateData.activeProject?.projectId)
+                || !string.IsNullOrEmpty(UIStateManager.current.sessionStateData.sessionState.userIdentity.matchmakerId);
         }
     }
 }

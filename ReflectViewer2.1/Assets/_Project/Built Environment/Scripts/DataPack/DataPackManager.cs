@@ -43,7 +43,7 @@ public class DataPackManager : CustomNode
             foreach (var item in Ids)
             {
                 string id = data.GetParameter("Mark");
-                if (item.Contains(id))
+                if (item.Equals(id))
                 {
                     Debug.Log($"Data Object Found {data.GetParameter("Id")} with Mark {id}");
 
@@ -54,10 +54,11 @@ public class DataPackManager : CustomNode
 
     public void OnObjectClick(BaseEventData data)
     {
-        //if(currentInteractor != null)
-        //{
-        //    currentInteractor.CloseController();
-        //}
+        if(currentInteractor != null)
+        {
+            currentInteractor.CloseController();
+            ButtonEnabled(false);
+        }
         
 
         if(selectionController.m_CurrentSelectedGameObject != null)

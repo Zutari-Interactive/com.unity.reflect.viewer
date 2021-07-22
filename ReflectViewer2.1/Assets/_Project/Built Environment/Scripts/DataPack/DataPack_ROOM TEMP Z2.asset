@@ -13,4 +13,8 @@ MonoBehaviour:
   m_Name: DataPack_ROOM TEMP Z2
   m_EditorClassIdentifier: 
   paths: []
+  sensorIDs:
+  - Z2 Room Temp
+  iotSensorDisplayPrefab: {fileID: 3523847640596643653, guid: 7fcac2d66c8517e4a92225385fcee963,
+    type: 3}
   pathsAvailable: 0

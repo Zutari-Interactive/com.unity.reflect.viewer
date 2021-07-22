@@ -34,7 +34,7 @@ public class IOTSensorGroup : MonoBehaviour
         for (int i = 0; i < ids.Length; i++)
         {
             GameObject obj = Instantiate(prefab);
-            obj.transform.position = groupPos.position;
+            //obj.transform.position = groupPos.position;
             IOTSensor sensor = obj.GetComponent<IOTSensor>();
             sensor.SetupNode(ids[i]);
             AddSensor(sensor);
@@ -43,11 +43,13 @@ public class IOTSensorGroup : MonoBehaviour
 
     public void Close()
     {
-        for (int i = 0; i < sensorGroup.Count; i++)
+        int count = sensorGroup.Count;
+        for (int i = count - 1; i >= 0; i--)
         {
             IOTSensor sensor = sensorGroup[i];
             sensorGroup.Remove(sensor);
             Destroy(sensor.gameObject);
         }
+        Debug.Log("group count = " + sensorGroup.Count);
     }
 }

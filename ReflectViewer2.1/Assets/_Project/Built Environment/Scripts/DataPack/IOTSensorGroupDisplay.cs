@@ -12,6 +12,8 @@ public class IOTSensorGroupDisplay : MonoBehaviour
 {
     [SerializeField]
     ToolButton iotButton;
+    [SerializeField]
+    ToolButton exitButton;
 
     [SerializeField]
     Sprite m_InfoImage;
@@ -68,6 +70,7 @@ public class IOTSensorGroupDisplay : MonoBehaviour
     {
 
         iotButton.buttonClicked += OnIOTButtonClicked;
+        exitButton.buttonClicked += OnIOTButtonClicked;
     }
 
     private void OnIOTButtonClicked()
@@ -100,7 +103,7 @@ public class IOTSensorGroupDisplay : MonoBehaviour
             sensorValues[i].text = currentSensorGroup.sensorGroup[i].SensorValue;
         }
 
-        for (int i = sensorNames.Count -1; i == currentSensorGroup.sensorGroup.Count; i--)
+        for (int i = sensorNames.Count -1; i >= currentSensorGroup.sensorGroup.Count; i--)
         {
             sensorNames[i].text = "";
             sensorValues[i].text = "";
@@ -120,5 +123,11 @@ public class IOTSensorGroupDisplay : MonoBehaviour
     public void SetSensorGroup(IOTSensorGroup group)
     {
         currentSensorGroup = group;
+    }
+
+    public void OnDisable()
+    {
+        iotButton.buttonClicked -= OnIOTButtonClicked;
+        exitButton.buttonClicked -= OnIOTButtonClicked;
     }
 }

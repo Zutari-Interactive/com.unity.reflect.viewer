@@ -51,7 +51,7 @@ MonoBehaviour:
   - ROOM TEMP Z2
   - CHILLER 1
   - CHILLER 2
-  - VCD1_350
+  - VCD1_250 X
 --- !u!114 &9207568253708986672
 MonoBehaviour:
   m_ObjectHideFlags: 0

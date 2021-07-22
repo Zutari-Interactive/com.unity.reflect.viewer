@@ -12,8 +12,6 @@ public class DataPackOptionsDialogController : MonoBehaviour
 {
     [SerializeField]
     ToolButton dataInfoButton;
-    //[SerializeField]
-    //ToolButton iotButton;
     [SerializeField]
     ToolButton manualButton;
     [SerializeField]
@@ -50,7 +48,6 @@ public class DataPackOptionsDialogController : MonoBehaviour
     void Start()
     {
         dataInfoButton.buttonClicked += OnDataInfoButtonClicked;
-        //iotButton.buttonClicked += OnIOTButtonClicked;
         manualButton.buttonClicked += OnManualInfoButtonClicked;
         photoButton.buttonClicked += OnPhotoButtonClicked;
         reportButton.buttonClicked += OnReportButtonClicked;
@@ -103,24 +100,6 @@ public class DataPackOptionsDialogController : MonoBehaviour
         }
     }
 
-    //private void OnIOTButtonClicked()
-    //{
-    //    Debug.Log("Open Sensor Group Dialog");
-    //    if (m_CurrentToolState.infoType == InfoType.Info)
-    //    {
-    //        var dialogType = m_DialogWindow.open ? DialogType.None : DialogType.IOTDataGroup;
-    //        Dispatcher.Dispatch(Payload<ActionTypes>.From(ActionTypes.OpenDialog, dialogType));
-
-    //        //IOTGroupDisplay.SetupGroupUI(currentSensorGroup);
-    //    }
-    //    if (m_CurrentToolState.infoType == InfoType.Debug)
-    //    {
-    //        //var dialogType = m_DebugDialogWindow.open ? DialogType.None : DialogType.DebugOptions;
-    //        //Dispatcher.Dispatch(Payload<ActionTypes>.From(ActionTypes.OpenDialog, dialogType));
-    //        Debug.LogWarning("no debug dialog available currently");
-    //    }
-    //}
-
     private void OnManualInfoButtonClicked()
     {
         DataPath path = new DataPath();
@@ -156,7 +135,6 @@ public class DataPackOptionsDialogController : MonoBehaviour
     private void OnDisable()
     {
         dataInfoButton.buttonClicked -= OnDataInfoButtonClicked;
-        //iotButton.buttonClicked -= OnIOTButtonClicked;
         manualButton.buttonClicked -= OnManualInfoButtonClicked;
         photoButton.buttonClicked -= OnPhotoButtonClicked;
         reportButton.buttonClicked-= OnReportButtonClicked;
