@@ -104,9 +104,7 @@ namespace Elements.UI.Controllers
         private void SpawnPointerServerRpc()
         {
             if (!_networkedPointer) _networkedPointer = Instantiate(PointerPrefab);
-            _networkedPointer.SpawnWithOwnership(0);
-            // _networkedPointer.Spawn();
-            print($"Point Owner Id - {_networkedPointer.OwnerClientId}");
+            _networkedPointer.Spawn();
         }
 
         [ServerRPC]
