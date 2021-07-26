@@ -84,6 +84,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4589118441681574269}
+  - component: {fileID: 8458310838712629596}
   - component: {fileID: 7044430404187395100}
   - component: {fileID: 4527557921366387938}
   m_Layer: 5
@@ -100,7 +101,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4527557921366387941}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -114,6 +115,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8458310838712629596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4527557921366387941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 209037615, guid: 01701b64234b4d523d8045142cbc73fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NetworkedInstanceId: 0
+  PrefabHash: 7784062742289929796
+  PrefabHashGenerator: Pointer
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
 --- !u!222 &7044430404187395100
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -134,7 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed04f26d8f550b843967ad7f18c31c24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PointerButton: {fileID: 0}
+  PointerPrefab: {fileID: 7207860987080340504, guid: 152e24f92c62b9243b4ec970712830b8,
+    type: 3}
+  m_PointerButton: {fileID: 4523726877236750877}
 --- !u!1 &7141484856456537841
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,7 +392,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Highlighted
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 4571688235060933026}
   m_OnClick:
     m_PersistentCalls:
