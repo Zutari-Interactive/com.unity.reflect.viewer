@@ -15,7 +15,7 @@ namespace Elements.UI.Controllers
         [Header("Pointer Button")]
         public ToolButton m_PointerButton;
 
-        private bool _usePointer = false;
+        public bool CanUsePointer = false;
         private SpawnPointer _localSpawnPointer;
 
 #pragma warning restore 649
@@ -41,37 +41,28 @@ namespace Elements.UI.Controllers
 
         private void UsePointer()
         {
-            _usePointer = !_usePointer;
+            CanUsePointer = !CanUsePointer;
             FindLocalSpawnPointer();
-            if (!_usePointer)
-            {
-                _localSpawnPointer?.DestroyPointerServerRpc();
-            }
-            else if (_usePointer)
-            {
-                _localSpawnPointer?.SpawnPointerServerRpc();
-            }
         }
 
         private void FindLocalSpawnPointer()
         {
-            // Check if we already have a local spawn pointer
-            if (_localSpawnPointer) return;
+            if (!_localSpawnPointer)
+            {
+                // Get Local Client ID
+                ulong localClientId = NetworkingManager.Singleton.LocalClientId;
 
-            // Check if we are connected
-            if (!NetworkingManager.Singleton.IsConnectedClient) return;
+                // Try Get Local Client Object using LocalClientID
+                if (!NetworkingManager.Singleton.ConnectedClients.TryGetValue(localClientId, out NetworkedClient networkClient)) return;
 
-            // Get Local Client ID
-            ulong localClientId = NetworkingManager.Singleton.LocalClientId;
-
-            // Try Get Local Client Object using LocalClientID
-            if (!NetworkingManager.Singleton.ConnectedClients.TryGetValue(localClientId, out NetworkedClient networkClient)) return;
-
-            // Try Get TeamPlayer Component from Local Client Object
-            if (!networkClient.PlayerObject.TryGetComponent<SpawnPointer>(out _localSpawnPointer)) return;
+                // Try Get TeamPlayer Component from Local Client Object
+                if (!networkClient.PlayerObject.TryGetComponent<SpawnPointer>(out _localSpawnPointer)) return;
+            }
 
             // Send a Message to the Server to Spawn the Pointer Network Object
-            _localSpawnPointer.SpawnPointerServerRpc();
+            if (CanUsePointer)
+                _localSpawnPointer.SpawnPointerServerRpc();
+            else if (!CanUsePointer) _localSpawnPointer.DestroyPointerServerRpc();
         }
 
         #endregion
@@ -86,7 +77,7 @@ namespace Elements.UI.Controllers
 
         private void OnClientDisconnected(ulong clientId)
         {
-            print("Client Diconnected");
+            print("Client Disconnected");
             m_PointerButton.button.interactable = false;
         }
 
