@@ -1,31 +1,22 @@
-using System;
+using Elements.Pointer;
 using MLAPI;
-using MLAPI.Messaging;
-using SharpFlux;
-using SharpFlux.Dispatching;
+using MLAPI.Connection;
 using Unity.Reflect.Viewer.UI;
 using UnityEngine;
-using UnityEngine.Reflect.Viewer;
-using UnityEngine.Reflect.Viewer.Pipeline;
 
 namespace Elements.UI.Controllers
 {
-    public class PointerUIController : NetworkedBehaviour
+    public class PointerUIController : MonoBehaviour
     {
         #region VARIABLES
 
 #pragma warning disable 649
-        [Header("Pointer Prefab")]
-        public NetworkedObject PointerPrefab;
 
         [Header("Pointer Button")]
         public ToolButton m_PointerButton;
 
-        private ISpatialPicker<Tuple<GameObject, RaycastHit>> m_ObjectPicker;
-        private NetworkedObject _networkedPointer;
-
-        private Camera _camera;
-        private Pointer _pointer;
+        private bool _usePointer = false;
+        private SpawnPointer _localSpawnPointer;
 
 #pragma warning restore 649
 
@@ -36,89 +27,67 @@ namespace Elements.UI.Controllers
         private void Awake()
         {
             m_PointerButton.buttonClicked += UsePointer;
-            m_ObjectPicker = new SpatialSelector();
-
-            _camera = Camera.main;
         }
 
         private void Start()
         {
-            // NetworkingManager.Singleton.OnClientConnectedCallback += ClientConnected;
-            // NetworkingManager.Singleton.OnClientDisconnectCallback += ClientDisconnected;
+            // NetworkingManager.Singleton.OnClientConnectedCallback += OnClientConnected;
+            // NetworkingManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;
         }
 
-        private void Update()
+        #endregion
+
+        #region METHODS
+
+        private void UsePointer()
         {
-            // Make sure Pointer exists
-            if (!_networkedPointer) return;
-            print("Has Networked Pointer");
+            _usePointer = !_usePointer;
+            FindLocalSpawnPointer();
+            if (!_usePointer)
+            {
+                _localSpawnPointer?.DestroyPointerServerRpc();
+            }
+            else if (_usePointer)
+            {
+                _localSpawnPointer?.SpawnPointerServerRpc();
+            }
+        }
 
-            // Get the Pointer Component
-            if (!_pointer) _networkedPointer.TryGetComponent(out _pointer);
-            print("Has Pointer Component");
+        private void FindLocalSpawnPointer()
+        {
+            // Check if we already have a local spawn pointer
+            if (_localSpawnPointer) return;
 
-            // Make sure we press the mouse button
-            if (!Input.GetMouseButtonDown(0)) return;
-            print("Has Mouse Down");
+            // Check if we are connected
+            if (!NetworkingManager.Singleton.IsConnectedClient) return;
 
-            // Find a collision
-            Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-            if (!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity)) return;
-            print("Has Ray Cast Hit");
-            print(hit.point);
+            // Get Local Client ID
+            ulong localClientId = NetworkingManager.Singleton.LocalClientId;
 
-            // Send a message to the Server Update Pointer Position
-            UpdatePointerPositionServerRpc(hit.point);
+            // Try Get Local Client Object using LocalClientID
+            if (!NetworkingManager.Singleton.ConnectedClients.TryGetValue(localClientId, out NetworkedClient networkClient)) return;
+
+            // Try Get TeamPlayer Component from Local Client Object
+            if (!networkClient.PlayerObject.TryGetComponent<SpawnPointer>(out _localSpawnPointer)) return;
+
+            // Send a Message to the Server to Spawn the Pointer Network Object
+            _localSpawnPointer.SpawnPointerServerRpc();
         }
 
         #endregion
 
         #region NETWORK METHODS
 
-        private void ClientConnected(ulong clientId)
+        private void OnClientConnected(ulong clientId)
         {
             print("Client Connected");
-            print($"Number of Clients - {NetworkingManager.Singleton.ConnectedClientsList.Count}");
             m_PointerButton.button.interactable = true;
-            SpawnPointerServerRpc();
         }
 
-        private void ClientDisconnected(ulong clientId)
+        private void OnClientDisconnected(ulong clientId)
         {
-            print("Client Disconnected");
-            print($"Number of Clients - {NetworkingManager.Singleton.ConnectedClientsList.Count}");
+            print("Client Diconnected");
             m_PointerButton.button.interactable = false;
-            UnspawnPointerServerRpc();
-        }
-
-        private void UsePointer()
-        {
-            print("Dispatch Object Picker Payload!");
-            Dispatcher.Dispatch(Payload<ActionTypes>.From(ActionTypes.SetObjectPicker, m_ObjectPicker));
-            SpawnPointerServerRpc();
-
-            // ToDo : Get Position of Collision
-        }
-
-        [ServerRPC]
-        private void SpawnPointerServerRpc()
-        {
-            if (!_networkedPointer) _networkedPointer = Instantiate(PointerPrefab);
-            _networkedPointer.Spawn();
-        }
-
-        [ServerRPC]
-        private void UnspawnPointerServerRpc()
-        {
-            if (!_networkedPointer) return;
-            _networkedPointer.UnSpawn();
-        }
-
-        [ServerRPC]
-        private void UpdatePointerPositionServerRpc(Vector3 position)
-        {
-            print($"Update Pointer Position - {position}");
-            _pointer.SetPointerPositionServerRpc(position);
         }
 
         #endregion
