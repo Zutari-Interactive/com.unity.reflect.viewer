@@ -89,6 +89,13 @@ MonoBehaviour:
     - DataPack
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
+  - m_GUID: 51ab7a2025d3c2f43aa670b27c60ad16
+    m_Address: DB_CHILLERS
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - DataPack
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: baba5ec04ef4d2541a5f5f14f8b992df, type: 2}
   m_SchemaSet:

@@ -116,7 +116,7 @@ namespace Zutari.Elements.Nodes
                 filter.Instances.Add(gameObject);
 
                 // YOUR CUSTOM CODE GOES HERE, THIS IS A UNIQUE CASE
-                if (category.value.Equals("Mechanical Equipment") || category.value.Equals("Air Terminals") || category.value.Equals("Electrical Fixtures"))
+                if (category.value.Equals("Mechanical Equipment") || category.value.Equals("Air Terminals") || category.value.Equals("Electrical Fixtures") || category.value.Equals("Electrical Equipment"))
                 {
                     dpManager.FindID(metadata);
                 }
