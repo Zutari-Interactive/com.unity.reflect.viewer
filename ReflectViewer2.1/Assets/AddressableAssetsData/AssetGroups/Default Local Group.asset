@@ -90,7 +90,7 @@ MonoBehaviour:
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
   - m_GUID: 51ab7a2025d3c2f43aa670b27c60ad16
-    m_Address: DB_CHILLERS
+    m_Address: DB-CHILLERS
     m_ReadOnly: 0
     m_SerializedLabels:
     - DataPack
